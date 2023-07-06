@@ -85,7 +85,7 @@ CREATE TABLE [dbo].[ChiTietThanhToan](
 	[create_at] [datetime] NULL,
 	[create_by] [uniqueidentifier] NULL,
 	[update_by] [uniqueidentifier] NULL,
-	[deleted] [bit] NULL
+	[deleted] [bit] DEFAULT 0 
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[ChucVu]    Script Date: 6/29/2023 2:46:06 AM ******/
@@ -100,7 +100,7 @@ CREATE TABLE [dbo].[ChucVu](
 	[create_at] [datetime] NULL,
 	[create_by] [uniqueidentifier] NULL,
 	[update_by] [uniqueidentifier] NULL,
-	[deleted] [bit] NULL,
+	[deleted] [bit] DEFAULT 0 ,
 PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -116,7 +116,7 @@ CREATE TABLE [dbo].[Combo](
 	[id] [uniqueidentifier] NOT NULL,
 	[ten_combo] [nvarchar](255) NULL,
 	[gia] [money] NULL,
-	[deleted] [bit] NULL,
+	[deleted] [bit] DEFAULT 0 ,
 	[update_by] [nvarchar](255) NULL,
 	[update_at] [datetime] NULL,
 	[created_by] [uniqueidentifier] NULL,
@@ -135,7 +135,7 @@ GO
 CREATE TABLE [dbo].[ComboDoAnDetail](
 	[id_combo] [uniqueidentifier] NOT NULL,
 	[id_do_an] [uniqueidentifier] NOT NULL,
-	[deleted] [bit] NULL,
+	[deleted] [bit] DEFAULT 0 ,
 	[so_luong] [int] NULL,
 	[created_at] [datetime] NULL,
 	[update_by] [uniqueidentifier] NULL,
@@ -158,7 +158,7 @@ CREATE TABLE [dbo].[DoAn](
 	[Ten] [nvarchar](255) NULL,
 	[Gia] [money] NULL,
 	[created_at] [datetime] NULL,
-	[deleted] [bit] NULL,
+	[deleted] [bit] DEFAULT 0 ,
 	[update_by] [uniqueidentifier] NULL,
 	[update_at] [datetime] NULL,
 	[created_by] [uniqueidentifier] NULL,
@@ -183,7 +183,7 @@ CREATE TABLE [dbo].[Ghe](
 	[create_at] [datetime] NULL,
 	[create_by] [uniqueidentifier] NULL,
 	[update_by] [uniqueidentifier] NULL,
-	[deleted] [bit] NULL,
+	[deleted] [bit] DEFAULT 0 ,
 PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -205,7 +205,7 @@ CREATE TABLE [dbo].[GiaVeLichChieu](
 	[create_at] [datetime] NULL,
 	[create_by] [uniqueidentifier] NULL,
 	[update_by] [uniqueidentifier] NULL,
-	[deleted] [bit] NULL,
+	[deleted] [bit] DEFAULT 0 ,
 PRIMARY KEY CLUSTERED 
 (
 	[id_lich_chieu] ASC,
@@ -231,7 +231,7 @@ CREATE TABLE [dbo].[HoaDon](
 	 [update_at] [datetime] NULL,
 	[create_by] [uniqueidentifier] NULL,
 	[update_by] [uniqueidentifier] NULL,
-	[deleted] [bit] NULL,
+	[deleted] [bit] DEFAULT 0 ,
 PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -248,7 +248,7 @@ CREATE TABLE [dbo].[HoaDonDoAn](
 	[id_combo] [uniqueidentifier] NOT NULL,
 	[soluong] [int] NULL,
 	[gia] [money] NULL,
-	[deleted] [bit] NULL,
+	[deleted] [bit] DEFAULT 0 ,
 	[update_by] [uniqueidentifier] NULL,
 	[update_at] [datetime] NULL,
 	[created_by] [uniqueidentifier] NULL,
@@ -277,7 +277,7 @@ CREATE TABLE [dbo].[KhachHang](
 	[create_at] [datetime] NULL,
 	[create_by] [uniqueidentifier] NULL,
 	[update_by] [uniqueidentifier] NULL,
-	[deleted] [bit] NULL,
+	[deleted] [bit] DEFAULT 0 ,
 PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -301,7 +301,7 @@ CREATE TABLE [dbo].[LichChieu](
 	[create_at] [datetime] NULL,
 	[create_by] [uniqueidentifier] NULL,
 	[update_by] [uniqueidentifier] NULL,
-	[deleted] [bit] NULL,
+	[deleted] [bit] DEFAULT 0 ,
 PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -321,7 +321,7 @@ CREATE TABLE [dbo].[LoaiGhe](
 	[create_at] [datetime] NULL,
 	[create_by] [uniqueidentifier] NULL,
 	[update_by] [uniqueidentifier] NULL,
-	[deleted] [bit] NULL,
+	[deleted] [bit] DEFAULT 0 ,
 PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -340,7 +340,7 @@ CREATE TABLE [dbo].[NgonNgu](
 	[create_at] [datetime] NULL,
 	[create_by] [uniqueidentifier] NULL,
 	[update_by] [uniqueidentifier] NULL,
-	[deleted] [bit] NULL,
+	[deleted] [bit] DEFAULT 0 ,
 PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -363,7 +363,7 @@ CREATE TABLE [dbo].[NhanVien](
 	[create_at] [datetime] NULL,
 	[create_by] [uniqueidentifier] NULL,
 	[update_by] [uniqueidentifier] NULL,
-	[deleted] [bit] NULL,
+	[deleted] [bit] DEFAULT 0 ,
 PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -384,7 +384,7 @@ CREATE TABLE [dbo].[PhongChieu](
 	[create_at] [datetime] NULL,
 	[create_by] [uniqueidentifier] NULL,
 	[update_by] [uniqueidentifier] NULL,
-	[deleted] [bit] NULL,
+	[deleted] [bit] DEFAULT 0 ,
 PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -404,7 +404,7 @@ CREATE TABLE [dbo].[PhuongThucThanhToan](
 	[create_at] [datetime] NULL,
 	[create_by] [uniqueidentifier] NULL,
 	[update_by] [uniqueidentifier] NULL,
-	[deleted] [bit] NULL,
+	[deleted] [bit] DEFAULT 0 ,
 PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -423,7 +423,7 @@ CREATE TABLE [dbo].[QuocGia](
 	[create_at] [datetime] NULL,
 	[create_by] [uniqueidentifier] NULL,
 	[update_by] [uniqueidentifier] NULL,
-	[deleted] [bit] NULL,
+	[deleted] [bit] DEFAULT 0 ,
 PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -443,7 +443,7 @@ CREATE TABLE [dbo].[TheLoai](
 	[create_at] [datetime] NULL,
 	[create_by] [uniqueidentifier] NULL,
 	[update_by] [uniqueidentifier] NULL,
-	[deleted] [bit] NULL,
+	[deleted] [bit] DEFAULT 0 ,
 PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -462,7 +462,7 @@ CREATE TABLE [dbo].[TheLoaiPhim](
 	[create_at] [datetime] NULL,
 	[create_by] [uniqueidentifier] NULL,
 	[update_by] [uniqueidentifier] NULL,
-	[deleted] [bit] NULL,
+	[deleted] [bit] DEFAULT 0 ,
 PRIMARY KEY CLUSTERED 
 (
 	[id_film] ASC,
@@ -494,7 +494,7 @@ CREATE TABLE [dbo].[ThongTinPhim](
 	[create_at] [datetime] NULL,
 	[create_by] [uniqueidentifier] NULL,
 	[update_by] [uniqueidentifier] NULL,
-	[deleted] [bit] NULL,
+	[deleted] [bit] DEFAULT 0 ,
 PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -517,7 +517,7 @@ CREATE TABLE [dbo].[Ve](
 	[create_at] [datetime] NULL,
 	[create_by] [uniqueidentifier] NULL,
 	[update_by] [uniqueidentifier] NULL,
-	[deleted] [bit] NULL,
+	[deleted] [bit] DEFAULT 0 ,
 PRIMARY KEY CLUSTERED 
 (
 	[id_lich_chieu] ASC,
