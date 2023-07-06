@@ -220,7 +220,6 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[HoaDon](
 	[id] [uniqueidentifier] NOT NULL,
-	[id_pttt] [uniqueidentifier] NULL,
 	[id_nhan_vien] [uniqueidentifier] NULL,
 	[id_khach_hang] [uniqueidentifier] NULL,
 	[ghi_chu] [nvarchar](max) NULL,
