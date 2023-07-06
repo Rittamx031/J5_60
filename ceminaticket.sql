@@ -228,6 +228,7 @@ CREATE TABLE [dbo].[HoaDon](
 	[trang_thai] [int] NULL,
 	[thoi_gian_thanh_toan] [datetime] NULL,
 	[create_at] [datetime] NULL,
+	 [update_at] [datetime] NULL,
 	[create_by] [uniqueidentifier] NULL,
 	[update_by] [uniqueidentifier] NULL,
 	[deleted] [bit] NULL,
