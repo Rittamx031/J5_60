@@ -1,5 +1,6 @@
 package j5_60.cinematicket.cinematicket.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -76,15 +77,17 @@ public class PhuongThucThanhToanController {
     }
 
     @PostMapping
-    public ResponseEntity<PhuongThucThanhToan> createPhuongThucThanhToan(@RequestBody PhuongThucThanhToan person) {
-        return ResponseEntity.ok().body(this.service.createPhuongThucThanhToan(person));
+    public ResponseEntity<PhuongThucThanhToan> createPhuongThucThanhToan(@RequestBody PhuongThucThanhToan phuongThucThanhToan) {
+        phuongThucThanhToan.setCreateAt(LocalDateTime.now());
+        return ResponseEntity.ok().body(this.service.createPhuongThucThanhToan(phuongThucThanhToan));
     }
 
     @PutMapping("{id}")
     public ResponseEntity<PhuongThucThanhToan> updatePhuongThucThanhToan(@PathVariable UUID id,
-            @RequestBody PhuongThucThanhToan person) {
-        person.setId(id);
-        return ResponseEntity.ok().body(this.service.updatePhuongThucThanhToan(person));
+            @RequestBody PhuongThucThanhToan phuongThucThanhToan) {
+        phuongThucThanhToan.setId(id);
+        phuongThucThanhToan.setUpdateAt(LocalDateTime.now());
+        return ResponseEntity.ok().body(this.service.updatePhuongThucThanhToan(phuongThucThanhToan));
     }
 
     @DeleteMapping("{id}")
