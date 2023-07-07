@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 import j5_60.cinematicket.cinematicket.entity.HoaDon;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.repository.HoaDonRepository;
+import jakarta.transaction.Transactional;
 @Service
+@Transactional
 public class HoaDonService {
     @Autowired
     private HoaDonRepository repo;
@@ -77,7 +79,7 @@ public class HoaDonService {
             hoaDonud.setDeleted(true);
             return hoaDonud;
         } else {
-            throw new ResourceNotFoundException("Can not find person with id" + id);
+            throw new ResourceNotFoundException("Can not find Hoa Don with id" + id);
         }
     }
 

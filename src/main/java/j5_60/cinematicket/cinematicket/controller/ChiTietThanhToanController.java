@@ -1,5 +1,6 @@
 package j5_60.cinematicket.cinematicket.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,76 +27,82 @@ import j5_60.cinematicket.cinematicket.service.ChiTietThanhToanService;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("cemina/chitietthanhtoans")
+@RequestMapping("cemina/chi-tiet-thanh-toan")
 public class ChiTietThanhToanController {
     @Autowired
     private ChiTietThanhToanService service;
 
+       
     @GetMapping("/index")
     public ResponseEntity<List<ChiTietThanhToan>> getAllChiTietThanhToan() {
-        return ResponseEntity.ok().body(service.getAllChiTietThanhToan());
+        List<ChiTietThanhToan> chiTietThanhToanList = service.getAllChiTietThanhToan();
+        return ResponseEntity.ok(chiTietThanhToanList);
     }
 
-    @GetMapping
-    public ResponseEntity<ChiTietThanhToan> getChiTietThanhToanById(@RequestParam(value = "idhd", required = true) UUID idhd,
-            @RequestParam(value = "idpttt", required = true) UUID idpttt) {
-        return ResponseEntity.ok().body(service.getChiTietThanhToanById(idhd,idpttt));
+    @GetMapping("/{idhd}/{idpttt}")
+    public ResponseEntity<ChiTietThanhToan> getChiTietThanhToanById(
+            @PathVariable("idhd") UUID idhd,
+            @PathVariable("idpttt") UUID idpttt) {
+        ChiTietThanhToan chiTietThanhToan = service.getChiTietThanhToanById(idhd, idpttt);
+        return ResponseEntity.ok(chiTietThanhToan);
     }
+
     // @GetMapping("/search")
-    // public ResponseEntity<List<ChiTietThanhToan>>
-    // getChiTietThanhToanById(@RequestParam(value ="name", required = true)
-    // String name) {
-    // return ResponseEntity.ok().body(service.searchByName(name));
+    // public ResponseEntity<List<ChiTietThanhToan>> getChiTietThanhToanByName(
+    //         @RequestParam("name") String name) {
+    //     List<ChiTietThanhToan> chiTietThanhToanList = service.searchByName(name);
+    //     return ResponseEntity.ok(chiTietThanhToanList);
     // }
 
-    @GetMapping("pre")
-    public ResponseEntity<List<ChiTietThanhToan>> getPrevPage(
-            @RequestParam(value = "sortby", required = false) String sortby,
-            @RequestParam(value = "sortdir", required = false) String sortdir) {
-        return ResponseEntity.ok().body(service.getPrevPage(sortby, sortdir));
+    @GetMapping("/prev-page")
+    public ResponseEntity<List<ChiTietThanhToan>> getPreviousPage(
+            @RequestParam(value = "sortby", required = false) String sortBy,
+            @RequestParam(value = "sortdir", required = false) String sortDir) {
+        List<ChiTietThanhToan> chiTietThanhToanList = service.getPrevPage(sortBy, sortDir);
+        return ResponseEntity.ok(chiTietThanhToanList);
     }
 
-    @GetMapping("pageno")
-    public ResponseEntity<List<ChiTietThanhToan>> getPageNo(
-            @RequestParam(value = "sortby", required = false) String sortby,
-            @RequestParam(value = "sortdir", required = false) String sortdir,
-            @RequestParam(value = "pageNo", required = false) int pageNo) {
-        System.out.println(pageNo + " , " + sortby + " ," + sortdir);
-        return ResponseEntity.ok().body(service.getPageNo(pageNo, sortby, sortdir));
+    @GetMapping("/page")
+    public ResponseEntity<List<ChiTietThanhToan>> getPage(
+            @RequestParam(value = "sortby", required = false) String sortBy,
+            @RequestParam(value = "sortdir", required = false) String sortDir,
+            @RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo) {
+        List<ChiTietThanhToan> chiTietThanhToanList = service.getPageNo(pageNo, sortBy, sortDir);
+        return ResponseEntity.ok(chiTietThanhToanList);
     }
 
-    @GetMapping("next")
+    @GetMapping("/next-page")
     public ResponseEntity<List<ChiTietThanhToan>> getNextPage(
-            @RequestParam(value = "sortby", required = false) String sortby,
-            @RequestParam(value = "sortdir", required = false) String sortdir) {
-        return ResponseEntity.ok().body(service.getNextPage(sortby, sortdir));
+            @RequestParam(value = "sortby", required = false) String sortBy,
+            @RequestParam(value = "sortdir", required = false) String sortDir) {
+        List<ChiTietThanhToan> chiTietThanhToanList = service.getNextPage(sortBy, sortDir);
+        return ResponseEntity.ok(chiTietThanhToanList);
     }
 
-    @GetMapping("delete")
-    public HttpStatus delete(@RequestParam(value = "idhd", required = true) UUID idhd,
-            @RequestParam(value = "idpttt", required = true) UUID idpttt) {
-        this.service.setDeteleteState(idhd,idpttt);
-        return HttpStatus.OK;
+    @DeleteMapping("/{idhd}/{idpttt}")
+    public ResponseEntity<Void> deleteChiTietThanhToan(
+            @PathVariable("idhd") UUID idhd,
+            @PathVariable("idpttt") UUID idpttt) {
+        service.setDeteleteState(idhd, idpttt);
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping
-    public ResponseEntity<ChiTietThanhToan> createChiTietThanhToan(@RequestBody ChiTietThanhToan person) {
-        return ResponseEntity.ok().body(this.service.createChiTietThanhToan(person));
+    public ResponseEntity<ChiTietThanhToan> createChiTietThanhToan(
+            @RequestBody ChiTietThanhToan chiTietThanhToan) {
+        chiTietThanhToan.setCreateAt(LocalDateTime.now());
+        ChiTietThanhToan createdChiTietThanhToan = service.createChiTietThanhToan(chiTietThanhToan);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdChiTietThanhToan);
     }
 
-    @PutMapping
-    public ResponseEntity<ChiTietThanhToan> updateChiTietThanhToan(@RequestParam(value = "idhd", required = true) UUID idhd,
-            @RequestParam(value = "idpttt", required = true) UUID idpttt,
-            @RequestBody ChiTietThanhToan person) {
-        person.setId(new ChiTietThanhToanKey(idhd,idpttt));
-        return ResponseEntity.ok().body(this.service.updateChiTietThanhToan(person));
+    @PutMapping("/{idhd}/{idpttt}")
+    public ResponseEntity<ChiTietThanhToan> updateChiTietThanhToan(
+            @PathVariable("idhd") UUID idhd,
+            @PathVariable("idpttt") UUID idpttt,
+            @RequestBody ChiTietThanhToan chiTietThanhToan) {
+        chiTietThanhToan.setId(new ChiTietThanhToanKey(idhd, idpttt));
+        chiTietThanhToan.setUpdateAt(LocalDateTime.now());
+        ChiTietThanhToan updatedChiTietThanhToan = service.updateChiTietThanhToan(chiTietThanhToan);
+        return ResponseEntity.ok(updatedChiTietThanhToan);
     }
-
-    @DeleteMapping
-    public HttpStatus deleteChiTietThanhToan(@RequestParam(value = "idhd", required = true) UUID idhd,
-            @RequestParam(value = "idpttt", required = true) UUID idpttt) {
-        this.service.deleteChiTietThanhToan(idhd,idpttt);
-        return HttpStatus.OK;
-    }
-    
 }
