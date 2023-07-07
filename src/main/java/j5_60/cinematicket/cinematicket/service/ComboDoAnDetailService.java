@@ -21,7 +21,7 @@ import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class ComboDoAnDetailService {
-        @Autowired
+    @Autowired
     private ComboDoAnDetailRepository repo;
     private final int ROWCOUNT = 5;
     private int PageNo = -1;
@@ -35,6 +35,7 @@ public class ComboDoAnDetailService {
         if (comboDoAnDetailDb.isPresent()) {
             ComboDoAnDetail comboDoAnDetailud = comboDoAnDetailDb.get();
             comboDoAnDetailud.setId(comboDoAnDetail.getId());
+            comboDoAnDetailud.setSoLuong(comboDoAnDetail.getSoLuong());
             comboDoAnDetailud.setCreateAt(comboDoAnDetail.getCreateAt());
             comboDoAnDetailud.setCreateBy(comboDoAnDetail.getCreateBy());
             comboDoAnDetailud.setDeleted(comboDoAnDetail.isDeleted());
@@ -78,7 +79,8 @@ public class ComboDoAnDetailService {
             comboDoAnDetailud.setDeleted(true);
             return comboDoAnDetailud;
         } else {
-            throw new ResourceNotFoundException("Can not find combo  with idcombo="+idcombo+" and idDoAn="+idDoAn);
+            throw new ResourceNotFoundException(
+                    "Can not find combo  with idcombo=" + idcombo + " and idDoAn=" + idDoAn);
         }
     }
 
