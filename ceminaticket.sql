@@ -119,8 +119,8 @@ CREATE TABLE [dbo].[Combo](
 	[deleted] [bit] DEFAULT 0 ,
 	[update_by] [nvarchar](255) NULL,
 	[update_at] [datetime] NULL,
-	[created_by] [uniqueidentifier] NULL,
-	[created_at] [datetime] NULL,
+	[create_by] [uniqueidentifier] NULL,
+	[create_at] [datetime] NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -137,10 +137,10 @@ CREATE TABLE [dbo].[ComboDoAnDetail](
 	[id_do_an] [uniqueidentifier] NOT NULL,
 	[deleted] [bit] DEFAULT 0 ,
 	[so_luong] [int] NULL,
-	[created_at] [datetime] NULL,
+	[create_at] [datetime] NULL,
 	[update_by] [uniqueidentifier] NULL,
 	[update_at] [datetime] NULL,
-	[created_by] [uniqueidentifier] NULL,
+	[create_by] [uniqueidentifier] NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[id_combo] ASC,
@@ -157,11 +157,11 @@ CREATE TABLE [dbo].[DoAn](
 	[id] [uniqueidentifier] NOT NULL,
 	[Ten] [nvarchar](255) NULL,
 	[Gia] [money] DEFAULT 0,
-	[created_at] [datetime] NULL,
+	[create_at] [datetime] NULL,
 	[deleted] [bit] DEFAULT 0 ,
 	[update_by] [uniqueidentifier] NULL,
 	[update_at] [datetime] NULL,
-	[created_by] [uniqueidentifier] NULL,
+	[create_by] [uniqueidentifier] NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -251,8 +251,8 @@ CREATE TABLE [dbo].[HoaDonDoAn](
 	[deleted] [bit] DEFAULT 0 ,
 	[update_by] [uniqueidentifier] NULL,
 	[update_at] [datetime] NULL,
-	[created_by] [uniqueidentifier] NULL,
-	[created_at] [datetime] NULL,
+	[create_by] [uniqueidentifier] NULL,
+	[create_at] [datetime] NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[id_hoa_don] ASC,
