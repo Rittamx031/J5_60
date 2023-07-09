@@ -56,5 +56,4 @@ public class NhanVienController {
     public ResponseEntity detailNV(@PathVariable("id") UUID id) {
         return new ResponseEntity(nhanVienService.findById(id), HttpStatus.OK);
     }
-    
 }

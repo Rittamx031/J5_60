@@ -51,11 +51,11 @@ public class HoaDon {
     @Column(name= "deleted") 
     private boolean deleted;
 
-    // @ManyToOne
-    // @JoinColumn(name="id_nhan_vien")
-    // private NhanVien nhanVien;
+    @ManyToOne
+    @JoinColumn(name="id_nhan_vien")
+    private NhanVien nhanVien;
 
-    // @ManyToOne
-    // @Column(name="id_khach_hang") 
-    // private KhachHang khachHang;
+    @ManyToOne
+    @Column(name="id_khach_hang") 
+    private KhachHang khachHang;
 }
