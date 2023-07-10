@@ -1,10 +1,13 @@
 package j5_60.cinematicket.cinematicket.service.impl;
 
+import j5_60.cinematicket.cinematicket.entity.Ghe;
 import j5_60.cinematicket.cinematicket.entity.LoaiGhe;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.repository.LoaiGheRepository;
 import j5_60.cinematicket.cinematicket.service.LoaiGheService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,6 +20,20 @@ public class LoaiGheServiceImpl implements LoaiGheService {
 
     @Autowired
     private LoaiGheRepository loaiGheRepository;
+
+    @Override
+    public Page<LoaiGhe> findAll(Pageable pageable) {
+        return loaiGheRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<LoaiGhe> sapXep() {
+        return loaiGheRepository.findAllByOrderByTen();
+    }
+    @Override
+    public List<LoaiGhe> searchLoaiGhe(String keyword) {
+        return loaiGheRepository.findByTenContainingIgnoreCase(keyword);
+    }
 
     @Override
     public List<LoaiGhe> getAll() {

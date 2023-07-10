@@ -8,6 +8,9 @@ import j5_60.cinematicket.cinematicket.entity.LoaiGhe;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.service.LoaiGheService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,28 +26,53 @@ public class LoaiGheController {
     private LoaiGheService loaiGheService;
 
     @GetMapping("/index")
-    public List<LoaiGhe> getAll() {
-        return loaiGheService.getAll();
+    public ResponseEntity<Page<LoaiGhe>> getAll(@RequestParam(defaultValue = "1") int page,
+                                                @RequestParam(defaultValue = "5") int size) {
+        if (page < 1) page = 1;
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<LoaiGhe> loaiGhePage = loaiGheService.findAll(pageable);
+        return ResponseEntity.ok().body(loaiGhePage);
     }
 
     @GetMapping("/{id}")
-    public LoaiGhe getById(@PathVariable("id") UUID id) throws ResourceNotFoundException {
-        return loaiGheService.findById(id);
+    public ResponseEntity<LoaiGhe> getById(@PathVariable("id") UUID id) throws ResourceNotFoundException {
+        LoaiGhe loaiGhe = loaiGheService.findById(id);
+        return ResponseEntity.ok().body(loaiGhe);
     }
 
     @PostMapping("/add")
-    public LoaiGhe add(@RequestBody LoaiGhe loaiGhe) {
-        return loaiGheService.save(loaiGhe);
+    public ResponseEntity<LoaiGhe> addLoaiGhe(@RequestBody LoaiGhe loaiGhe) {
+        LoaiGhe savedLoaiGhe = loaiGheService.save(loaiGhe);
+        return ResponseEntity.ok().body(savedLoaiGhe);
     }
 
     @PutMapping("/update/{id}")
-    public LoaiGhe update(@PathVariable("id") UUID id, @RequestBody LoaiGhe loaiGhe) throws ResourceNotFoundException {
-        return loaiGheService.updateLoaiGhe(id, loaiGhe);
+    public ResponseEntity<LoaiGhe> updateLoaiGhe(@PathVariable("id") UUID id, @RequestBody LoaiGhe loaiGhe) throws ResourceNotFoundException {
+        LoaiGhe existingLoaiGhe = loaiGheService.findById(id);
+        existingLoaiGhe.setTen(loaiGhe.getTen());
+        existingLoaiGhe.setTrangThai(loaiGhe.getTrangThai());
+        existingLoaiGhe.setUpdateAt(loaiGhe.getUpdateAt());
+        // Set other properties of LoaiGhe as needed
+
+        LoaiGhe updatedLoaiGhe = loaiGheService.updateLoaiGhe(id, existingLoaiGhe);
+        return ResponseEntity.ok().body(updatedLoaiGhe);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") UUID id) {
+    public ResponseEntity<?> deleteLoaiGhe(@PathVariable("id") UUID id) {
         loaiGheService.deleteById(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<LoaiGhe>> searchLoaiGhe(@RequestParam("keyword") String keyword) {
+        List<LoaiGhe> loaiGheList = loaiGheService.searchLoaiGhe(keyword);
+        return ResponseEntity.ok().body(loaiGheList);
+    }
+
+    @GetMapping("/sorted")
+    public ResponseEntity<List<LoaiGhe>> getSortedLoaiGheList() {
+        List<LoaiGhe> sortedLoaiGheList = loaiGheService.sapXep();
+        return ResponseEntity.ok().body(sortedLoaiGheList);
     }
 }

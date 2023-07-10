@@ -1,13 +1,15 @@
 package j5_60.cinematicket.cinematicket.service.impl;
-
 import j5_60.cinematicket.cinematicket.entity.Ghe;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.repository.GheRepository;
 import j5_60.cinematicket.cinematicket.service.GheService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -15,9 +17,25 @@ import java.util.UUID;
 @Service
 public class GheServiceImpl implements GheService {
 
-    @Autowired
-    private GheRepository gheRepository;
+    private final GheRepository gheRepository;
 
+    @Autowired
+    public GheServiceImpl(GheRepository gheRepository) {
+        this.gheRepository = gheRepository;
+    }
+    @Override
+    public Page<Ghe> findAll(Pageable pageable) {
+        return gheRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Ghe> sapXep() {
+        return gheRepository.findAllByOrderByTen();
+    }
+    @Override
+    public List<Ghe> searchGhe(String keyword) {
+        return gheRepository.findByTenContainingIgnoreCase(keyword);
+    }
     @Override
     public List<Ghe> getAll() {
         return gheRepository.findAll();
@@ -59,4 +77,6 @@ public class GheServiceImpl implements GheService {
         }
         throw new ResourceNotFoundException("Ghe not found with id: " + id);
     }
+
+
 }

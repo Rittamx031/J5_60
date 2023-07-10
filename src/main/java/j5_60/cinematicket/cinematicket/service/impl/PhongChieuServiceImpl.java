@@ -5,6 +5,8 @@ import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.repository.PhongChieuRepository;
 import j5_60.cinematicket.cinematicket.service.PhongChieuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -21,6 +23,19 @@ public class PhongChieuServiceImpl implements PhongChieuService {
     @Override
     public List<PhongChieu> getAll() {
         return phongChieuRepository.findAll();
+    }
+    @Override
+    public Page<PhongChieu> findAll(Pageable pageable) {
+        return phongChieuRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<PhongChieu> sapXep() {
+        return phongChieuRepository.findAllByOrderByTen();
+    }
+    @Override
+    public List<PhongChieu> searchPhongChieu(String keyword) {
+        return phongChieuRepository.findByTenContainingIgnoreCase(keyword);
     }
 
     @Override

@@ -8,6 +8,9 @@ import j5_60.cinematicket.cinematicket.service.GheService;
 import j5_60.cinematicket.cinematicket.service.LoaiGheService;
 import j5_60.cinematicket.cinematicket.service.PhongChieuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,9 +32,14 @@ public class GheController {
     private PhongChieuService phongChieuService;
 
     @GetMapping("/index")
-    public List<Ghe> getAll() {
-        return gheService.getAll();
+    public ResponseEntity<Page<Ghe>> getAll(@RequestParam(defaultValue = "1") int page,
+                                            @RequestParam(defaultValue = "5") int size) {
+        if (page < 1) page = 1;
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<Ghe> ghePage = gheService.findAll(pageable);
+        return ResponseEntity.ok().body(ghePage);
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Ghe> getById(@PathVariable("id") UUID id) throws ResourceNotFoundException {
@@ -67,5 +75,15 @@ public class GheController {
     public ResponseEntity<?> deleteGhe(@PathVariable("id") UUID id) {
         gheService.deleteById(id);
         return ResponseEntity.ok().build();
+    }
+    @GetMapping("/search")
+    public ResponseEntity<List<Ghe>> searchGhe(@RequestParam("keyword") String keyword) {
+        List<Ghe> gheList = gheService.searchGhe(keyword);
+        return ResponseEntity.ok().body(gheList);
+    }
+    @GetMapping("/sorted")
+    public ResponseEntity<List<Ghe>> getSortedGheList() {
+        List<Ghe> sortedGheList = gheService.sapXep();
+        return ResponseEntity.ok().body(sortedGheList);
     }
 }

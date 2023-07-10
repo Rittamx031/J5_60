@@ -2,7 +2,8 @@ package j5_60.cinematicket.cinematicket.service;
 
 import j5_60.cinematicket.cinematicket.entity.Ghe;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 
 import java.util.List;
@@ -18,4 +19,9 @@ public interface GheService {
     void deleteById(UUID id);
 
     Ghe findById(UUID id) throws ResourceNotFoundException;
+
+    Page<Ghe> findAll(Pageable pageable);
+
+    List<Ghe> sapXep();
+    List<Ghe> searchGhe(String keyword);
 }
