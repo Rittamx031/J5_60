@@ -11,6 +11,4 @@ import java.util.UUID;
  */
 @Repository
 public interface ThongTinPhimRepository extends JpaRepository<ThongTinPhim, UUID> {
-
-    
 }

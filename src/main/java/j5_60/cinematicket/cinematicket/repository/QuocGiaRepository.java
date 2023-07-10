@@ -1,9 +1,12 @@
 package j5_60.cinematicket.cinematicket.repository;
 
-/**
- * QuocGiaRepository
- */
-public interface QuocGiaRepository {
+import j5_60.cinematicket.cinematicket.entity.QuocGia;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-    
+import java.util.UUID;
+
+
+@Repository
+public interface QuocGiaRepository extends JpaRepository<QuocGia, UUID> {
 }
