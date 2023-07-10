@@ -9,4 +9,5 @@ import java.util.UUID;
 
 public interface NhanVienRepository extends JpaRepository<NhanVien, UUID> {
     Page<NhanVien> findAll(Pageable pageable);
+    Page<NhanVien> findAllByOrderByHoTenDesc(Pageable pageable);
 }

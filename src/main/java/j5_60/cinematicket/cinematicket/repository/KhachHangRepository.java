@@ -11,6 +11,6 @@ import java.util.UUID;
 
 @Repository
 public interface KhachHangRepository extends JpaRepository<KhachHang, UUID> {
-
     Page<KhachHang> findAll(Pageable pageable);
+    Page<KhachHang> findAllByOrderByHoTenDesc(Pageable pageable);
 }

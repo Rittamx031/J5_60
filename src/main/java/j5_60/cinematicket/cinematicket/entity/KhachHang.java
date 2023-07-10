@@ -28,6 +28,9 @@ public class KhachHang {
     @Column(name="email")
     private String email;
 
+    @Column(name="mat_khau")
+    private String pass;
+
     @Column(name="gioi_tinh")
     private boolean gioiTinh;
 

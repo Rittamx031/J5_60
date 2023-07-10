@@ -31,6 +31,9 @@ public class NhanVien {
     @Column(name="email")
     private String email;
 
+    @Column(name="mat_khau")
+    private String pass;
+
     @Column(name="so_dien_thoai")
     private String sdt;
 

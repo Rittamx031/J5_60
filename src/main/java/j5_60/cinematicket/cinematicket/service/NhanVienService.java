@@ -22,15 +22,19 @@ public class NhanVienService {
     public Page<NhanVien> findAll(Pageable pageable) {
         return nvRepository.findAll(pageable);
     }
+    public Page<NhanVien> sapXep(Pageable pageable) {
+        return nvRepository.findAllByOrderByHoTenDesc(pageable);
+    }
 
     public NhanVien add(NhanVien nv) {
-      return   nvRepository.save(nv);
+      return nvRepository.save(nv);
     }
 
     public NhanVien update(UUID id, NhanVien nhanVien) {
         NhanVien nv = nvRepository.findById(id).get();
         nv.setHoTen(nhanVien.getHoTen());
         nv.setEmail(nhanVien.getEmail());
+        nv.setPass(nhanVien.getPass());
         nv.setSdt(nhanVien.getSdt());
         nv.setIdCV(nhanVien.getIdCV());
         nv.setUpdateAt(nhanVien.getUpdateAt());

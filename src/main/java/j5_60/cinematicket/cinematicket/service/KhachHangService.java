@@ -22,21 +22,25 @@ public class KhachHangService {
     public Page<KhachHang> findAllKH(Pageable pageable) {
         return khRepository.findAll(pageable);
     }
+    public Page<KhachHang> sapXepTheoName(Pageable pageable) {
+        return khRepository.findAllByOrderByHoTenDesc(pageable);
+    }
 
     public KhachHang add(KhachHang kh) {
-     return    khRepository.save(kh);
+     return khRepository.save(kh);
     }
 
     public KhachHang update(UUID id, KhachHang khachHang) {
         KhachHang kh = khRepository.findById(id).get();
         kh.setHoTen(khachHang.getHoTen());
         kh.setEmail(khachHang.getEmail());
+        kh.setPass(khachHang.getPass());
         kh.setGioiTinh(khachHang.isGioiTinh());
         kh.setNgaySinh(khachHang.getNgaySinh());
         kh.setSdt(khachHang.getSdt());
         kh.setTrangThai(khachHang.getTrangThai());
         kh.setUpdateAt(khachHang.getUpdateAt());
-     return    khRepository.save(kh);
+     return khRepository.save(kh);
     }
 
     public void delete(UUID id) {
