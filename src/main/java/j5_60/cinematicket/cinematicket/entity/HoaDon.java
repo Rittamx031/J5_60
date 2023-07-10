@@ -56,6 +56,6 @@ public class HoaDon {
     private NhanVien nhanVien;
 
     @ManyToOne
-    @Column(name="id_khach_hang") 
+    @JoinColumn(name="id_khach_hang") 
     private KhachHang khachHang;
 }
