@@ -6,12 +6,15 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import j5_60.cinematicket.cinematicket.entity.ComboDoAnDetail;
 import j5_60.cinematicket.cinematicket.entity.key.ComBoDoAnDetailKey;
@@ -20,6 +23,9 @@ import j5_60.cinematicket.cinematicket.service.ComboDoAnDetailService;
 /**
  * ComboDoAnDetailController
  */
+@RestController
+@CrossOrigin
+@RequestMapping("cemina/com-bo-do-an-detail")
 public class ComboDoAnDetailController {
     @Autowired
     private ComboDoAnDetailService  service;
