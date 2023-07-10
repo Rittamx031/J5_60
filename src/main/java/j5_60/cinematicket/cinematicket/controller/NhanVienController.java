@@ -24,15 +24,22 @@ public class NhanVienController {
     @Autowired
     private ChucVuService chucVuService;
 
-    @GetMapping
+    @GetMapping("/hien-thi")
     public ResponseEntity hienThi(@RequestParam(defaultValue = "1") int page) {
         if (page < 1) page = 1;
         Pageable pageable = PageRequest.of(page - 1, 3);
         return new ResponseEntity(nhanVienService.findAll(pageable), HttpStatus.OK);
     }
 
+//    @GetMapping
+//    public ResponseEntity sapXep(@RequestParam(defaultValue = "1") int page) {
+//        if (page < 1) page = 1;
+//        Pageable pageable = PageRequest.of(page - 1, 10);
+//        return new ResponseEntity(nhanVienService.sapXep(pageable), HttpStatus.OK);
+//    }
+
     @GetMapping("/chucvus")
-    public ResponseEntity hienThi() {
+    public ResponseEntity hienThiCV() {
         return new ResponseEntity(chucVuService.getAll1(), HttpStatus.OK);
     }
 
@@ -56,5 +63,4 @@ public class NhanVienController {
     public ResponseEntity detailNV(@PathVariable("id") UUID id) {
         return new ResponseEntity(nhanVienService.findById(id), HttpStatus.OK);
     }
-    
 }

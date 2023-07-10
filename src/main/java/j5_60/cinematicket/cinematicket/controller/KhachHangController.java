@@ -21,11 +21,16 @@ public class KhachHangController {
     private KhachHangService khService;
 
     @GetMapping
-    public ResponseEntity hienThi(@RequestParam(defaultValue = "1") int page) {
+    public ResponseEntity hienThi(@RequestParam(defaultValue = "1") int page, @RequestParam(required = false) String sapXepTheoName) {
         if (page < 1) page = 1;
-        Pageable pageable = PageRequest.of(page - 1, 3);
-        return new ResponseEntity(khService.findAllKH(pageable), HttpStatus.OK);
+        Pageable pageable = PageRequest.of(page - 1, 10);
+        if (sapXepTheoName != null && sapXepTheoName.equalsIgnoreCase("true")) {
+            return new ResponseEntity(khService.sapXepTheoName(pageable), HttpStatus.OK);
+        } else {
+            return new ResponseEntity(khService.findAllKH(pageable), HttpStatus.OK);
+        }
     }
+
 
     @PostMapping("/add")
     public ResponseEntity<KhachHang> addKH(@RequestBody KhachHang khachHang) {
