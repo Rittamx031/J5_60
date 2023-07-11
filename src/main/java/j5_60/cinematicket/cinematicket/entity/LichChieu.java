@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Setter
 @Getter
+@Component
 public class LichChieu {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -32,11 +34,11 @@ public class LichChieu {
     private ThongTinPhim thongTinPhim;
 
     @Column(name = "gio_chieu")
-    private LocalTime gioiChieu;
+    private LocalDateTime gioiChieu;
     @Column(name = "gio_ket_thuc")
-    private LocalTime gioiKetThuc;
+    private LocalDateTime gioiKetThuc;
     @Column(name = "ngay_chieu")
-    private LocalDate ngayChieu;
+    private LocalDateTime ngayChieu;
     @Column(name = "trang_thai")
     private int trangThai;
     @Column(name = "create_at")

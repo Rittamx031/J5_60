@@ -1,61 +1,120 @@
 package j5_60.cinematicket.cinematicket.service;
 
+import j5_60.cinematicket.cinematicket.entity.Combo;
 import j5_60.cinematicket.cinematicket.entity.LichChieu;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.repository.LichChieuRepository;
-import j5_60.cinematicket.cinematicket.service.serviceimpl.LichChieuIF;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.IntStream;
 
 @Service
-public class LichChieuService implements LichChieuIF {
+@Transactional
+public class LichChieuService  {
     @Autowired
-    LichChieuRepository lichChieuRepository;
+    private LichChieuRepository lichChieuRepository;
+    private final int ROWCOUNT = 5;
+    private int PageNo = -1;
 
-    @Override
-    public List<LichChieu> getAll() {
-        return lichChieuRepository.findAll();
-    }
-
-    @Override
-    public LichChieu save(LichChieu lichChieu) {
+    public LichChieu addLichChieu(LichChieu lichChieu){
         return lichChieuRepository.save(lichChieu);
     }
 
-    @Override
-    public LichChieu update(UUID id, LichChieu lichChieu) {
-        if (lichChieu != null) {
-            LichChieu lc = lichChieuRepository.getById(id);
-            if (lc != null) {
-                lc.setGioiChieu(lichChieu.getGioiChieu());
-                lc.setGioiKetThuc(lichChieu.getGioiKetThuc());
-                lc.setTrangThai(lichChieu.getTrangThai());
-                lc.setNgayChieu(lichChieu.getNgayChieu());
-                lc.setPhongChieu(lichChieu.getPhongChieu());
-                lc.setThongTinPhim(lichChieu.getThongTinPhim());
-                lc.setUpdateAt(lichChieu.getUpdateAt());
-            }
-            return lichChieuRepository.save(lc);
+    public LichChieu updateLichChieu(LichChieu lichChieu){
+        Optional<LichChieu> lichChieuDb = this.lichChieuRepository.findById(lichChieu.getId());
+        if (lichChieuDb.isPresent()){
+            LichChieu lc = lichChieuDb.get();
+            lc.setId(lichChieu.getId());
+            lc.setPhongChieu(lichChieu.getPhongChieu());
+            lc.setThongTinPhim(lichChieu.getThongTinPhim());
+            lc.setGioiChieu(lichChieu.getGioiChieu());
+            lc.setGioiKetThuc(lichChieu.getGioiKetThuc());
+            lc.setNgayChieu(lichChieu.getNgayChieu());
+            lc.setTrangThai(lichChieu.getTrangThai());
+            lc.setUpdateAt(lichChieu.getUpdateAt());
+            lc.setCreateAt(lichChieu.getCreateAt());
+            lc.setCreateBy(lichChieu.getCreateBy());
+            lc.setUpdateBy(lichChieu.getUpdateBy());
+            lc.setDeleted(lichChieu.isDeleted());
+            return lc;
+        } else {
+            throw new ResourceNotFoundException("Can not find lich chieu with id: "+ lichChieu.getId());
         }
-        return null;
     }
 
-    @Override
-    public void deleteById(UUID id) {
-        lichChieuRepository.deleteById(id);
+    public List<LichChieu> getAllLichChieu(){
+        return lichChieuRepository.findAll();
     }
 
-    @Override
-    public LichChieu findById(UUID id) throws ResourceNotFoundException {
+    public LichChieu getLichChieuById(UUID id){
         Optional<LichChieu> lichChieu = lichChieuRepository.findById(id);
-        if (lichChieu.isPresent()) {
+        if (lichChieu.isPresent()){
             return lichChieu.get();
+        } else {
+            throw new ResourceNotFoundException("Can not find lich chieu with id: "+ id);
         }
-        throw new ResourceNotFoundException("Can not find player with id: " + id);
     }
 
+    public LichChieu deleteLichChieu(UUID id){
+        Optional<LichChieu> lichChieu = lichChieuRepository.findById(id);
+        if (lichChieu.isPresent()){
+            return lichChieu.get();
+        } else {
+            throw new ResourceNotFoundException("Can not find lich chieu with id: "+ id);
+        }
+    }
+    public LichChieu setDeleteState(UUID id){
+        Optional<LichChieu> lichChieuDb = this.lichChieuRepository.findById(id);
+        if (lichChieuDb.isPresent()){
+            LichChieu lc = lichChieuDb.get();
+            lc.setDeleted(true);
+            return lc;
+        } else {
+            throw new ResourceNotFoundException("Can not find lich chieu with id: "+ id);
+        }
+    }
+
+    public List<LichChieu> getPageNo(int pageNo, String sortBy, String sortDir){
+        this.PageNo = pageNo;
+        List<LichChieu> lichChieus;
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name())?Sort.by(sortBy).ascending():Sort.by(sortBy).descending();
+
+        Pageable pageable = PageRequest.of(pageNo,ROWCOUNT,sort);
+        Page<LichChieu> page = lichChieuRepository.findAll(pageable);
+        lichChieus = page.getContent();
+        return lichChieus;
+    }
+
+    public int[] getPanigation() {
+        Pageable pageable = PageRequest.of(1, ROWCOUNT);
+        Page<LichChieu> page = lichChieuRepository.findAll(pageable);
+        int totalPage = page.getTotalPages();
+        int[] array = IntStream.rangeClosed(0, totalPage).toArray();
+        return array;
+    }
+
+    public List<LichChieu> getNextPage(String sortBy,String sortDir){
+        if (this.PageNo >= getPanigation().length - 1){
+            return this.getPageNo(this.getPanigation().length-1,sortBy,sortDir);
+        } else {
+            return  this.getPageNo(this.PageNo+1, sortBy, sortDir);
+        }
+    }
+
+    public List<LichChieu> getPrevPage(String sortBy, String sortDri){
+        if (this.PageNo <= 0) {
+            return this.getPageNo(0, sortBy, sortBy);
+        } else {
+            return this.getPageNo(this.PageNo - 1, sortBy, sortBy);
+        }
+    }
 }
