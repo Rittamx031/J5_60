@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ComBoDoAnDetailKey {
+public class ComBoDoAnDetailKey  {
       @Column(name = "id_combo")
     UUID id_combo;
     
