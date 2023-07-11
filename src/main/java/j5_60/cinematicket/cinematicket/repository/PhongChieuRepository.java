@@ -1,4 +1,3 @@
-package j5_60.cinematicket.cinematicket.repository;
 
 import j5_60.cinematicket.cinematicket.entity.LoaiGhe;
 import j5_60.cinematicket.cinematicket.entity.PhongChieu;

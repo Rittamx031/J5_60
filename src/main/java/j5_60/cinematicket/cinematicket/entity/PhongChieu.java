@@ -1,5 +1,3 @@
-package j5_60.cinematicket.cinematicket.entity;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -50,3 +48,4 @@ public class PhongChieu implements Serializable {
 
     // Getters and setters, as well as any additional methods
 }
+
