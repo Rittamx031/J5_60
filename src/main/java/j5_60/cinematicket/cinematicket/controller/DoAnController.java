@@ -26,7 +26,7 @@ import j5_60.cinematicket.cinematicket.service.DoAnService;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("cemina/doans")
+@RequestMapping("cemina/do-an")
 public class DoAnController {
   @Autowired 
     private DoAnService service;

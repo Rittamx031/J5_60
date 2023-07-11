@@ -36,7 +36,7 @@ public class HoaDonDoAn {
     @Column(name = "gia")
     private double gia;
     @Column(name = "so_luong")
-    private int trangThai;
+    private int soLuong;
     @Column(name = "create_at")
     private LocalDateTime createAt;
     @Column(name = "update_at")
