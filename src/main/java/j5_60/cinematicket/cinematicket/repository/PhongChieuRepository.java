@@ -10,7 +10,6 @@ import java.util.UUID;
 /**
  * PhongChieuRepository
  */
-@Repository
 public interface PhongChieuRepository  extends JpaRepository<PhongChieu, UUID> {
 
     List<PhongChieu> findAllByOrderByTen();

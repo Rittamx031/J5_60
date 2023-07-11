@@ -55,19 +55,12 @@ public class ThongTinPhim {
     private String poster;
 
     @ManyToOne()
-    @JoinColumn(
-            name = "id_quoc_gia",
-            referencedColumnName = "id"
-    )
+    @JoinColumn(name = "id_quoc_gia", referencedColumnName = "id")
     private QuocGia quocGia;
 
     @ManyToOne()
-    @JoinColumn(
-            name = "id_ngon_ngu",
-            referencedColumnName = "id"
-    )
+    @JoinColumn(name = "id_ngon_ngu", referencedColumnName = "id")
     private NgonNgu ngonNgu;
-
 
     @Column(name = "create_at")
     private LocalDateTime createAt;
@@ -75,12 +68,11 @@ public class ThongTinPhim {
     @Column(name = "update_at")
     private LocalDateTime updateAt;
 
-//    @Column(name = "create_by")
-//    private UUID createById;
-//
-//    @Column(name = "update_by")
-//    private UUID updateById;
-
+    // @Column(name = "create_by")
+    // private UUID createById;
+    //
+    // @Column(name = "update_by")
+    // private UUID updateById;
 
     @Column(name = "deleted")
     private boolean deleted;

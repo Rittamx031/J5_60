@@ -19,6 +19,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class VeKey {
+    @Column(name = "id_lich_chieu")
     UUID id_lich_chieu;
 
     @Column(name = "id_ghe")
