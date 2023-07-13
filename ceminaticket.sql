@@ -97,6 +97,7 @@ GO
 CREATE TABLE [dbo].[ChucVu](
 	[id] [uniqueidentifier] NOT NULL,
 	[ten] [nvarchar](100) NULL,
+	  [trang_thai] [int] DEFAULT 0,
 	[update_at] [datetime] NULL,
 	[create_at] [datetime] NULL,
 	[create_by] [uniqueidentifier] NULL,
@@ -361,6 +362,9 @@ CREATE TABLE [dbo].[NhanVien](
 	 [mat_khau] [varchar](20) NULL,
 	[email] [nvarchar](100) NULL,
 	[so_dien_thoai] [nvarchar](10) NULL,
+	[gioi_tinh] [bit]  DEFAULT 0 ,
+	[ngay_sinh] [date] NULL,
+	[trang_thai] [int] DEFAULT 0,
 	[image_nv] [nvarchar](max) NULL,
 	[update_at] [datetime] NULL,
 	[create_at] [datetime] NULL,
