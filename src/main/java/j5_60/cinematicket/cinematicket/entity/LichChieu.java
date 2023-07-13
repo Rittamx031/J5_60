@@ -34,9 +34,9 @@ public class LichChieu {
     private ThongTinPhim thongTinPhim;
 
     @Column(name = "gio_chieu")
-    private LocalDateTime gioiChieu;
+    private LocalTime gioiChieu;
     @Column(name = "gio_ket_thuc")
-    private LocalDateTime gioiKetThuc;
+    private LocalTime gioiKetThuc;
     @Column(name = "ngay_chieu")
     private LocalDateTime ngayChieu;
     @Column(name = "trang_thai")

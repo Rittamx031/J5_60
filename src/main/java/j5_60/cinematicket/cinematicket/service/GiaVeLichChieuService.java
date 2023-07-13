@@ -1,11 +1,11 @@
 package j5_60.cinematicket.cinematicket.service;
 
 import j5_60.cinematicket.cinematicket.entity.GiaVeLichChieu;
-import j5_60.cinematicket.cinematicket.entity.HoaDonDoAn;
-import j5_60.cinematicket.cinematicket.entity.key.HoaDonDoAnKey;
+import j5_60.cinematicket.cinematicket.entity.GiaVeLichChieu;
+import j5_60.cinematicket.cinematicket.entity.key.GiaVeLichChieuKey;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.repository.GiaVeLichChieuRepository;
-import j5_60.cinematicket.cinematicket.repository.HoaDonDoAnRepository;
+import j5_60.cinematicket.cinematicket.repository.GiaVeLichChieuRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,28 +27,103 @@ public class GiaVeLichChieuService {
     private final int ROWCOUNT = 5;
     private int PageNo = -1;
 
-    public GiaVeLichChieu createGiaVeLichChieu(GiaVeLichChieu gvlc) {
-        return repo.save(gvlc);
+    public GiaVeLichChieu createGiaVeLichChieu(GiaVeLichChieu giaVeLichChieuDetail) {
+        return repo.save(giaVeLichChieuDetail);
     }
 
-    public GiaVeLichChieu updateGiaVeLichChieun(GiaVeLichChieu giaVeLichChieu) {
-        Optional<GiaVeLichChieu> gvlcDB = this.repo.findById(giaVeLichChieu.getId());
-        if (gvlcDB.isPresent()) {
-            GiaVeLichChieu gvlcUd = gvlcDB.get();
-            gvlcUd.setId(gvlcUd.getId());
-            gvlcUd.setCreateAt(gvlcUd.getCreateAt());
-            gvlcUd.setCreateBy(gvlcUd.getCreateBy());
-            gvlcUd.setDeleted(gvlcUd.isDeleted());
-            gvlcUd.setUpdateAt(gvlcUd.getUpdateAt());
-            gvlcUd.setUpdateBy(gvlcUd.getUpdateBy());
-            gvlcUd.setGia(gvlcUd.getGia());
-            gvlcUd.setTrangThai(gvlcUd.getTrangThai());
-            gvlcUd.setSlGhe(gvlcUd.getSlGhe());
-            gvlcUd.setLichChieu(gvlcUd.getLichChieu());
-            gvlcUd.setLoaiGhe(gvlcUd.getLoaiGhe());
-            return gvlcUd;
+    public GiaVeLichChieu updateGiaVeLichChieu(GiaVeLichChieu giaVeLichChieuDetail) {
+        Optional<GiaVeLichChieu> giaVeLichChieuDetailDb = this.repo.findById(giaVeLichChieuDetail.getId());
+        if (giaVeLichChieuDetailDb.isPresent()) {
+            GiaVeLichChieu giaVeLichChieuDetailud = giaVeLichChieuDetailDb.get();
+            giaVeLichChieuDetailud.setId(giaVeLichChieuDetail.getId());
+            giaVeLichChieuDetailud.setTrangThai(giaVeLichChieuDetail.getTrangThai());
+            giaVeLichChieuDetailud.setGia(giaVeLichChieuDetail.getGia());
+            giaVeLichChieuDetailud.setLoaiGhe(giaVeLichChieuDetail.getLoaiGhe());
+            giaVeLichChieuDetailud.setLichChieu(giaVeLichChieuDetail.getLichChieu());
+            giaVeLichChieuDetailud.setCreateAt(giaVeLichChieuDetail.getCreateAt());
+            giaVeLichChieuDetailud.setCreateBy(giaVeLichChieuDetail.getCreateBy());
+            giaVeLichChieuDetailud.setDeleted(giaVeLichChieuDetail.isDeleted());
+            giaVeLichChieuDetailud.setUpdateAt(giaVeLichChieuDetail.getUpdateAt());
+            giaVeLichChieuDetailud.setUpdateBy(giaVeLichChieuDetail.getUpdateBy());
+            return giaVeLichChieuDetailud;
         } else {
-            throw new ResourceNotFoundException("Can not find Hoa Don Do An  with id" + giaVeLichChieu.getId());
+            throw new ResourceNotFoundException("Can not find Hoa Don Do An  with id" + giaVeLichChieuDetail.getId());
         }
     }
+
+    public List<GiaVeLichChieu> getAllGiaVeLichChieu() {
+        return repo.findAll();
+    }
+
+    // public List<GiaVeLichChieu> searchByName(){
+    // return repo.findAll();
+    // }
+    public GiaVeLichChieu getGiaVeLichChieuById(UUID id_lich_chieu, UUID idLoaiGhe) {
+        Optional<GiaVeLichChieu> phuongthucThanhToan = repo.findById(new GiaVeLichChieuKey(id_lich_chieu, idLoaiGhe));
+        if (phuongthucThanhToan.isPresent()) {
+            return phuongthucThanhToan.get();
+        } else {
+            throw new ResourceNotFoundException("Cannot Find Hoa Don Do An  with id = ");
+        }
+    }
+
+    public GiaVeLichChieu deleteGiaVeLichChieu(UUID id_lich_chieu, UUID idLoaiGhe) {
+        Optional<GiaVeLichChieu> phuongthucThanhToan = repo.findById(new GiaVeLichChieuKey(id_lich_chieu, idLoaiGhe));
+        if (phuongthucThanhToan.isPresent()) {
+            return phuongthucThanhToan.get();
+        } else {
+            throw new ResourceNotFoundException("Cannot Find Hoa Don Do An  with id = ");
+        }
+    }
+
+    public GiaVeLichChieu setDeteleteState(UUID id_lich_chieu, UUID idLoaiGhe) {
+        Optional<GiaVeLichChieu> giaVeLichChieuDetailDb = this.repo
+                .findById(new GiaVeLichChieuKey(id_lich_chieu, idLoaiGhe));
+        if (giaVeLichChieuDetailDb.isPresent()) {
+            GiaVeLichChieu giaVeLichChieuDetailud = giaVeLichChieuDetailDb.get();
+            giaVeLichChieuDetailud.setDeleted(true);
+            return giaVeLichChieuDetailud;
+        } else {
+            throw new ResourceNotFoundException(
+                    "Can not find Hoa Don Do An  with id_lich_chieu=" + id_lich_chieu + " and idLoaiGhe=" + idLoaiGhe);
+        }
+    }
+
+    public List<GiaVeLichChieu> getPageNo(int pageNo, String sortBy, String sortDir) {
+        this.PageNo = pageNo;
+        List<GiaVeLichChieu> giaVeLichChieuDetails;
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
+                : Sort.by(sortBy).descending();
+        // Pageable object
+        Pageable pageable = PageRequest.of(pageNo, ROWCOUNT, sort);
+        // findAll method and pass pageable instance
+        Page<GiaVeLichChieu> page = repo.findAll(pageable);
+        giaVeLichChieuDetails = page.getContent();
+        return giaVeLichChieuDetails;
+    }
+
+    public List<GiaVeLichChieu> getNextPage(String sortBy, String sortDir) {
+        if (this.PageNo >= getPanigation().length - 1) {
+            return this.getPageNo(this.getPanigation().length - 1, sortBy, sortBy);
+        } else {
+            return this.getPageNo(this.PageNo + 1, sortBy, sortBy);
+        }
+    }
+
+    public List<GiaVeLichChieu> getPrevPage(String sortBy, String sortDir) {
+        if (this.PageNo <= 0) {
+            return this.getPageNo(0, sortBy, sortBy);
+        } else {
+            return this.getPageNo(this.PageNo - 1, sortBy, sortBy);
+        }
+    }
+
+    public int[] getPanigation() {
+        Pageable pageable = PageRequest.of(1, ROWCOUNT);
+        Page<GiaVeLichChieu> page = repo.findAll(pageable);
+        int totalPage = page.getTotalPages();
+        int[] array = IntStream.rangeClosed(0, totalPage).toArray();
+        return array;
+    }
+
 }

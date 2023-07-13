@@ -32,8 +32,8 @@ public class GiaVeLichChieu {
 
     @Column(name = "gia")
     private double gia;
-    @Column(name = "so_luong_ghe")
-    private int slGhe;
+    // @Column(name = "so_luong_ghe")
+    // private int slGhe;
     @Column(name = "trang_thai")
     private int trangThai;
     @Column(name = "create_at")

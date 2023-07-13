@@ -51,7 +51,7 @@ public class ThongTinPhimController {
                     thongTinPhimUpdate.setTuoiGioiHan(thongTinPhim.getTuoiGioiHan());
                     thongTinPhimUpdate.setQuocGia(thongTinPhim.getQuocGia());
                     thongTinPhimUpdate.setNgonNgu(thongTinPhim.getNgonNgu());
-                    thongTinPhimUpdate.setNgayKhoiChieu(thongTinPhim.getNgayKhoiChieu());
+                    // thongTinPhimUpdate.setNgayKhoiChieu(thongTinPhim.getNgayKhoiChieu());
                     thongTinPhimUpdate.setNoiDung(thongTinPhim.getNoiDung());
                     thongTinPhimUpdate.setTrailer(thongTinPhim.getTrailer());
                     thongTinPhimUpdate.setPoster(thongTinPhim.getPoster());

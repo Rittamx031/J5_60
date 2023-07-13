@@ -1,29 +1,67 @@
 package j5_60.cinematicket.cinematicket.service;
 
 
-import j5_60.cinematicket.cinematicket.entity.Ghe;
-import j5_60.cinematicket.cinematicket.entity.LoaiGhe;
-import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-public interface LoaiGheService {
-    List<LoaiGhe> getAll();
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-    LoaiGhe save(LoaiGhe loaiGhe);
+import j5_60.cinematicket.cinematicket.entity.LoaiGhe;
+import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
+import j5_60.cinematicket.cinematicket.repository.LoaiGheRepository;
+import jakarta.transaction.Transactional;
+@Service
+@Transactional  
+public class LoaiGheService {
+    
+    @Autowired
+    public LoaiGheRepository loaiGheRepository;
 
-    LoaiGhe updateLoaiGhe(UUID id, LoaiGhe loaiGhe) throws ResourceNotFoundException;
+    public List<LoaiGhe> sapXep() {
+        return loaiGheRepository.findAllByOrderByTen();
+    }
+    public List<LoaiGhe> searchLoaiGhe(String keyword) {
+        return loaiGheRepository.findByTenContainingIgnoreCase(keyword);
+    }
 
-    void deleteById(UUID id);
+    
+    public List<LoaiGhe> getAll() {
+        return loaiGheRepository.findAll();
+    }
 
-    LoaiGhe findById(UUID id) throws ResourceNotFoundException;
+    
+    public LoaiGhe save(LoaiGhe loaiGhe) {
+        return loaiGheRepository.save(loaiGhe);
+    }
 
+    
+    public LoaiGhe updateLoaiGhe(UUID id, LoaiGhe loaiGhe) throws ResourceNotFoundException {
+        Optional<LoaiGhe> optionalLoaiGhe = loaiGheRepository.findById(id);
+        if (optionalLoaiGhe.isPresent()) {
+            LoaiGhe existingLoaiGhe = optionalLoaiGhe.get();
+            existingLoaiGhe.setTen(loaiGhe.getTen());
+            existingLoaiGhe.setTrangThai(loaiGhe.getTrangThai());
+            existingLoaiGhe.setUpdateAt(LocalDateTime.now());
+            // Cập nhật các thuộc tính khác của LoaiGhe
 
-    Page<LoaiGhe> findAll(Pageable pageable);
+            return loaiGheRepository.save(existingLoaiGhe);
+        }
+        throw new ResourceNotFoundException("LoaiGhe not found with id: " + id);
+    }
 
-    List<LoaiGhe> sapXep();
-    List<LoaiGhe> searchLoaiGhe(String keyword);
-}
+    
+    public void deleteById(UUID id) {
+        loaiGheRepository.deleteById(id);
+    }
+
+    
+    public LoaiGhe findById(UUID id) throws ResourceNotFoundException {
+        Optional<LoaiGhe> optionalLoaiGhe = loaiGheRepository.findById(id);
+        if (optionalLoaiGhe.isPresent()) {
+            return optionalLoaiGhe.get();
+        }
+        throw new ResourceNotFoundException("LoaiGhe not found with id: " + id);
+    }}

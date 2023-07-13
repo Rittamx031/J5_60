@@ -42,8 +42,8 @@ public class ThongTinPhim {
     @Column(name = "tuoi_gioi_han")
     private int tuoiGioiHan;
 
-    @Column(name = "ngay_khoi_chieu")
-    private Date ngayKhoiChieu;
+    // @Column(name = "ngay_khoi_chieu")
+    // private Date ngayKhoiChieu;
 
     @Column(name = "noidung")
     private String noiDung;

@@ -1,27 +1,72 @@
 package j5_60.cinematicket.cinematicket.service;
 
-import j5_60.cinematicket.cinematicket.entity.Ghe;
-import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
-
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-public interface GheService {
-    List<Ghe> getAll();
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
-    Ghe save(Ghe ghe);
+import j5_60.cinematicket.cinematicket.entity.Ghe;
+import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
+import j5_60.cinematicket.cinematicket.repository.GheRepository;
+import jakarta.transaction.Transactional;
 
-    Ghe updateGhe(UUID id, Ghe ghe) throws ResourceNotFoundException;
+@Service
+@Transactional
+public class GheService {
+    @Autowired
+    public GheRepository gheRepository;
 
-    void deleteById(UUID id);
+    public Page<Ghe> findAll(Pageable pageable) {
+        return gheRepository.findAll(pageable);
+    }
 
-    Ghe findById(UUID id) throws ResourceNotFoundException;
+    public List<Ghe> sapXep() {
+        return gheRepository.findAllByOrderByTen();
+    }
 
-    Page<Ghe> findAll(Pageable pageable);
+    public List<Ghe> searchGhe(String keyword) {
+        return gheRepository.findByTenContainingIgnoreCase(keyword);
+    }
 
-    List<Ghe> sapXep();
-    List<Ghe> searchGhe(String keyword);
+    public List<Ghe> getAll() {
+        return gheRepository.findAll();
+    }
+
+    public Ghe save(Ghe ghe) {
+        ghe.setCreateAt(LocalDateTime.now());
+        return gheRepository.save(ghe);
+    }
+
+    public Ghe updateGhe(UUID id, Ghe ghe) throws ResourceNotFoundException {
+        Optional<Ghe> optionalGhe = gheRepository.findById(id);
+        if (optionalGhe.isPresent()) {
+            Ghe existingGhe = optionalGhe.get();
+            existingGhe.setTen(ghe.getTen());
+            existingGhe.setLoaiGhe(ghe.getLoaiGhe());
+            existingGhe.setPhongChieu(ghe.getPhongChieu());
+            existingGhe.setTrangThai(ghe.getTrangThai());
+            existingGhe.setUpdateAt(LocalDateTime.now());
+            // Cập nhật các thuộc tính khác của đối tượng Ghe
+
+            return gheRepository.save(existingGhe);
+        }
+        throw new ResourceNotFoundException("Ghe not found with id: " + id);
+    }
+
+    public void deleteById(UUID id) {
+        gheRepository.deleteById(id);
+    }
+
+    public Ghe findById(UUID id) throws ResourceNotFoundException {
+        Optional<Ghe> optionalGhe = gheRepository.findById(id);
+        if (optionalGhe.isPresent()) {
+            return optionalGhe.get();
+        }
+        throw new ResourceNotFoundException("Ghe not found with id: " + id);
+    }
 }

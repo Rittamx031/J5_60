@@ -1,10 +1,20 @@
 package j5_60.cinematicket.cinematicket.entity.key;
 
-import jakarta.persistence.Column;
-
 import java.util.Objects;
 import java.util.UUID;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Embeddable
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class GiaVeLichChieuKey {
     @Column(name = "id_lich_chieu")
     UUID id_lich_chieu;
