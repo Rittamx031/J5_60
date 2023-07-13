@@ -926,7 +926,7 @@ CREATE TABLE [dbo].[LichChieu](
 	[id_phim] [uniqueidentifier] NULL,
 	[gio_chieu] [time](7) NULL,
 	[gio_ket_thuc] [time](7) NULL,
-	[ngay_chieu] [time](7) NULL,
+	[ngay_chieu] [datetime] NULL,
 	[id_phong_chieu] [uniqueidentifier] NULL,
 	[trang_thai] [int] DEFAULT 0,
 	[update_at] [datetime] NULL,
