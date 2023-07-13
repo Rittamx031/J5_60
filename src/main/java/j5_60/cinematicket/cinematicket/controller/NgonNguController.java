@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
-@RequestMapping("/ngon-ngu")
+@CrossOrigin
+@RequestMapping("cimena/ngon-ngu")
 public class NgonNguController {
 
     @Autowired
