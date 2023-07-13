@@ -26,7 +26,7 @@ import j5_60.cinematicket.cinematicket.service.PhuongThucThanhToanService;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("cemina/phuong-thuc-thanh-toan")
+@RequestMapping("cimena/phuong-thuc-thanh-toan")
 public class PhuongThucThanhToanController {
     @Autowired
     private PhuongThucThanhToanService service;

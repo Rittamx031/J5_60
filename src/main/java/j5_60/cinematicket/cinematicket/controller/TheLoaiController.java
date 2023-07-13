@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/the-loai")
-@CrossOrigin("http://localhost:3000")
+@RequestMapping("cimena/the-loai")
+@CrossOrigin
 public class TheLoaiController {
 
     @Autowired

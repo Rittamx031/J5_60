@@ -27,7 +27,7 @@ import j5_60.cinematicket.cinematicket.service.VeService;
 
 @RestController
 @CrossOrigin
-@RequestMapping("cemina/ve")
+@RequestMapping("cimena/ve")
 public class VeController {
 
     @Autowired

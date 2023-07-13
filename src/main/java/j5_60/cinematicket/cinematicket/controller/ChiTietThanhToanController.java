@@ -27,7 +27,7 @@ import j5_60.cinematicket.cinematicket.service.ChiTietThanhToanService;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("cemina/chi-tiet-thanh-toan")
+@RequestMapping("cimena/chi-tiet-thanh-toan")
 public class ChiTietThanhToanController {
     @Autowired
     private ChiTietThanhToanService service;

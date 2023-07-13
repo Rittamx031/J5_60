@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin
-@RequestMapping("cemina/ghe")
+@RequestMapping("cimena/ghe")
 public class GheController {
 
     @Autowired

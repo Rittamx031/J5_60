@@ -26,7 +26,7 @@ import j5_60.cinematicket.cinematicket.service.ComboService;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("cemina/com-bo")
+@RequestMapping("cimena/com-bo")
 public class ComboController {
  @Autowired 
     private ComboService service;

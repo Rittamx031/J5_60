@@ -27,7 +27,7 @@ import jakarta.websocket.server.PathParam;
  * HoaDonDoAnController
  */
 @RestController
-@RequestMapping("cemina/hoa-don-do-an")
+@RequestMapping("cimena/hoa-don-do-an")
 @CrossOrigin
 public class HoaDonDoAnController {
     @Autowired

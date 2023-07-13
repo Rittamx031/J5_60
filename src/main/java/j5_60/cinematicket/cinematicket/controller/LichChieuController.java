@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin
-@RequestMapping("cemina/lich-chieu")
+@RequestMapping("cimena/lich-chieu")
 public class LichChieuController {
     @Autowired
     private LichChieuService lcSer;

@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/admin/khach-hang")
+@RequestMapping("/cimena/khach-hang")
 @CrossOrigin
 public class KhachHangController {
 

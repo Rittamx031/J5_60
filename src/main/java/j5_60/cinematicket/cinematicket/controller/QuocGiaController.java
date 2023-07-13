@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/quoc-gia")
-@CrossOrigin("http://localhost:3000")
+@RequestMapping("cimena/quoc-gia")
+@CrossOrigin
 public class QuocGiaController {
 
     @Autowired

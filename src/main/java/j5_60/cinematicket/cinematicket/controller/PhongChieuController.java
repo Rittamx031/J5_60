@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/phongchieu")
+@CrossOrigin
+@RequestMapping("cimena/phongchieu")
 public class PhongChieuController {
 
     @Autowired

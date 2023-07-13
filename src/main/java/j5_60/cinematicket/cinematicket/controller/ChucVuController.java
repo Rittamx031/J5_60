@@ -14,7 +14,7 @@ import java.util.UUID;
 
 
 @RestController
-@RequestMapping("/admin/chuc-vu")
+@RequestMapping("/cimena/chuc-vu")
 @CrossOrigin
 public class ChucVuController {
 
