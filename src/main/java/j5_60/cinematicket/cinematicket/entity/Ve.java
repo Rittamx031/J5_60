@@ -7,10 +7,22 @@ import java.util.UUID;
 import j5_60.cinematicket.cinematicket.entity.key.VeKey;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@Entity
+@Table(name = "Ve")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Ve {
     @EmbeddedId
     private VeKey id;

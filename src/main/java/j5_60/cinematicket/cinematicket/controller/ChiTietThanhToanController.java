@@ -33,7 +33,7 @@ public class ChiTietThanhToanController {
     private ChiTietThanhToanService service;
 
        
-    @GetMapping("/index")
+    @GetMapping
     public ResponseEntity<List<ChiTietThanhToan>> getAllChiTietThanhToan() {
         List<ChiTietThanhToan> chiTietThanhToanList = service.getAllChiTietThanhToan();
         return ResponseEntity.ok(chiTietThanhToanList);

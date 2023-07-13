@@ -1,7 +1,5 @@
 package j5_60.cinematicket.cinematicket.service;
 
-import j5_60.cinematicket.cinematicket.entity.Ghe;
-import j5_60.cinematicket.cinematicket.entity.LoaiGhe;
 import j5_60.cinematicket.cinematicket.entity.PhongChieu;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import org.springframework.data.domain.Page;
