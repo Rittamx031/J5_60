@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/admin/nhan-vien")
+@RequestMapping("/cemina/nhan-vien")
 @CrossOrigin
 public class NhanVienController {
 

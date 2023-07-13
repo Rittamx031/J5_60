@@ -14,7 +14,7 @@ import java.util.UUID;
 
 
 @RestController
-@RequestMapping("/admin/chuc-vu")
+@RequestMapping("/cemina/chuc-vu")
 @CrossOrigin
 public class ChucVuController {
 
@@ -27,7 +27,7 @@ public class ChucVuController {
 //    }
 
 
-    @GetMapping
+    @GetMapping("/hien-thi")
     public ResponseEntity hienThi( @RequestParam(defaultValue = "1") int page) {
         if (page < 1) page = 1;
         Pageable pageable = PageRequest.of(page - 1, 5);

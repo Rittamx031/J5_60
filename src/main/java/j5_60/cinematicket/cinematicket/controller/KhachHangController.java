@@ -13,14 +13,14 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/admin/khach-hang")
+@RequestMapping("/cemina/khach-hang")
 @CrossOrigin
 public class KhachHangController {
 
     @Autowired
     private KhachHangService khService;
 
-    @GetMapping
+    @GetMapping("/hien-thi")
     public ResponseEntity hienThi(@RequestParam(defaultValue = "1") int page, @RequestParam(required = false) String sapXepTheoName) {
         if (page < 1) page = 1;
         Pageable pageable = PageRequest.of(page - 1, 10);
@@ -31,12 +31,12 @@ public class KhachHangController {
         }
     }
 
-
     @PostMapping("/add")
     public ResponseEntity<KhachHang> addKH(@RequestBody KhachHang khachHang) {
         khachHang.setCreateAt(LocalDateTime.now());
         return new ResponseEntity<>(khService.add(khachHang), HttpStatus.CREATED);
     }
+
     @PutMapping("/update/{id}")
     public ResponseEntity<KhachHang> updateKH(@PathVariable("id") UUID id, @RequestBody KhachHang khachHang) {
         khachHang.setUpdateAt(LocalDateTime.now());
