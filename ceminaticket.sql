@@ -97,6 +97,7 @@ GO
 CREATE TABLE [dbo].[ChucVu](
 	[id] [uniqueidentifier] NOT NULL,
 	[ten] [nvarchar](100) NULL,
+	  [trang_thai] [int] DEFAULT 0,
 	[update_at] [datetime] NULL,
 	[create_at] [datetime] NULL,
 	[create_by] [uniqueidentifier] NULL,
