@@ -1,5 +1,27 @@
 package j5_60.cinematicket.cinematicket.entity.key;
 
+import jakarta.persistence.Column;
+
+import java.util.Objects;
+import java.util.UUID;
+
 public class GiaVeLichChieuKey {
-    
+    @Column(name = "id_lich_chieu")
+    UUID id_lich_chieu;
+
+    @Column(name = "id_loai_ghe")
+    UUID id_loai_ghe;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof GiaVeLichChieuKey)) return false;
+        GiaVeLichChieuKey other = (GiaVeLichChieuKey) obj;
+        return Objects.equals(id_lich_chieu, other.id_lich_chieu) && Objects.equals(id_loai_ghe, other.id_loai_ghe);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_lich_chieu, id_loai_ghe);
+    }
+
 }

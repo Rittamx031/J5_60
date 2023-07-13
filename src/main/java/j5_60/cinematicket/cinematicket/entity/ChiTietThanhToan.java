@@ -30,14 +30,13 @@ public class ChiTietThanhToan {
     @MapsId("id_hoa_don")
     @JoinColumn(name = "id_hoa_don")
     HoaDon hoaDon;
-
     @ManyToOne
     @MapsId("id_phuong_thuc_thanh_toan")
     @JoinColumn(name = "id_phuong_thuc_thanh_toan")
     PhuongThucThanhToan phuongThucThanhToan;
-    @Column(name="tong_tien")
+    @Column(name = "tong_tien")
     private double tongTien;
-    @Column(name="trang_thai")
+    @Column(name = "trang_thai")
     private int trangThai;
     @Column(name = "create_at")
     private LocalDateTime createAt;
