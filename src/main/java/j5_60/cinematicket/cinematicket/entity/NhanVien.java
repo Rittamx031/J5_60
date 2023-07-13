@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -36,6 +37,18 @@ public class NhanVien {
 
     @Column(name="so_dien_thoai")
     private String sdt;
+
+    @Column(name="gioi_tinh")
+    private boolean gioiTinh;
+
+    @Column(name="ngay_sinh")
+    private Date ngaySinh;
+
+    @Column(name="image_nv")
+    private String imagaNV;
+
+    @Column(name="trang_thai")
+    private int trangThai;
 
     @Column(name = "create_at")
     private LocalDateTime createAt;
