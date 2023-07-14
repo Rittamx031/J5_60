@@ -35,6 +35,8 @@ public class HoaDonDoAnService {
         if (hoaDonDoAnDetailDb.isPresent()) {
             HoaDonDoAn hoaDonDoAnDetailud = hoaDonDoAnDetailDb.get();
             hoaDonDoAnDetailud.setId(hoaDonDoAnDetail.getId());
+            hoaDonDoAnDetailud.setSoLuong(hoaDonDoAnDetail.getSoLuong());
+            hoaDonDoAnDetailud.setGia(hoaDonDoAnDetail.getGia());
             hoaDonDoAnDetailud.setCreateAt(hoaDonDoAnDetail.getCreateAt());
             hoaDonDoAnDetailud.setCreateBy(hoaDonDoAnDetail.getCreateBy());
             hoaDonDoAnDetailud.setDeleted(hoaDonDoAnDetail.isDeleted());

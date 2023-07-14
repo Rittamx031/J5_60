@@ -3,7 +3,6 @@ package j5_60.cinematicket.cinematicket.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.UUID;
 

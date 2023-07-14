@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import j5_60.cinematicket.cinematicket.entity.HoaDonDoAn;
 import j5_60.cinematicket.cinematicket.entity.key.HoaDonDoAnKey;
 import j5_60.cinematicket.cinematicket.service.HoaDonDoAnService;
-import jakarta.websocket.server.PathParam;
 
 /**
  * HoaDonDoAnController
@@ -40,8 +39,8 @@ public class HoaDonDoAnController {
 
     @GetMapping("{idhoadon}/{idcombo}")
     public ResponseEntity<HoaDonDoAn> getOne(
-            @PathParam("idhoadon") UUID idhoadon,
-            @PathParam("idcombo") UUID idcombo) {
+            @PathVariable("idhoadon") UUID idhoadon,
+            @PathVariable("idcombo") UUID idcombo) {
         return ResponseEntity.ok().body(service.getHoaDonDoAnById(idcombo, idhoadon));
     }
 

@@ -36,9 +36,8 @@ public class VeController {
     @GetMapping
     public ResponseEntity<List<Ve>> getAllVe() {
         return ResponseEntity.ok().body(service.getAllVe());
-
     }
-
+    
     @GetMapping("{id_ghe}/{id_lich_chieu}")
     public ResponseEntity<Ve> getOne(
             @PathVariable("id_ghe") UUID id_ghe,
