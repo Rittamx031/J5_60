@@ -37,7 +37,14 @@ public class VeController {
     public ResponseEntity<List<Ve>> getAllVe() {
         return ResponseEntity.ok().body(service.getAllVe());
     }
-    
+     @GetMapping("panigation")
+    public ResponseEntity<int[]> getPanigation() {
+        return ResponseEntity.ok().body(service.getPanigation());
+    }
+     @GetMapping("currentpage")
+    public int getCrrentPage() {
+        return service.getCrrentPage();
+    }
     @GetMapping("{id_ghe}/{id_lich_chieu}")
     public ResponseEntity<Ve> getOne(
             @PathVariable("id_ghe") UUID id_ghe,

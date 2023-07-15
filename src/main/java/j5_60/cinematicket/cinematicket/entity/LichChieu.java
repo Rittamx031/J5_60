@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
-// import java.time.LocalDate;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.UUID;
@@ -38,7 +38,7 @@ public class LichChieu {
     @Column(name = "gio_ket_thuc")
     private LocalTime gioiKetThuc;
     @Column(name = "ngay_chieu")
-    private LocalDateTime ngayChieu;
+    private LocalDate ngayChieu;
     @Column(name = "trang_thai")
     private int trangThai;
     @Column(name = "create_at")

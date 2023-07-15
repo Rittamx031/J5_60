@@ -28,7 +28,7 @@ import j5_60.cinematicket.cinematicket.service.DoAnService;
 @CrossOrigin
 @RequestMapping("cimena/do-an")
 public class DoAnController {
-  @Autowired 
+    @Autowired
     private DoAnService service;
 
     @GetMapping
@@ -63,6 +63,14 @@ public class DoAnController {
         return ResponseEntity.ok().body(service.getPageNo(pageNo, sortby, sortdir));
     }
 
+    @GetMapping("panigation")
+    public ResponseEntity<int[]> getPanigation() {
+        return ResponseEntity.ok().body(service.getPanigation());
+    }
+     @GetMapping("currentpage")
+    public int getCrrentPage() {
+        return service.getCrrentPage();
+    }
     @GetMapping("next")
     public ResponseEntity<List<DoAn>> getNextPage(
             @RequestParam(value = "sortby", required = false) String sortby,
@@ -95,6 +103,4 @@ public class DoAnController {
         this.service.deleteDoAn(id);
         return HttpStatus.OK;
     }
-    
-    
 }

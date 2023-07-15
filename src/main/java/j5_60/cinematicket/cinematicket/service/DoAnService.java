@@ -89,7 +89,7 @@ public class DoAnService {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
         // Pageable object
-        Pageable pageable = PageRequest.of(pageNo, ROWCOUNT, sort);
+        Pageable pageable = PageRequest.of(pageNo-1, ROWCOUNT, sort);
         // findAll method and pass pageable instance
         Page<DoAn> page = repo.findAll(pageable);
         doAns = page.getContent();
@@ -116,7 +116,10 @@ public class DoAnService {
         Pageable pageable = PageRequest.of(1, ROWCOUNT);
         Page<DoAn> page = repo.findAll(pageable);
         int totalPage = page.getTotalPages();
-        int[] array = IntStream.rangeClosed(0, totalPage).toArray();
+        int[] array = IntStream.rangeClosed(1, totalPage).toArray();
         return array;
+    }
+    public int getCrrentPage(){
+        return this.PageNo;
     }
 }
