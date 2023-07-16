@@ -9,6 +9,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +23,13 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@NamedQueries({
+    @NamedQuery(
+        name="DoAn.search",
+        query = "SELECT doan FROM DoAn doan WHERE ten LIKE CONCAT('%',:txtSearch,'%')"
+    )
+}
+)
 public class DoAn {
     @Id
     @GeneratedValue(generator = "uuid2")

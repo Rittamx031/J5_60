@@ -40,12 +40,11 @@ public class DoAnController {
     public ResponseEntity<DoAn> getDoAnById(@PathVariable UUID id) {
         return ResponseEntity.ok().body(service.getDoAnById(id));
     }
-    // @GetMapping("/search")
-    // public ResponseEntity<List<DoAn>>
-    // getDoAnById(@RequestParam(value ="name", required = true)
-    // String name) {
-    // return ResponseEntity.ok().body(service.searchByName(name));
-    // }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<DoAn>> getDoAnById(@RequestParam(value = "name", required = true) String name) {
+        return ResponseEntity.ok().body(service.searchDoAn(name));
+    }
 
     @GetMapping("pre")
     public ResponseEntity<List<DoAn>> getPrevPage(
@@ -54,11 +53,11 @@ public class DoAnController {
         return ResponseEntity.ok().body(service.getPrevPage(sortby, sortdir));
     }
 
-    @GetMapping("pageno")
+    @GetMapping("page")
     public ResponseEntity<List<DoAn>> getPageNo(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir,
-            @RequestParam(value = "pageNo", required = false) int pageNo) {
+            @RequestParam(value = "pageno", required = false) int pageNo) {
         System.out.println(pageNo + " , " + sortby + " ," + sortdir);
         return ResponseEntity.ok().body(service.getPageNo(pageNo, sortby, sortdir));
     }
@@ -67,10 +66,12 @@ public class DoAnController {
     public ResponseEntity<int[]> getPanigation() {
         return ResponseEntity.ok().body(service.getPanigation());
     }
-     @GetMapping("currentpage")
+
+    @GetMapping("currentpage")
     public int getCrrentPage() {
         return service.getCrrentPage();
     }
+
     @GetMapping("next")
     public ResponseEntity<List<DoAn>> getNextPage(
             @RequestParam(value = "sortby", required = false) String sortby,

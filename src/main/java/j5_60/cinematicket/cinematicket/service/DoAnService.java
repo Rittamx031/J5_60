@@ -51,6 +51,10 @@ public class DoAnService {
         return repo.findAll();
     }
 
+    public List<DoAn> searchDoAn(String txt) {
+        return repo.search(txt);
+    }
+
     // public List<DoAn> searchByName(){
     // return repo.findAll();
     // }
@@ -89,7 +93,7 @@ public class DoAnService {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
         // Pageable object
-        Pageable pageable = PageRequest.of(pageNo-1, ROWCOUNT, sort);
+        Pageable pageable = PageRequest.of(pageNo - 1, ROWCOUNT, sort);
         // findAll method and pass pageable instance
         Page<DoAn> page = repo.findAll(pageable);
         doAns = page.getContent();
@@ -119,7 +123,8 @@ public class DoAnService {
         int[] array = IntStream.rangeClosed(1, totalPage).toArray();
         return array;
     }
-    public int getCrrentPage(){
+
+    public int getCrrentPage() {
         return this.PageNo;
     }
 }
