@@ -33,18 +33,24 @@ public class GheController {
 
     @GetMapping("/index")
     public ResponseEntity<Page<Ghe>> getAll(@RequestParam(defaultValue = "1") int page,
-                                            @RequestParam(defaultValue = "5") int size) {
-        if (page < 1) page = 1;
+            @RequestParam(defaultValue = "5") int size) {
+        if (page < 1)
+            page = 1;
         Pageable pageable = PageRequest.of(page - 1, size);
         Page<Ghe> ghePage = gheService.findAll(pageable);
         return ResponseEntity.ok().body(ghePage);
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<Ghe> getById(@PathVariable("id") UUID id) throws ResourceNotFoundException {
         Ghe ghe = gheService.findById(id);
         return ResponseEntity.ok().body(ghe);
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<Ghe>> getGheByPhongChieu(@RequestParam("id_phongchieu") UUID idpc) throws ResourceNotFoundException {
+        PhongChieu pc = phongChieuService.findById(idpc);
+        return ResponseEntity.ok().body(gheService.fillGheInPhongChieu(pc));
     }
 
     @PostMapping("/add")
@@ -58,7 +64,8 @@ public class GheController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Ghe> updateGhe(@PathVariable("id") UUID id, @RequestBody Ghe ghe) throws ResourceNotFoundException {
+    public ResponseEntity<Ghe> updateGhe(@PathVariable("id") UUID id, @RequestBody Ghe ghe)
+            throws ResourceNotFoundException {
         Ghe existingGhe = gheService.findById(id);
         LoaiGhe loaiGhe = loaiGheService.findById(ghe.getLoaiGhe().getId());
         PhongChieu phongChieu = phongChieuService.findById(ghe.getPhongChieu().getId());
@@ -76,11 +83,13 @@ public class GheController {
         gheService.deleteById(id);
         return ResponseEntity.ok().build();
     }
+
     @GetMapping("/search")
     public ResponseEntity<List<Ghe>> searchGhe(@RequestParam("keyword") String keyword) {
         List<Ghe> gheList = gheService.searchGhe(keyword);
         return ResponseEntity.ok().body(gheList);
     }
+
     @GetMapping("/sorted")
     public ResponseEntity<List<Ghe>> getSortedGheList() {
         List<Ghe> sortedGheList = gheService.sapXep();

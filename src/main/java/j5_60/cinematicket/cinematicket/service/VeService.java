@@ -90,7 +90,7 @@ public class VeService {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
         // Pageable object
-        Pageable pageable = PageRequest.of(pageNo-1, ROWCOUNT, sort);
+        Pageable pageable = PageRequest.of(pageNo - 1, ROWCOUNT, sort);
         // findAll method and pass pageable instance
         Page<Ve> page = repo.findAll(pageable);
         ves = page.getContent();
@@ -104,6 +104,7 @@ public class VeService {
             return this.getPageNo(this.PageNo + 1, sortBy, sortBy);
         }
     }
+
     public List<Ve> getPrevPage(String sortBy, String sortDir) {
         if (this.PageNo <= 0) {
             return this.getPageNo(0, sortBy, sortBy);
@@ -116,10 +117,11 @@ public class VeService {
         Pageable pageable = PageRequest.of(1, ROWCOUNT);
         Page<Ve> page = repo.findAll(pageable);
         int totalPage = page.getTotalPages();
-        int[] array = IntStream.rangeClosed(0, totalPage-1).toArray();
+        int[] array = IntStream.rangeClosed(0, totalPage - 1).toArray();
         return array;
     }
-    public int getCrrentPage(){
+
+    public int getCrrentPage() {
         return this.PageNo;
     }
 }
