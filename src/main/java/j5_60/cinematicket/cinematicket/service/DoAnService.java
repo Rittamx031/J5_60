@@ -117,7 +117,7 @@ public class DoAnService {
     }
 
     public int[] getPanigation() {
-        Pageable pageable = PageRequest.of(1, ROWCOUNT);
+        Pageable pageable = PageRequest.of(0, ROWCOUNT);
         Page<DoAn> page = repo.findAll(pageable);
         int totalPage = page.getTotalPages();
         int[] array = IntStream.rangeClosed(1, totalPage).toArray();

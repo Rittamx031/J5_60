@@ -28,7 +28,7 @@ import j5_60.cinematicket.cinematicket.service.ComboDoAnDetailService;
 @RequestMapping("cimena/com-bo-do-an-detail")
 public class ComboDoAnDetailController {
     @Autowired
-    private ComboDoAnDetailService  service;
+    private ComboDoAnDetailService service;
 
     @PostMapping
     public ResponseEntity<ComboDoAnDetail> createComboDoAnDetail(@RequestBody ComboDoAnDetail comboDoAnDetail) {
@@ -36,9 +36,10 @@ public class ComboDoAnDetailController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdComboDoAnDetail);
     }
 
-    @PutMapping("/{idcombo}/{idDoAn}")
-    public ResponseEntity<ComboDoAnDetail> updateComboDoAnDetail(@PathVariable("idcombo") UUID idcombo,@PathVariable("idDoAn") UUID idDoAn, @RequestBody ComboDoAnDetail comboDoAnDetail) {
-        comboDoAnDetail.setId(new ComBoDoAnDetailKey(idcombo, idDoAn));
+    @PutMapping("/{idcombo}/{iddoan}")
+    public ResponseEntity<ComboDoAnDetail> updateComboDoAnDetail(@PathVariable("idcombo") UUID idcombo,
+            @PathVariable("iddoan") UUID iddoan, @RequestBody ComboDoAnDetail comboDoAnDetail) {
+        comboDoAnDetail.setId(new ComBoDoAnDetailKey(idcombo, iddoan));
         ComboDoAnDetail updatedComboDoAnDetail = service.updateComboDoAnDetail(comboDoAnDetail);
         return ResponseEntity.ok(updatedComboDoAnDetail);
     }
@@ -49,21 +50,30 @@ public class ComboDoAnDetailController {
         return ResponseEntity.ok(comboDoAnDetails);
     }
 
-    @GetMapping("/{idcombo}/{idDoAn}")
-    public ResponseEntity<ComboDoAnDetail> getComboDoAnDetailById(@PathVariable("idcombo") UUID idcombo, @PathVariable("idDoAn") UUID idDoAn) {
-        ComboDoAnDetail comboDoAnDetail = service.getComboDoAnDetailById(idcombo, idDoAn);
+    @GetMapping("/{idcombo}/{iddoan}")
+    public ResponseEntity<ComboDoAnDetail> getComboDoAnDetailById(@PathVariable("idcombo") UUID idcombo,
+            @PathVariable("iddoan") UUID iddoan) {
+        ComboDoAnDetail comboDoAnDetail = service.getComboDoAnDetailById(idcombo, iddoan);
         return ResponseEntity.ok(comboDoAnDetail);
     }
 
-    @DeleteMapping("/{idcombo}/{idDoAn}")
-    public ResponseEntity<ComboDoAnDetail> deleteComboDoAnDetail(@PathVariable("idcombo") UUID idcombo, @PathVariable("idDoAn") UUID idDoAn) {
-        ComboDoAnDetail deletedComboDoAnDetail = service.deleteComboDoAnDetail(idcombo, idDoAn);
+    @GetMapping("/{idcombo}")
+    public ResponseEntity<List<ComboDoAnDetail>> getListDoAnbyCombo(@PathVariable("idcombo") UUID idcombo) {
+        List<ComboDoAnDetail> listdt = service.getComboDoAnDetailByIdComboo(idcombo);
+        return ResponseEntity.ok(listdt);
+    }
+
+    @DeleteMapping("/{idcombo}/{iddoan}")
+    public ResponseEntity<ComboDoAnDetail> deleteComboDoAnDetail(@PathVariable("idcombo") UUID idcombo,
+            @PathVariable("iddoan") UUID iddoan) {
+        ComboDoAnDetail deletedComboDoAnDetail = service.deleteComboDoAnDetail(idcombo, iddoan);
         return ResponseEntity.ok(deletedComboDoAnDetail);
     }
 
-    @PutMapping("/{idcombo}/{idDoAn}/delete")
-    public ResponseEntity<ComboDoAnDetail> setDeleteState(@PathVariable("idcombo") UUID idcombo, @PathVariable("idDoAn") UUID idDoAn) {
-        ComboDoAnDetail comboDoAnDetail = service.setDeteleteState(idcombo, idDoAn);
+    @PutMapping("/{idcombo}/{iddoan}/delete")
+    public ResponseEntity<ComboDoAnDetail> setDeleteState(@PathVariable("idcombo") UUID idcombo,
+            @PathVariable("iddoan") UUID iddoan) {
+        ComboDoAnDetail comboDoAnDetail = service.setDeteleteState(idcombo, iddoan);
         return ResponseEntity.ok(comboDoAnDetail);
     }
 }

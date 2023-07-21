@@ -24,8 +24,8 @@ public class LichChieuController {
         return ResponseEntity.ok().body(lcSer.getAllLichChieu());
     }
 
-    @GetMapping("id")
-    public ResponseEntity<LichChieu> getLichChieuById(@PathVariable UUID id){
+    @GetMapping("/{id}")
+    public ResponseEntity<LichChieu> getLichChieuById(@PathVariable("id") UUID id){
         return ResponseEntity.ok().body(lcSer.getLichChieuById(id));
     }
 

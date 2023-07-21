@@ -55,18 +55,25 @@ public class ComboDoAnDetailService {
     // return repo.findAll();
     // }
     public ComboDoAnDetail getComboDoAnDetailById(UUID idcombo, UUID idDoAn) {
-        Optional<ComboDoAnDetail> phuongthucThanhToan = repo.findById(new ComBoDoAnDetailKey(idcombo, idDoAn));
-        if (phuongthucThanhToan.isPresent()) {
-            return phuongthucThanhToan.get();
+        Optional<ComboDoAnDetail> comboDetail = repo.findById(new ComBoDoAnDetailKey(idcombo, idDoAn));
+        if (comboDetail.isPresent()) {
+            return comboDetail.get();
         } else {
             throw new ResourceNotFoundException("Cannot Find Chi Tiet com bo with id = ");
         }
     }
 
+    public List<ComboDoAnDetail> getComboDoAnDetailByIdComboo(UUID idcombo) {
+        List<ComboDoAnDetail> comboDetail = repo.findAll();
+        List<ComboDoAnDetail> list = comboDetail.stream().filter(cbdt -> cbdt.getId().getId_combo().equals(idcombo))
+                .toList();
+        return list;
+    }
+
     public ComboDoAnDetail deleteComboDoAnDetail(UUID idcombo, UUID idDoAn) {
-        Optional<ComboDoAnDetail> phuongthucThanhToan = repo.findById(new ComBoDoAnDetailKey(idcombo, idDoAn));
-        if (phuongthucThanhToan.isPresent()) {
-            return phuongthucThanhToan.get();
+        Optional<ComboDoAnDetail> comboDetail = repo.findById(new ComBoDoAnDetailKey(idcombo, idDoAn));
+        if (comboDetail.isPresent()) {
+            return comboDetail.get();
         } else {
             throw new ResourceNotFoundException("Cannot Find Chi Tiet com bo with id = ");
         }

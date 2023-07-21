@@ -30,7 +30,7 @@ public class Ve {
     @MapsId("id_lich_chieu")
     @JoinColumn(name = "id_lich_chieu")
     private LichChieu lichChieu;
-    @ManyToOne
+    @ManyToOne  
     @MapsId("id_ghe")
     @JoinColumn(name = "id_ghe")
     private Ghe ghe;

@@ -50,6 +50,11 @@ public class ComboService {
         return repo.findAll();
     }
 
+    
+    public List<Combo> searchDoAn(String txt) {
+        return repo.search(txt);
+    }
+
     // public List<Combo> searchByName(){
     // return repo.findAll();
     // }
@@ -115,7 +120,7 @@ public class ComboService {
         Pageable pageable = PageRequest.of(1, ROWCOUNT);
         Page<Combo> page = repo.findAll(pageable);
         int totalPage = page.getTotalPages();
-        int[] array = IntStream.rangeClosed(0, totalPage).toArray();
+        int[] array = IntStream.rangeClosed(1, totalPage).toArray();
         return array;
     }
 }

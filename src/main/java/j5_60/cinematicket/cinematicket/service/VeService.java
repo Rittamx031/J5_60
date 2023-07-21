@@ -36,7 +36,12 @@ public class VeService {
         if (veDb.isPresent()) {
             Ve veud = veDb.get();
             veud.setId(ve.getId());
+            veud.setGhe(ve.getGhe());
+            veud.setHoaDon(ve.getHoaDon());
+            veud.setLichChieu(ve.getLichChieu());
             veud.setTrangThai(ve.getTrangThai());
+            veud.setGia(ve.getGia());
+            veud.setNgayDatVe(ve.getNgayDatVe());
             veud.setCreateAt(ve.getCreateAt());
             veud.setCreateBy(ve.getCreateBy());
             veud.setDeleted(ve.isDeleted());

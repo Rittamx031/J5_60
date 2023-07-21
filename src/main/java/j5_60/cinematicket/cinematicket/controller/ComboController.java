@@ -28,7 +28,7 @@ import j5_60.cinematicket.cinematicket.service.ComboService;
 @CrossOrigin
 @RequestMapping("cimena/com-bo")
 public class ComboController {
- @Autowired 
+    @Autowired
     private ComboService service;
 
     @GetMapping
@@ -40,12 +40,11 @@ public class ComboController {
     public ResponseEntity<Combo> getComboById(@PathVariable UUID id) {
         return ResponseEntity.ok().body(service.getComboById(id));
     }
-    // @GetMapping("/search")
-    // public ResponseEntity<List<Combo>>
-    // getComboById(@RequestParam(value ="name", required = true)
-    // String name) {
-    // return ResponseEntity.ok().body(service.searchByName(name));
-    // }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Combo>> getDoAnById(@RequestParam(value = "name", required = true) String name) {
+        return ResponseEntity.ok().body(service.searchDoAn(name));
+    }
 
     @GetMapping("pre")
     public ResponseEntity<List<Combo>> getPrevPage(
@@ -54,13 +53,17 @@ public class ComboController {
         return ResponseEntity.ok().body(service.getPrevPage(sortby, sortdir));
     }
 
-    @GetMapping("pageno")
+    @GetMapping("/page")
     public ResponseEntity<List<Combo>> getPageNo(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir,
-            @RequestParam(value = "pageNo", required = false) int pageNo) {
-        System.out.println(pageNo + " , " + sortby + " ," + sortdir);
+            @RequestParam(value = "pageno", required = false) int pageNo) {
         return ResponseEntity.ok().body(service.getPageNo(pageNo, sortby, sortdir));
+    }
+
+    @GetMapping("panigation")
+    public ResponseEntity<int[]> getPanigation() {
+        return ResponseEntity.ok().body(service.getPanigation());
     }
 
     @GetMapping("next")
@@ -95,6 +98,5 @@ public class ComboController {
         this.service.deleteCombo(id);
         return HttpStatus.OK;
     }
-    
-    
+
 }

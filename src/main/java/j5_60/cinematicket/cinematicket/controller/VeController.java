@@ -1,5 +1,6 @@
 package j5_60.cinematicket.cinematicket.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -37,14 +38,17 @@ public class VeController {
     public ResponseEntity<List<Ve>> getAllVe() {
         return ResponseEntity.ok().body(service.getAllVe());
     }
-     @GetMapping("panigation")
+
+    @GetMapping("panigation")
     public ResponseEntity<int[]> getPanigation() {
         return ResponseEntity.ok().body(service.getPanigation());
     }
-     @GetMapping("currentpage")
+
+    @GetMapping("currentpage")
     public int getCrrentPage() {
         return service.getCrrentPage();
     }
+
     @GetMapping("{id_ghe}/{id_lich_chieu}")
     public ResponseEntity<Ve> getOne(
             @PathVariable("id_ghe") UUID id_ghe,
@@ -84,6 +88,7 @@ public class VeController {
 
     @PostMapping
     public ResponseEntity<Ve> createVe(@RequestBody Ve ve) {
+        ve.setNgayDatVe(LocalDate.now());
         ve.setCreateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.service.createVe(ve));
     }
