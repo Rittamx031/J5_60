@@ -16,6 +16,7 @@ import j5_60.cinematicket.cinematicket.entity.HoaDon;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.repository.HoaDonRepository;
 import jakarta.transaction.Transactional;
+
 @Service
 @Transactional
 public class HoaDonService {
@@ -23,9 +24,11 @@ public class HoaDonService {
     private HoaDonRepository repo;
     private final int ROWCOUNT = 5;
     private int PageNo = -1;
+
     public HoaDon createHoaDon(HoaDon hoaDon) {
         return repo.save(hoaDon);
     }
+
     public HoaDon updateHoaDon(HoaDon hoaDon) {
         Optional<HoaDon> hoaDonDb = this.repo.findById(hoaDon.getId());
         if (hoaDonDb.isPresent()) {
@@ -35,7 +38,7 @@ public class HoaDonService {
             hoaDonud.setTongGia(hoaDon.getTongGia());
             hoaDonud.setTongGiaSauGiam(hoaDon.getTongGiaSauGiam());
             hoaDonud.setGhiChu(hoaDon.getGhiChu());
-            hoaDonud.setTrang_Thai(hoaDon.getTrang_Thai());
+            hoaDonud.setTrangThai(hoaDon.getTrangThai());
             hoaDonud.setCreateAt(hoaDon.getCreateAt());
             hoaDonud.setCreateBy(hoaDon.getCreateBy());
             hoaDonud.setDeleted(hoaDon.isDeleted());
@@ -51,9 +54,10 @@ public class HoaDonService {
         return repo.findAll();
     }
 
-    // public List<HoaDon> searchByName(){
-    // return repo.findAll();
-    // }
+    public List<HoaDon> search(String txtSearch) {
+        return repo.search(txtSearch);
+    }
+
     public HoaDon getHoaDonById(UUID id) {
         Optional<HoaDon> hoaDon = repo.findById(id);
         if (hoaDon.isPresent()) {
@@ -89,7 +93,7 @@ public class HoaDonService {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
         // Pageable object
-        Pageable pageable = PageRequest.of(pageNo, ROWCOUNT, sort);
+        Pageable pageable = PageRequest.of(pageNo-1, ROWCOUNT, sort);
         // findAll method and pass pageable instance
         Page<HoaDon> page = repo.findAll(pageable);
         hoaDons = page.getContent();
@@ -116,7 +120,7 @@ public class HoaDonService {
         Pageable pageable = PageRequest.of(1, ROWCOUNT);
         Page<HoaDon> page = repo.findAll(pageable);
         int totalPage = page.getTotalPages();
-        int[] array = IntStream.rangeClosed(0, totalPage).toArray();
+        int[] array = IntStream.rangeClosed(1, totalPage).toArray();
         return array;
     }
 }

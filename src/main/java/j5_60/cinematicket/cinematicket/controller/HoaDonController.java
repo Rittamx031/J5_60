@@ -28,7 +28,7 @@ import j5_60.cinematicket.cinematicket.service.HoaDonService;
 @CrossOrigin
 @RequestMapping("cimena/hoa-don")
 public class HoaDonController {
-    @Autowired 
+    @Autowired
     private HoaDonService service;
 
     @GetMapping
@@ -40,12 +40,11 @@ public class HoaDonController {
     public ResponseEntity<HoaDon> getHoaDonById(@PathVariable UUID id) {
         return ResponseEntity.ok().body(service.getHoaDonById(id));
     }
-    // @GetMapping("/search")
-    // public ResponseEntity<List<HoaDon>>
-    // getHoaDonById(@RequestParam(value ="name", required = true)
-    // String name) {
-    // return ResponseEntity.ok().body(service.searchByName(name));
-    // }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<HoaDon>> getSearchResult(@RequestParam(value = "txt", required = true) String txtSearch) {
+        return ResponseEntity.ok().body(service.search(txtSearch));
+    }
 
     @GetMapping("pre")
     public ResponseEntity<List<HoaDon>> getPrevPage(
@@ -54,11 +53,11 @@ public class HoaDonController {
         return ResponseEntity.ok().body(service.getPrevPage(sortby, sortdir));
     }
 
-    @GetMapping("pageno")
+    @GetMapping("page")
     public ResponseEntity<List<HoaDon>> getPageNo(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir,
-            @RequestParam(value = "pageNo", required = false) int pageNo) {
+            @RequestParam(value = "pageno", required = false) int pageNo) {
         System.out.println(pageNo + " , " + sortby + " ," + sortdir);
         return ResponseEntity.ok().body(service.getPageNo(pageNo, sortby, sortdir));
     }
@@ -68,6 +67,11 @@ public class HoaDonController {
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir) {
         return ResponseEntity.ok().body(service.getNextPage(sortby, sortdir));
+    }
+
+    @GetMapping("panigation")
+    public ResponseEntity<int[]> getPanigation() {
+        return ResponseEntity.ok().body(service.getPanigation());
     }
 
     @GetMapping("delete/{id}")
@@ -95,5 +99,5 @@ public class HoaDonController {
         this.service.deleteHoaDon(id);
         return HttpStatus.OK;
     }
-    
+
 }

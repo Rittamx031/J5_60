@@ -35,7 +35,7 @@ public class HoaDonDoAn {
     Combo combo;
     @Column(name = "gia")
     private double gia;
-    @Column(name = "so_luong")
+    @Column(name = "soluong")
     private int soLuong;
     @Column(name = "create_at")
     private LocalDateTime createAt;

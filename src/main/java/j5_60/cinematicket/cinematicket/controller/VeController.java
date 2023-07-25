@@ -44,6 +44,12 @@ public class VeController {
         return ResponseEntity.ok().body(service.getPanigation());
     }
 
+    @GetMapping("/hoadon/{idhoadon}")
+    public ResponseEntity<List<Ve>> getVebyHoaDonId(
+            @PathVariable("idhoadon") UUID idhoadon) {
+        return ResponseEntity.ok().body(service.getVeByHoaDonId(idhoadon));
+    }
+
     @GetMapping("currentpage")
     public int getCrrentPage() {
         return service.getCrrentPage();

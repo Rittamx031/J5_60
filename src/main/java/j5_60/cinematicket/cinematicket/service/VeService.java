@@ -57,9 +57,14 @@ public class VeService {
         return repo.findAll();
     }
 
-    // public List<Ve> searchByName(){
-    // return repo.findAll();
-    // }
+    public List<Ve> getVeByHoaDonId(UUID hoaDonId) {
+        List<Ve> listhdda = repo.findAll();
+        List<Ve> result = listhdda.stream().filter(hdda -> hdda.getHoaDon() != null)
+                .toList();
+        return result.stream().filter(hdda -> hdda.getHoaDon().getId().equals(hoaDonId))
+                .toList();
+    }
+
     public Ve getVeById(UUID id_lich_chieu, UUID id_ghe) {
         Optional<Ve> ve = repo.findById(new VeKey(id_lich_chieu, id_ghe));
         if (ve.isPresent()) {

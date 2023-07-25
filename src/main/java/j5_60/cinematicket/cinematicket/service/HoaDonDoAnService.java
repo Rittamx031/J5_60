@@ -52,6 +52,13 @@ public class HoaDonDoAnService {
         return repo.findAll();
     }
 
+    public List<HoaDonDoAn> getHoaDonDoAnByHoaDonId(UUID idHoaDon) {
+        List<HoaDonDoAn> listhdda = repo.findAll();
+        List<HoaDonDoAn> result = listhdda.stream().filter(hdda -> hdda.getId().getId_hoa_don().equals(idHoaDon))
+                .toList();
+        return result;
+    }
+
     // public List<HoaDonDoAn> searchByName(){
     // return repo.findAll();
     // }

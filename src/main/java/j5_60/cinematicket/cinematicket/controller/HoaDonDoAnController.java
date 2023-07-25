@@ -44,22 +44,27 @@ public class HoaDonDoAnController {
         return ResponseEntity.ok().body(service.getHoaDonDoAnById(idcombo, idhoadon));
     }
 
-    @GetMapping("pageno")
+    @GetMapping("/hoadon/{idhoadon}")
+    public ResponseEntity<List<HoaDonDoAn>> getHoaDonDoAnbyHoaDonId(
+            @PathVariable("idhoadon") UUID idhoadon) {
+        return ResponseEntity.ok().body(service.getHoaDonDoAnByHoaDonId(idhoadon));
+    }
+
+    @GetMapping("page")
     public ResponseEntity<List<HoaDonDoAn>> getPageNo(@RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir,
-            @RequestParam(value = "pageNo", required = false) int pageNo) {
-
+            @RequestParam(value = "pageno", required = false) int pageNo) {
         return ResponseEntity.ok().body(service.getPageNo(pageNo, sortby, sortdir));
     }
 
-    @GetMapping("prev-page")
+    @GetMapping("prev")
     public ResponseEntity<List<HoaDonDoAn>> getPrePage(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir) {
         return ResponseEntity.ok().body(service.getPrevPage(sortby, sortdir));
     }
 
-    @GetMapping("next-page")
+    @GetMapping("next")
     public ResponseEntity<List<HoaDonDoAn>> getNextPage(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir) {

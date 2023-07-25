@@ -11,6 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,11 +20,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="HoaDon")
+@Table(name = "HoaDon")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@NamedQueries({
+        @NamedQuery(name = "HoaDon.search", query = "SELECT hoaDon FROM HoaDon hoaDon WHERE" +
+                " hoaDon.id LIKE CONCAT('%', :txtSearch, '%') OR " +
+                "hoaDon.ghiChu LIKE CONCAT('%', :txtSearch, '%') OR " +
+                "hoaDon.tongGia LIKE CONCAT('%',:txtSearch,'%') OR " +
+                "hoaDon.tongGiaSauGiam LIKE CONCAT('%',:txtSearch,'%') OR " +
+                "hoaDon.thoiGianThanhToan LIKE CONCAT('%',:txtSearch,'%') OR " +
+                "hoaDon.trangThai LIKE CONCAT('%',:txtSearch,'%') ")
+})
 public class HoaDon {
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -39,7 +50,7 @@ public class HoaDon {
     @Column(name = "thoi_gian_thanh_toan")
     private LocalDateTime thoiGianThanhToan;
     @Column(name = "trang_thai")
-    private int trang_Thai;
+    private int trangThai;
     @Column(name = "create_at")
     private LocalDateTime createAt;
     @Column(name = "update_at")
@@ -48,14 +59,14 @@ public class HoaDon {
     private UUID updateBy;
     @Column(name = "create_by")
     private UUID createBy;
-    @Column(name= "deleted") 
+    @Column(name = "deleted")
     private boolean deleted;
 
     @ManyToOne
-    @JoinColumn(name="id_nhan_vien")
+    @JoinColumn(name = "id_nhan_vien")
     private NhanVien nhanVien;
 
     @ManyToOne
-    @JoinColumn(name="id_khach_hang") 
+    @JoinColumn(name = "id_khach_hang")
     private KhachHang khachHang;
 }
