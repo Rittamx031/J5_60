@@ -109,7 +109,7 @@ public class VeService {
 
     public List<Ve> getNextPage(String sortBy, String sortDir) {
         if (this.PageNo >= getPanigation().length - 1) {
-            return this.getPageNo(this.getPanigation().length - 1, sortBy, sortBy);
+            return this.getPageNo(this.getPanigation().length, sortBy, sortBy);
         } else {
             return this.getPageNo(this.PageNo + 1, sortBy, sortBy);
         }
@@ -117,7 +117,7 @@ public class VeService {
 
     public List<Ve> getPrevPage(String sortBy, String sortDir) {
         if (this.PageNo <= 0) {
-            return this.getPageNo(0, sortBy, sortBy);
+            return this.getPageNo(1, sortBy, sortBy);
         } else {
             return this.getPageNo(this.PageNo - 1, sortBy, sortBy);
         }

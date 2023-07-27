@@ -98,7 +98,7 @@ public class HoaDonDoAnService {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
         // Pageable object
-        Pageable pageable = PageRequest.of(pageNo, ROWCOUNT, sort);
+        Pageable pageable = PageRequest.of(pageNo-1, ROWCOUNT, sort);
         // findAll method and pass pageable instance
         Page<HoaDonDoAn> page = repo.findAll(pageable);
         hoaDonDoAnDetails = page.getContent();
@@ -125,7 +125,7 @@ public class HoaDonDoAnService {
         Pageable pageable = PageRequest.of(1, ROWCOUNT);
         Page<HoaDonDoAn> page = repo.findAll(pageable);
         int totalPage = page.getTotalPages();
-        int[] array = IntStream.rangeClosed(0, totalPage).toArray();
+        int[] array = IntStream.rangeClosed(1, totalPage).toArray();
         return array;
     }
 

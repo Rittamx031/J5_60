@@ -51,9 +51,10 @@ public class PhuongThucThanhToanService {
         return repo.findAll();
     }
 
-    // public List<PhuongThucThanhToan> searchByName(){
-    // return repo.findAll();
-    // }
+    public List<PhuongThucThanhToan> searchByName(String txtSearch) {
+        return repo.search(txtSearch);
+    }
+
     public PhuongThucThanhToan getPhuongThucThanhToanById(UUID id) {
         Optional<PhuongThucThanhToan> phuongthucThanhToan = repo.findById(id);
         if (phuongthucThanhToan.isPresent()) {
@@ -89,7 +90,7 @@ public class PhuongThucThanhToanService {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
         // Pageable object
-        Pageable pageable = PageRequest.of(pageNo, ROWCOUNT, sort);
+        Pageable pageable = PageRequest.of(pageNo-1, ROWCOUNT, sort);
         // findAll method and pass pageable instance
         Page<PhuongThucThanhToan> page = repo.findAll(pageable);
         phuongThucThanhToans = page.getContent();
@@ -97,8 +98,8 @@ public class PhuongThucThanhToanService {
     }
 
     public List<PhuongThucThanhToan> getNextPage(String sortBy, String sortDir) {
-        if (this.PageNo >= getPanigation().length - 1) {
-            return this.getPageNo(this.getPanigation().length - 1, sortBy, sortBy);
+        if (this.PageNo >= getPanigation().length) {
+            return this.getPageNo(this.getPanigation().length, sortBy, sortBy);
         } else {
             return this.getPageNo(this.PageNo + 1, sortBy, sortBy);
         }
@@ -106,7 +107,7 @@ public class PhuongThucThanhToanService {
 
     public List<PhuongThucThanhToan> getPrevPage(String sortBy, String sortDir) {
         if (this.PageNo <= 0) {
-            return this.getPageNo(0, sortBy, sortBy);
+            return this.getPageNo(1, sortBy, sortBy);
         } else {
             return this.getPageNo(this.PageNo - 1, sortBy, sortBy);
         }
@@ -116,7 +117,7 @@ public class PhuongThucThanhToanService {
         Pageable pageable = PageRequest.of(1, ROWCOUNT);
         Page<PhuongThucThanhToan> page = repo.findAll(pageable);
         int totalPage = page.getTotalPages();
-        int[] array = IntStream.rangeClosed(0, totalPage).toArray();
+        int[] array = IntStream.rangeClosed(1, totalPage).toArray();
         return array;
     }
 }

@@ -52,9 +52,10 @@ public class ChiTietThanhToanService {
         return repo.findAll();
     }
 
-    // public List<ChiTietThanhToan> searchByName(){
-    // return repo.findAll();
-    // }
+    public List<ChiTietThanhToan> searchByName() {
+        return repo.findAll();
+    }
+
     public ChiTietThanhToan getChiTietThanhToanById(UUID idHD, UUID idPTTT) {
         Optional<ChiTietThanhToan> phuongthucThanhToan = repo.findById(new ChiTietThanhToanKey(idHD, idPTTT));
         if (phuongthucThanhToan.isPresent()) {
@@ -80,7 +81,7 @@ public class ChiTietThanhToanService {
             chiTietThanhToanud.setDeleted(true);
             return chiTietThanhToanud;
         } else {
-            throw new ResourceNotFoundException("Can not find person with id");
+            throw new ResourceNotFoundException("Can not find Phuong thuc thanh toan with id");
         }
     }
 
@@ -90,7 +91,7 @@ public class ChiTietThanhToanService {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
         // Pageable object
-        Pageable pageable = PageRequest.of(pageNo, ROWCOUNT, sort);
+        Pageable pageable = PageRequest.of(pageNo - 1, ROWCOUNT, sort);
         // findAll method and pass pageable instance
         Page<ChiTietThanhToan> page = repo.findAll(pageable);
         chiTietThanhToans = page.getContent();
@@ -117,7 +118,7 @@ public class ChiTietThanhToanService {
         Pageable pageable = PageRequest.of(1, ROWCOUNT);
         Page<ChiTietThanhToan> page = repo.findAll(pageable);
         int totalPage = page.getTotalPages();
-        int[] array = IntStream.rangeClosed(0, totalPage).toArray();
+        int[] array = IntStream.rangeClosed(1, totalPage).toArray();
         return array;
     }
 }

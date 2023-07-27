@@ -32,14 +32,13 @@ public class ChiTietThanhToanController {
     @Autowired
     private ChiTietThanhToanService service;
 
-       
     @GetMapping
     public ResponseEntity<List<ChiTietThanhToan>> getAllChiTietThanhToan() {
         List<ChiTietThanhToan> chiTietThanhToanList = service.getAllChiTietThanhToan();
         return ResponseEntity.ok(chiTietThanhToanList);
     }
 
-    @GetMapping("/{idhd}/{idpttt}")
+    @GetMapping("{idhd}/{idpttt}")
     public ResponseEntity<ChiTietThanhToan> getChiTietThanhToanById(
             @PathVariable("idhd") UUID idhd,
             @PathVariable("idpttt") UUID idpttt) {
@@ -47,11 +46,15 @@ public class ChiTietThanhToanController {
         return ResponseEntity.ok(chiTietThanhToan);
     }
 
+    @GetMapping("panigation")
+    public ResponseEntity<int[]> getPanigation() {
+        return ResponseEntity.ok().body(service.getPanigation());
+    }
     // @GetMapping("/search")
     // public ResponseEntity<List<ChiTietThanhToan>> getChiTietThanhToanByName(
-    //         @RequestParam("name") String name) {
-    //     List<ChiTietThanhToan> chiTietThanhToanList = service.searchByName(name);
-    //     return ResponseEntity.ok(chiTietThanhToanList);
+    // @RequestParam("name") String name) {
+    // List<ChiTietThanhToan> chiTietThanhToanList = service.searchByName(name);
+    // return ResponseEntity.ok(chiTietThanhToanList);
     // }
 
     @GetMapping("/prev-page")
@@ -66,7 +69,7 @@ public class ChiTietThanhToanController {
     public ResponseEntity<List<ChiTietThanhToan>> getPage(
             @RequestParam(value = "sortby", required = false) String sortBy,
             @RequestParam(value = "sortdir", required = false) String sortDir,
-            @RequestParam(value = "pageNo", required = false, defaultValue = "1") int pageNo) {
+            @RequestParam(value = "pageno", required = false, defaultValue = "1") int pageNo) {
         List<ChiTietThanhToan> chiTietThanhToanList = service.getPageNo(pageNo, sortBy, sortDir);
         return ResponseEntity.ok(chiTietThanhToanList);
     }

@@ -92,6 +92,11 @@ public class HoaDonDoAnController {
         return ResponseEntity.ok().body(this.service.updateHoaDonDoAn(hoaDonDoAn));
     }
 
+    @GetMapping("panigation")
+    public ResponseEntity<int[]> getPanigation() {
+        return ResponseEntity.ok().body(service.getPanigation());
+    }
+
     @DeleteMapping("{idhoadon}/{idcombo}")
     public HttpStatus deleteHoaDon(@PathVariable("idhoadon") UUID idhoadon, @PathVariable("idcombo") UUID idcombo) {
         this.service.deleteHoaDonDoAn(idcombo, idhoadon);

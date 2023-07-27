@@ -40,12 +40,12 @@ public class PhuongThucThanhToanController {
     public ResponseEntity<PhuongThucThanhToan> getPhuongThucThanhToanById(@PathVariable UUID id) {
         return ResponseEntity.ok().body(service.getPhuongThucThanhToanById(id));
     }
-    // @GetMapping("/search")
-    // public ResponseEntity<List<PhuongThucThanhToan>>
-    // getPhuongThucThanhToanById(@RequestParam(value ="name", required = true)
-    // String name) {
-    // return ResponseEntity.ok().body(service.searchByName(name));
-    // }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<PhuongThucThanhToan>> getDoAnById(
+            @RequestParam(value = "name", required = true) String name) {
+        return ResponseEntity.ok().body(service.searchByName(name));
+    }
 
     @GetMapping("prev-page")
     public ResponseEntity<List<PhuongThucThanhToan>> getPrevPage(
@@ -58,7 +58,7 @@ public class PhuongThucThanhToanController {
     public ResponseEntity<List<PhuongThucThanhToan>> getPageNo(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir,
-            @RequestParam(value = "pageNo", required = false) int pageNo) {
+            @RequestParam(value = "pageno", required = false) int pageNo) {
         System.out.println(pageNo + " , " + sortby + " ," + sortdir);
         return ResponseEntity.ok().body(service.getPageNo(pageNo, sortby, sortdir));
     }
@@ -76,8 +76,14 @@ public class PhuongThucThanhToanController {
         return HttpStatus.OK;
     }
 
+    @GetMapping("panigation")
+    public ResponseEntity<int[]> getPanigation() {
+        return ResponseEntity.ok().body(service.getPanigation());
+    }
+
     @PostMapping
-    public ResponseEntity<PhuongThucThanhToan> createPhuongThucThanhToan(@RequestBody PhuongThucThanhToan phuongThucThanhToan) {
+    public ResponseEntity<PhuongThucThanhToan> createPhuongThucThanhToan(
+            @RequestBody PhuongThucThanhToan phuongThucThanhToan) {
         phuongThucThanhToan.setCreateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.service.createPhuongThucThanhToan(phuongThucThanhToan));
     }

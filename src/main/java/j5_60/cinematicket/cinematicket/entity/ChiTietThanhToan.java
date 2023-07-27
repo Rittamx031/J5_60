@@ -22,6 +22,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class ChiTietThanhToan {
     @EmbeddedId
     ChiTietThanhToanKey id;
