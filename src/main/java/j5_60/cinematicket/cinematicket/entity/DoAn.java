@@ -24,12 +24,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @NamedQueries({
-    @NamedQuery(
-        name="DoAn.search",
-        query = "SELECT doan FROM DoAn doan WHERE ten LIKE CONCAT('%',:txtSearch,'%')"
-    )
-}
-)
+        @NamedQuery(name = "DoAn.search", query = "SELECT doan FROM DoAn doan WHERE ten LIKE CONCAT('%',:txtSearch,'%')")
+})
 public class DoAn {
     @Id
     @GeneratedValue(generator = "uuid2")

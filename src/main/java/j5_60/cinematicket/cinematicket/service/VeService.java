@@ -3,6 +3,7 @@ package j5_60.cinematicket.cinematicket.service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import j5_60.cinematicket.cinematicket.entity.Ve;
 import j5_60.cinematicket.cinematicket.entity.key.VeKey;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
+import j5_60.cinematicket.cinematicket.helper.fillterHelper;
 import j5_60.cinematicket.cinematicket.repository.VeRepository;
 import jakarta.transaction.Transactional;
 
@@ -29,6 +31,51 @@ public class VeService {
 
     public Ve createVe(Ve ve) {
         return repo.save(ve);
+    }
+
+    public List<String> getDistingValueinField(String field) {
+        List<Ve> list = this.repo.findAll();
+
+        // Filter and collect distinct values from the specified field
+        List<String> result = list.stream()
+                .map(ve -> getFieldAsString(ve, field))
+                .distinct()
+                .collect(Collectors.toList());
+        return result;
+    }
+
+    // Helper method to retrieve the field value as a string using reflection
+    private String getFieldAsString(Ve ve, String field) {
+        try {
+            java.lang.reflect.Field declaredField = Ve.class.getDeclaredField(field);
+            declaredField.setAccessible(true);
+            Object value = declaredField.get(ve);
+            return value != null ? value.toString() : null;
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            // Handle exceptions if needed
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Ve> filler(List<fillterHelper> listft) {
+        String sql = "SELECT * FROM Ve ve ";
+        if (listft.size() == 0) {
+            return repo.findAll();
+        } else {
+            sql += "WHERE";
+            for (int i = 0; i < listft.size() - 1; i++) {
+                fillterHelper fillterHelper = listft.get(i);
+                if (i < listft.size() - 2) {
+                    sql += " ve." + fillterHelper.getField() + "LIKE" + " \' " + fillterHelper.getValue() + " \' "
+                            + "AND";
+                } else {
+                    sql += " ve." + fillterHelper.getField() + "LIKE" + " \' " + fillterHelper.getValue() + " \' ";
+                }
+            }
+        }
+        System.out.println(sql);
+        return null;
     }
 
     public Ve updateVe(Ve ve) {
