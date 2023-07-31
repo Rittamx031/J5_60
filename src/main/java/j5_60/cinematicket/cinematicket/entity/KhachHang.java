@@ -19,28 +19,31 @@ import java.util.UUID;
 public class KhachHang {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
+    @Column(name = "id")
     private UUID id;
 
-    @Column(name="ho_ten")
+    @Column(name = "ho_ten")
     private String hoTen;
 
-    @Column(name="email")
+    @Column(name = "ma_khach_hang")
+    private String maKhachHang;
+
+    @Column(name = "email")
     private String email;
 
-    @Column(name="mat_khau")
+    @Column(name = "mat_khau")
     private String pass;
 
-    @Column(name="gioi_tinh")
+    @Column(name = "gioi_tinh")
     private boolean gioiTinh;
 
-    @Column(name="ngay_sinh")
+    @Column(name = "ngay_sinh")
     private Date ngaySinh;
 
-    @Column(name="so_dien_thoai")
+    @Column(name = "so_dien_thoai")
     private String sdt;
 
-    @Column(name="trang_thai")
+    @Column(name = "trang_thai")
     private int trangThai;
 
     @Column(name = "create_at")

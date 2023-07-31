@@ -43,6 +43,9 @@ public class HoaDon {
 
     @Column(name = "ghi_chu")
     private String ghiChu;
+
+    @Column(name = "ma_hoa_don")
+    private String maHoaDon;
     @Column(name = "tong_gia")
     private double tongGia;
     @Column(name = "tong_gia_sau_giam")

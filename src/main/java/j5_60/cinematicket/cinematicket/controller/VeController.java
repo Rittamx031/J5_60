@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import j5_60.cinematicket.cinematicket.entity.Ve;
 import j5_60.cinematicket.cinematicket.service.VeService;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * VeController
@@ -53,6 +54,11 @@ public class VeController {
     @GetMapping("currentpage")
     public int getCrrentPage() {
         return service.getCrrentPage();
+    }
+
+    @GetMapping("getDistingValue")
+    public List<String> getDistingValueInField(@RequestParam("field") String field) {
+        return service.getDistingValueinField(field);
     }
 
     @GetMapping("{id_ghe}/{id_lich_chieu}")
@@ -113,5 +119,12 @@ public class VeController {
             @PathVariable("id_lich_chieu") UUID id_lich_chieu) {
         this.service.deleteVe(id_lich_chieu, id_ghe);
         return HttpStatus.OK;
+    }
+
+    @GetMapping("fillter")
+    public String fillter(
+            HttpServletRequest request) {
+
+        return request.getRequestURL().toString();
     }
 }

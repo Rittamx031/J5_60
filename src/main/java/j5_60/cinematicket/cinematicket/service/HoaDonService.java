@@ -39,6 +39,7 @@ public class HoaDonService {
             hoaDonud.setTongGiaSauGiam(hoaDon.getTongGiaSauGiam());
             hoaDonud.setGhiChu(hoaDon.getGhiChu());
             hoaDonud.setTrangThai(hoaDon.getTrangThai());
+            hoaDonud.setMaHoaDon(hoaDon.getMaHoaDon());
             hoaDonud.setCreateAt(hoaDon.getCreateAt());
             hoaDonud.setCreateBy(hoaDon.getCreateBy());
             hoaDonud.setDeleted(hoaDon.isDeleted());
@@ -93,7 +94,7 @@ public class HoaDonService {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
         // Pageable object
-        Pageable pageable = PageRequest.of(pageNo-1, ROWCOUNT, sort);
+        Pageable pageable = PageRequest.of(pageNo - 1, ROWCOUNT, sort);
         // findAll method and pass pageable instance
         Page<HoaDon> page = repo.findAll(pageable);
         hoaDons = page.getContent();

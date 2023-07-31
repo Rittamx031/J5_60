@@ -18,26 +18,30 @@ import java.util.UUID;
 public class NhanVien {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
+    @Column(name = "id")
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name="id_chuc_vu",nullable = false)
+    @JoinColumn(name = "id_chuc_vu", nullable = false)
     private ChucVu idCV;
 
-    @Column(name="ho_ten")
+    @Column(name = "ho_ten")
     private String hoTen;
 
-    @Column(name="email")
+    @Column(name = "email")
     private String email;
 
-    @Column(name="mat_khau")
+    @Column(name = "mat_khau")
     private String pass;
 
-    @Column(name="so_dien_thoai")
+    @Column(name = "so_dien_thoai")
     private String sdt;
+    @Column(name = "ma_nhan_vien")
+
+    private String maNhanVien;
 
     @Column(name = "create_at")
+
     private LocalDateTime createAt;
 
     @Column(name = "update_at")
