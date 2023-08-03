@@ -3,8 +3,8 @@ package j5_60.cinematicket.cinematicket.controller;
 import j5_60.cinematicket.cinematicket.entity.ChucVu;
 import j5_60.cinematicket.cinematicket.service.ChucVuService;
 
-import org.aspectj.apache.bcel.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -23,17 +23,12 @@ public class ChucVuController {
     @Autowired
     private ChucVuService chucVuService;
 
-    // @GetMapping
-    // public ResponseEntity hienThi() {
-    // return new ResponseEntity(chucVuService.getAll1(), HttpStatus.OK);
-    // }
-
     @GetMapping
-    public ResponseEntity hienThi(@RequestParam(defaultValue = "1") int page) {
+    public ResponseEntity<Page<ChucVu>> hienThi(@RequestParam(defaultValue = "1") int page) {
         if (page < 1)
             page = 1;
         Pageable pageable = PageRequest.of(page - 1, 5);
-        return new ResponseEntity(chucVuService.findAll(pageable), HttpStatus.OK);
+        return ResponseEntity.ok().body(chucVuService.findAll(pageable));
     }
 
     @PostMapping("/add")
@@ -54,12 +49,13 @@ public class ChucVuController {
     }
 
     @GetMapping("/detail/{id}")
-    public ResponseEntity detail(@PathVariable("id") UUID id) {
-        return new ResponseEntity(chucVuService.getById(id), HttpStatus.OK);
+    public HttpStatus detail(@PathVariable("id") UUID id) {
+        chucVuService.getById(id);
+        return HttpStatus.OK;
     }
 
-    @GetMapping()
+    @GetMapping("getAll")
     public ResponseEntity<List<ChucVu>> getAll() {
-        return ResponseEntity.ok().body(chucVuService.getAll1());
+        return ResponseEntity.ok().body(chucVuService.getAll());
     }
 }

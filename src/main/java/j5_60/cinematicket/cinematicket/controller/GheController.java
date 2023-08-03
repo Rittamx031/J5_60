@@ -41,8 +41,8 @@ public class GheController {
         return ResponseEntity.ok().body(ghePage);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Ghe>> getAll() {
+    @GetMapping("getall")
+    public ResponseEntity<List<Ghe>> getAllGhe() {
         return ResponseEntity.ok().body(gheService.getAll());
     }
 

@@ -1,9 +1,11 @@
 package j5_60.cinematicket.cinematicket.controller;
 
+import j5_60.cinematicket.cinematicket.entity.ChucVu;
 import j5_60.cinematicket.cinematicket.entity.NhanVien;
 import j5_60.cinematicket.cinematicket.service.ChucVuService;
 import j5_60.cinematicket.cinematicket.service.NhanVienService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -26,11 +28,11 @@ public class NhanVienController {
     private ChucVuService chucVuService;
 
     @GetMapping("/hien-thi")
-    public ResponseEntity hienThi(@RequestParam(defaultValue = "1") int page) {
+    public ResponseEntity<Page<NhanVien>> hienThi(@RequestParam(defaultValue = "1") int page) {
         if (page < 1)
             page = 1;
         Pageable pageable = PageRequest.of(page - 1, 3);
-        return new ResponseEntity(nhanVienService.findAll(pageable), HttpStatus.OK);
+        return ResponseEntity.ok().body(nhanVienService.findAll(pageable));
     }
 
     @GetMapping
@@ -39,20 +41,20 @@ public class NhanVienController {
     }
 
     @GetMapping("/chucvus")
-    public ResponseEntity hienThiCV() {
-        return new ResponseEntity(chucVuService.getAll1(), HttpStatus.OK);
+    public ResponseEntity<List<ChucVu>> hienThiCV() {
+        return ResponseEntity.ok().body(chucVuService.getAll());
     }
 
     @PostMapping("/add")
     public ResponseEntity<NhanVien> addNV(@RequestBody NhanVien nhanVien) {
         nhanVien.setCreateAt(LocalDateTime.now());
-        return new ResponseEntity<>(nhanVienService.add(nhanVien), HttpStatus.CREATED);
+        return ResponseEntity.ok().body(nhanVienService.add(nhanVien));
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<NhanVien> updateNV(@PathVariable("id") UUID id, @RequestBody NhanVien nhanVien) {
         nhanVien.setUpdateAt(LocalDateTime.now());
-        return new ResponseEntity<>(nhanVienService.update(id, nhanVien), HttpStatus.OK);
+        return ResponseEntity.ok().body(nhanVienService.update(id, nhanVien));
     }
 
     @DeleteMapping("/delete/{id}")
@@ -61,7 +63,7 @@ public class NhanVienController {
     }
 
     @GetMapping("/detail/{id}")
-    public ResponseEntity detailNV(@PathVariable("id") UUID id) {
-        return new ResponseEntity(nhanVienService.findById(id), HttpStatus.OK);
+    public HttpStatus detailNV(@PathVariable("id") UUID id) {
+        return HttpStatus.OK;
     }
 }

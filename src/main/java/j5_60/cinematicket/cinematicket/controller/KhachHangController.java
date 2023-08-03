@@ -3,6 +3,7 @@ package j5_60.cinematicket.cinematicket.controller;
 import j5_60.cinematicket.cinematicket.entity.KhachHang;
 import j5_60.cinematicket.cinematicket.service.KhachHangService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -22,15 +23,15 @@ public class KhachHangController {
     private KhachHangService khService;
 
     @GetMapping
-    public ResponseEntity hienThi(@RequestParam(defaultValue = "1") int page,
+    public ResponseEntity<Page<KhachHang>> hienThi(@RequestParam(defaultValue = "1") int page,
             @RequestParam(required = false) String sapXepTheoName) {
         if (page < 1)
             page = 1;
         Pageable pageable = PageRequest.of(page - 1, 10);
         if (sapXepTheoName != null && sapXepTheoName.equalsIgnoreCase("true")) {
-            return new ResponseEntity(khService.sapXepTheoName(pageable), HttpStatus.OK);
+            return ResponseEntity.ok().body(khService.sapXepTheoName(pageable));
         } else {
-            return new ResponseEntity(khService.findAllKH(pageable), HttpStatus.OK);
+            return ResponseEntity.ok().body(khService.findAllKH(pageable));
         }
     }
 
@@ -52,11 +53,12 @@ public class KhachHangController {
     }
 
     @GetMapping("/detail/{id}")
-    public ResponseEntity detail(@PathVariable("id") UUID id) {
-        return new ResponseEntity(khService.findById(id), HttpStatus.OK);
+    public HttpStatus detail(@PathVariable("id") UUID id) {
+
+        return HttpStatus.OK;
     }
 
-    @GetMapping
+    @GetMapping("getall")
     public ResponseEntity<List<KhachHang>> getAll() {
         return ResponseEntity.ok().body(khService.getAllKH());
     }

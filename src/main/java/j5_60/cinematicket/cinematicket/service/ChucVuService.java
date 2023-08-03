@@ -15,7 +15,7 @@ public class ChucVuService {
     @Autowired
     private ChucVuRepository repository;
 
-    public List<ChucVu> getAll1() {
+    public List<ChucVu> getAll() {
         return repository.findAll();
     }
 
