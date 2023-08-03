@@ -72,4 +72,11 @@ public class LoaiGheController {
         List<LoaiGhe> sortedLoaiGheList = loaiGheService.sapXep();
         return ResponseEntity.ok().body(sortedLoaiGheList);
     }
+
+
+      @GetMapping
+    public ResponseEntity<List<LoaiGhe>> getAll() {
+        return ResponseEntity.ok().body(loaiGheService.getAll());
+    }
+ 
 }

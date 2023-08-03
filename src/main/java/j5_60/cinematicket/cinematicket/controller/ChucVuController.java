@@ -54,7 +54,7 @@ public class ChucVuController {
         return HttpStatus.OK;
     }
 
-    @GetMapping("getAll")
+    @GetMapping("getall")
     public ResponseEntity<List<ChucVu>> getAll() {
         return ResponseEntity.ok().body(chucVuService.getAll());
     }

@@ -22,7 +22,7 @@ public class KhachHangController {
     @Autowired
     private KhachHangService khService;
 
-    @GetMapping
+    @GetMapping("hien-thi")
     public ResponseEntity<Page<KhachHang>> hienThi(@RequestParam(defaultValue = "1") int page,
             @RequestParam(required = false) String sapXepTheoName) {
         if (page < 1)
@@ -58,7 +58,7 @@ public class KhachHangController {
         return HttpStatus.OK;
     }
 
-    @GetMapping("getall")
+    @GetMapping
     public ResponseEntity<List<KhachHang>> getAll() {
         return ResponseEntity.ok().body(khService.getAllKH());
     }

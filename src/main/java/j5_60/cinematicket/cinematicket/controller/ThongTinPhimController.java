@@ -1,9 +1,14 @@
 package j5_60.cinematicket.cinematicket.controller;
 
 import j5_60.cinematicket.cinematicket.entity.ThongTinPhim;
+import j5_60.cinematicket.cinematicket.entity.ThongTinPhim;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.repository.ThongTinPhimRepository;
+import j5_60.cinematicket.cinematicket.service.ThongTinPhimService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -16,56 +21,76 @@ import java.util.UUID;
 public class ThongTinPhimController {
 
     @Autowired
-    ThongTinPhimRepository thongTinPhimRepository;
+    private ThongTinPhimService service;
 
-    @GetMapping("/hien-thi")
-    public List<ThongTinPhim> get() {
-        return thongTinPhimRepository.findAll();
+    @GetMapping
+    public ResponseEntity<List<ThongTinPhim>> getAllThongTinPhim() {
+        return ResponseEntity.ok().body(service.getAllThongTinPhim());
     }
 
-    @GetMapping("/{id}")
-    public ThongTinPhim getById(@PathVariable("id") UUID id) {
-        return thongTinPhimRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("not find ThongTinFilm With id= " + id));
+    @GetMapping("{id}")
+    public ResponseEntity<ThongTinPhim> getThongTinPhimById(@PathVariable UUID id) {
+        return ResponseEntity.ok().body(service.getThongTinPhimById(id));
     }
 
-    @PostMapping("/add")
-    public ThongTinPhim add(@RequestBody ThongTinPhim thongTinPhim) {
-        LocalDateTime localDateTime = LocalDateTime.now();
-        thongTinPhim.setCreateAt(localDateTime);
-        return thongTinPhimRepository.save(thongTinPhim);
+    // @GetMapping("/search")
+    // public ResponseEntity<List<ThongTinPhim>> getSearchResult(
+    // @RequestParam(value = "txt", required = true) String txtSearch) {
+    // return ResponseEntity.ok().body(service.search(txtSearch));
+    // }
+
+    @GetMapping("pre")
+    public ResponseEntity<List<ThongTinPhim>> getPrevPage(
+            @RequestParam(value = "sortby", required = false) String sortby,
+            @RequestParam(value = "sortdir", required = false) String sortdir) {
+        return ResponseEntity.ok().body(service.getPrevPage(sortby, sortdir));
     }
 
-    @PutMapping("/update/{id}")
-    public ThongTinPhim update(@PathVariable("id") UUID id,
+    @GetMapping("page")
+    public ResponseEntity<List<ThongTinPhim>> getPageNo(
+            @RequestParam(value = "sortby", required = false) String sortby,
+            @RequestParam(value = "sortdir", required = false) String sortdir,
+            @RequestParam(value = "pageno", required = false) int pageNo) {
+        System.out.println(pageNo + " , " + sortby + " ," + sortdir);
+        return ResponseEntity.ok().body(service.getPageNo(pageNo, sortby, sortdir));
+    }
+
+    @GetMapping("next")
+    public ResponseEntity<List<ThongTinPhim>> getNextPage(
+            @RequestParam(value = "sortby", required = false) String sortby,
+            @RequestParam(value = "sortdir", required = false) String sortdir) {
+        return ResponseEntity.ok().body(service.getNextPage(sortby, sortdir));
+    }
+
+    @GetMapping("panigation")
+    public ResponseEntity<int[]> getPanigation() {
+        return ResponseEntity.ok().body(service.getPanigation());
+    }
+
+    @GetMapping("delete/{id}")
+    public HttpStatus delete(@PathVariable UUID id) {
+        this.service.setDeteleteState(id);
+        return HttpStatus.OK;
+    }
+
+    @PostMapping
+    public ResponseEntity<ThongTinPhim> createThongTinPhim(@RequestBody ThongTinPhim thongTinPhim) {
+        thongTinPhim.setCreateAt(LocalDateTime.now());
+        return ResponseEntity.ok().body(this.service.createThongTinPhim(thongTinPhim));
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<ThongTinPhim> updateThongTinPhim(@PathVariable UUID id,
             @RequestBody ThongTinPhim thongTinPhim) {
-        return thongTinPhimRepository.findById(id)
-                .map(thongTinPhimUpdate -> {
-                    thongTinPhimUpdate.setTen(thongTinPhim.getTen());
-                    thongTinPhimUpdate.setDaoDien(thongTinPhim.getDaoDien());
-                    thongTinPhimUpdate.setNhaSanXuat(thongTinPhim.getNhaSanXuat());
-                    thongTinPhimUpdate.setDienVien(thongTinPhim.getDienVien());
-                    thongTinPhimUpdate.setNamPhatHanh(thongTinPhim.getNamPhatHanh());
-                    thongTinPhimUpdate.setThoiLuong(thongTinPhim.getThoiLuong());
-                    thongTinPhimUpdate.setTuoiGioiHan(thongTinPhim.getTuoiGioiHan());
-                    thongTinPhimUpdate.setQuocGia(thongTinPhim.getQuocGia());
-                    thongTinPhimUpdate.setNgonNgu(thongTinPhim.getNgonNgu());
-                    // thongTinPhimUpdate.setNgayKhoiChieu(thongTinPhim.getNgayKhoiChieu());
-                    thongTinPhimUpdate.setNoiDung(thongTinPhim.getNoiDung());
-                    thongTinPhimUpdate.setTrailer(thongTinPhim.getTrailer());
-                    thongTinPhimUpdate.setPoster(thongTinPhim.getPoster());
-                    LocalDateTime localDateTime = LocalDateTime.now();
-                    thongTinPhimUpdate.setUpdateAt(localDateTime);
-                    return thongTinPhimRepository.save(thongTinPhimUpdate);
-                }).orElseThrow(() -> new ResourceNotFoundException("not find ThongTinFilm With id= " + id));
+        thongTinPhim.setId(id);
+        thongTinPhim.setUpdateAt(LocalDateTime.now());
+        return ResponseEntity.ok().body(this.service.updateThongTinPhim(thongTinPhim));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable("id") UUID id) {
-        if (!thongTinPhimRepository.existsById(id)) {
-            throw new ResourceNotFoundException("not find ThongTinFilm With id= " + id);
-        }
-        thongTinPhimRepository.deleteById(id);
-        return "Xoa thanh cong phim co id: " + id + ".";
+    @DeleteMapping("{id}")
+    public HttpStatus deleteThongTinPhim(@PathVariable UUID id) {
+        this.service.deleteThongTinPhim(id);
+        return HttpStatus.OK;
     }
+
 }

@@ -72,4 +72,10 @@ public class PhongChieuController {
         List<PhongChieu> sortedPhongChieuList = phongChieuService.sapXep();
         return ResponseEntity.ok().body(sortedPhongChieuList);
     }
+
+
+     @GetMapping
+    public ResponseEntity<List<PhongChieu>> getPhongChieus() {
+        return ResponseEntity.ok().body(phongChieuService.getAll());
+    }
 }

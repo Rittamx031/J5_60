@@ -18,8 +18,7 @@ public class NgonNguController {
     @Autowired
     NgonNguRepository ngonNguRepository;
 
-
-    @GetMapping("/hien-thi")
+    @GetMapping
     public List<NgonNgu> get() {
         return ngonNguRepository.findAll();
     }
@@ -39,7 +38,7 @@ public class NgonNguController {
 
     @PutMapping("/update/{id}")
     public NgonNgu update(@RequestBody NgonNgu ngonNgu,
-                          @PathVariable("id") UUID id) {
+            @PathVariable("id") UUID id) {
         return ngonNguRepository.findById(id)
                 .map(ngonNguMoi -> {
                     ngonNguMoi.setTen(ngonNgu.getTen());
@@ -57,6 +56,5 @@ public class NgonNguController {
         ngonNguRepository.deleteById(id);
         return "Xóa thành công ngôn ngữ có id: " + id + ". ";
     }
-
 
 }
