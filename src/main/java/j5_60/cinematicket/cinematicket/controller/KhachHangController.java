@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -21,8 +22,10 @@ public class KhachHangController {
     private KhachHangService khService;
 
     @GetMapping
-    public ResponseEntity hienThi(@RequestParam(defaultValue = "1") int page, @RequestParam(required = false) String sapXepTheoName) {
-        if (page < 1) page = 1;
+    public ResponseEntity hienThi(@RequestParam(defaultValue = "1") int page,
+            @RequestParam(required = false) String sapXepTheoName) {
+        if (page < 1)
+            page = 1;
         Pageable pageable = PageRequest.of(page - 1, 10);
         if (sapXepTheoName != null && sapXepTheoName.equalsIgnoreCase("true")) {
             return new ResponseEntity(khService.sapXepTheoName(pageable), HttpStatus.OK);
@@ -31,12 +34,12 @@ public class KhachHangController {
         }
     }
 
-
     @PostMapping("/add")
     public ResponseEntity<KhachHang> addKH(@RequestBody KhachHang khachHang) {
         khachHang.setCreateAt(LocalDateTime.now());
         return new ResponseEntity<>(khService.add(khachHang), HttpStatus.CREATED);
     }
+
     @PutMapping("/update/{id}")
     public ResponseEntity<KhachHang> updateKH(@PathVariable("id") UUID id, @RequestBody KhachHang khachHang) {
         khachHang.setUpdateAt(LocalDateTime.now());
@@ -51,5 +54,10 @@ public class KhachHangController {
     @GetMapping("/detail/{id}")
     public ResponseEntity detail(@PathVariable("id") UUID id) {
         return new ResponseEntity(khService.findById(id), HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<KhachHang>> getAll() {
+        return ResponseEntity.ok().body(khService.getAllKH());
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -26,17 +27,16 @@ public class NhanVienController {
 
     @GetMapping("/hien-thi")
     public ResponseEntity hienThi(@RequestParam(defaultValue = "1") int page) {
-        if (page < 1) page = 1;
+        if (page < 1)
+            page = 1;
         Pageable pageable = PageRequest.of(page - 1, 3);
         return new ResponseEntity(nhanVienService.findAll(pageable), HttpStatus.OK);
     }
 
-//    @GetMapping
-//    public ResponseEntity sapXep(@RequestParam(defaultValue = "1") int page) {
-//        if (page < 1) page = 1;
-//        Pageable pageable = PageRequest.of(page - 1, 10);
-//        return new ResponseEntity(nhanVienService.sapXep(pageable), HttpStatus.OK);
-//    }
+    @GetMapping
+    public ResponseEntity<List<NhanVien>> getAll() {
+        return ResponseEntity.ok().body(nhanVienService.getAllNV());
+    }
 
     @GetMapping("/chucvus")
     public ResponseEntity hienThiCV() {
@@ -48,6 +48,7 @@ public class NhanVienController {
         nhanVien.setCreateAt(LocalDateTime.now());
         return new ResponseEntity<>(nhanVienService.add(nhanVien), HttpStatus.CREATED);
     }
+
     @PutMapping("/update/{id}")
     public ResponseEntity<NhanVien> updateNV(@PathVariable("id") UUID id, @RequestBody NhanVien nhanVien) {
         nhanVien.setUpdateAt(LocalDateTime.now());

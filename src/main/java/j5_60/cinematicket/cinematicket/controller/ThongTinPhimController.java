@@ -1,8 +1,7 @@
 package j5_60.cinematicket.cinematicket.controller;
 
-
 import j5_60.cinematicket.cinematicket.entity.ThongTinPhim;
-import j5_60.cinematicket.cinematicket.exception.NotFoundException;
+import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.repository.ThongTinPhimRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +26,7 @@ public class ThongTinPhimController {
     @GetMapping("/{id}")
     public ThongTinPhim getById(@PathVariable("id") UUID id) {
         return thongTinPhimRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(id));
+                .orElseThrow(() -> new ResourceNotFoundException("not find ThongTinFilm With id= " + id));
     }
 
     @PostMapping("/add")
@@ -39,7 +38,7 @@ public class ThongTinPhimController {
 
     @PutMapping("/update/{id}")
     public ThongTinPhim update(@PathVariable("id") UUID id,
-                               @RequestBody ThongTinPhim thongTinPhim) {
+            @RequestBody ThongTinPhim thongTinPhim) {
         return thongTinPhimRepository.findById(id)
                 .map(thongTinPhimUpdate -> {
                     thongTinPhimUpdate.setTen(thongTinPhim.getTen());
@@ -58,13 +57,13 @@ public class ThongTinPhimController {
                     LocalDateTime localDateTime = LocalDateTime.now();
                     thongTinPhimUpdate.setUpdateAt(localDateTime);
                     return thongTinPhimRepository.save(thongTinPhimUpdate);
-                }).orElseThrow(() -> new NotFoundException(id));
+                }).orElseThrow(() -> new ResourceNotFoundException("not find ThongTinFilm With id= " + id));
     }
 
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable("id") UUID id) {
         if (!thongTinPhimRepository.existsById(id)) {
-            throw new NotFoundException(id);
+            throw new ResourceNotFoundException("not find ThongTinFilm With id= " + id);
         }
         thongTinPhimRepository.deleteById(id);
         return "Xoa thanh cong phim co id: " + id + ".";

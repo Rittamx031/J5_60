@@ -32,11 +32,11 @@ public class TheLoai {
     @Column(name = "update_at")
     private LocalDateTime updateAt;
 
-//    @Column(name = "create_by")
-//    private UUID createById;
-//
-//    @Column(name = "update_by")
-//    private UUID updateById;
+   @Column(name = "create_by")
+   private UUID createBy;
+
+   @Column(name = "update_by")
+   private UUID updateBy;
 
     @Column(name = "deleted")
     private Integer deleted;

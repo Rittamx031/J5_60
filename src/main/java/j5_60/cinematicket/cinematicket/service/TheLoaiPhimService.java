@@ -116,7 +116,7 @@ public class TheLoaiPhimService {
         Pageable pageable = PageRequest.of(1, ROWCOUNT);
         Page<TheLoaiPhim> page = repo.findAll(pageable);
         int totalPage = page.getTotalPages();
-        int[] array = IntStream.rangeClosed(0, totalPage).toArray();
+        int[] array = IntStream.rangeClosed(1, totalPage).toArray();
         return array;
     }
 }

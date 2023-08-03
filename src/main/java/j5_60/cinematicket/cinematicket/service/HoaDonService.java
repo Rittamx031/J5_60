@@ -38,6 +38,7 @@ public class HoaDonService {
             hoaDonud.setTongGia(hoaDon.getTongGia());
             hoaDonud.setTongGiaSauGiam(hoaDon.getTongGiaSauGiam());
             hoaDonud.setGhiChu(hoaDon.getGhiChu());
+            hoaDonud.setPhuongThucThanhToan(hoaDon.getPhuongThucThanhToan());
             hoaDonud.setTrangThai(hoaDon.getTrangThai());
             hoaDonud.setMaHoaDon(hoaDon.getMaHoaDon());
             hoaDonud.setCreateAt(hoaDon.getCreateAt());

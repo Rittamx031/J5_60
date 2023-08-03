@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import j5_60.cinematicket.cinematicket.entity.Ve;
+import j5_60.cinematicket.cinematicket.modelsearch.VeSearch;
 import j5_60.cinematicket.cinematicket.service.VeService;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -103,6 +104,11 @@ public class VeController {
         ve.setNgayDatVe(LocalDate.now());
         ve.setCreateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.service.createVe(ve));
+    }
+
+    @PostMapping("fillter")
+    public ResponseEntity<List<Ve>> fillterVe(@RequestBody VeSearch veSearch) {
+        return ResponseEntity.ok().body(this.service.fillterVe(veSearch));
     }
 
     @PutMapping("{id_ghe}/{id_lich_chieu}")

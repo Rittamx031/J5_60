@@ -41,6 +41,11 @@ public class GheController {
         return ResponseEntity.ok().body(ghePage);
     }
 
+    @GetMapping
+    public ResponseEntity<List<Ghe>> getAll() {
+        return ResponseEntity.ok().body(gheService.getAll());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Ghe> getById(@PathVariable("id") UUID id) throws ResourceNotFoundException {
         Ghe ghe = gheService.findById(id);
@@ -48,7 +53,8 @@ public class GheController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Ghe>> getGheByPhongChieu(@RequestParam("id_phongchieu") UUID idpc) throws ResourceNotFoundException {
+    public ResponseEntity<List<Ghe>> getGheByPhongChieu(@RequestParam("id_phongchieu") UUID idpc)
+            throws ResourceNotFoundException {
         PhongChieu pc = phongChieuService.findById(idpc);
         return ResponseEntity.ok().body(gheService.fillGheInPhongChieu(pc));
     }

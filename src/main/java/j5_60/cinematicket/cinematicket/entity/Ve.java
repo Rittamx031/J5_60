@@ -11,6 +11,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,6 +25,9 @@ import lombok.Setter;
 @Table(name = "Ve")
 @AllArgsConstructor
 @NoArgsConstructor
+// @NamedQueries({
+//     @NamedQuery(name="Ve.fillter" ,query="SELECT ve FROM Ve ve WHERE LichChieu:id")
+// })
 public class Ve {
     @EmbeddedId
     private VeKey id;

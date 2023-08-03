@@ -1,7 +1,7 @@
 package j5_60.cinematicket.cinematicket.controller;
 
 import j5_60.cinematicket.cinematicket.entity.QuocGia;
-import j5_60.cinematicket.cinematicket.exception.NotFoundException;
+import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.repository.QuocGiaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +26,7 @@ public class QuocGiaController {
     @GetMapping("/{id}")
     public QuocGia getById(@PathVariable("id") UUID id) {
         return quocGiaRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(id));
+                .orElseThrow(() -> new ResourceNotFoundException("not find Quoc Gia With id= " + id));
     }
 
     @PostMapping("/add")
@@ -38,20 +38,20 @@ public class QuocGiaController {
 
     @PutMapping("/update/{id}")
     public QuocGia update(@PathVariable("id") UUID id,
-                          @RequestBody QuocGia quocGia) {
+            @RequestBody QuocGia quocGia) {
         return quocGiaRepository.findById(id)
                 .map(quocGiaMoi -> {
                     quocGiaMoi.setTen(quocGia.getTen());
                     LocalDateTime localDateTime = LocalDateTime.now();
                     quocGiaMoi.setUpdateAt(localDateTime);
                     return quocGiaRepository.save(quocGiaMoi);
-                }).orElseThrow(() -> new NotFoundException(id));
+                }).orElseThrow(() -> new ResourceNotFoundException("not find Quoc Gia With id= " + id));
     }
 
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable("id") UUID id) {
         if (!quocGiaRepository.existsById(id)) {
-            throw new NotFoundException(id);
+            throw new ResourceNotFoundException("not find Quoc Gia With id= " + id);
         }
         quocGiaRepository.deleteById(id);
         return "Xóa thành công quốc gia có id: " + id + ". ";
