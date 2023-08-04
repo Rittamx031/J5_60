@@ -89,7 +89,7 @@ public class TheLoaiPhimService {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
         // Pageable object
-        Pageable pageable = PageRequest.of(pageNo, ROWCOUNT, sort);
+        Pageable pageable = PageRequest.of(pageNo - 1, ROWCOUNT, sort);
         // findAll method and pass pageable instance
         Page<TheLoaiPhim> page = repo.findAll(pageable);
         theLoaiPhimDetails = page.getContent();
