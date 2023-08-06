@@ -18,7 +18,7 @@ import j5_60.cinematicket.cinematicket.repository.DoAnRepository;
 import jakarta.transaction.Transactional;
 
 @Service
-@Transactional
+// @Transactional
 public class DoAnService {
     @Autowired
     private DoAnRepository repo;
