@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import j5_60.cinematicket.cinematicket.entity.DoAn;
 import j5_60.cinematicket.cinematicket.service.DoAnService;
+import jakarta.validation.Valid;
 
 /**
  * DoAnController
@@ -86,14 +87,14 @@ public class DoAnController {
     }
 
     @PostMapping
-    public ResponseEntity<DoAn> createDoAn(@RequestBody DoAn hoaDon) {
+    public ResponseEntity<DoAn> createDoAn(@RequestBody @Valid DoAn hoaDon) {
         hoaDon.setCreateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.service.createDoAn(hoaDon));
     }
 
     @PutMapping("{id}")
     public ResponseEntity<DoAn> updateDoAn(@PathVariable UUID id,
-            @RequestBody DoAn hoaDon) {
+            @RequestBody @Valid DoAn hoaDon) {
         hoaDon.setId(id);
         hoaDon.setUpdateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.service.updateDoAn(hoaDon));
