@@ -12,6 +12,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,8 +35,12 @@ public class DoAn {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(name = "id", columnDefinition = "uniqueidentifier")
     private UUID id;
+    @NotNull(message = "Ten can not null")
+    @NotBlank
+    @NotEmpty
     @Column(name = "ten")
     private String ten;
+    @NotNull(message = "gia can not null")
     @Column(name = "gia")
     private double gia;
     @Column(name = "create_at")
