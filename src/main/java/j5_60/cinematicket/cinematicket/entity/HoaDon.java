@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Range;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,6 +15,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,8 +49,12 @@ public class HoaDon {
 
     @Column(name = "ma_hoa_don")
     private String maHoaDon;
+    @NotNull
+    @Positive
     @Column(name = "tong_gia")
     private double tongGia;
+    @NotNull
+    @Positive
     @Column(name = "tong_gia_sau_giam")
     private String tongGiaSauGiam;
     @Column(name = "thoi_gian_thanh_toan")
@@ -64,7 +71,6 @@ public class HoaDon {
     private UUID createBy;
     @Column(name = "deleted")
     private boolean deleted;
-
     @ManyToOne
     @JoinColumn(name = "id_nhan_vien")
     private NhanVien nhanVien;

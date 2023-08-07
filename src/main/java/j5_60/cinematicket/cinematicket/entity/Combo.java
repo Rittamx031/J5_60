@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Range;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,6 +13,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,8 +38,13 @@ public class Combo {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(name = "id", columnDefinition = "uniqueidentifier")
     private UUID id;
+    @NotNull(message = "can not null.")
+    @NotBlank(message = "can not blank")
+    @Size(min = 0, max = 50, message = "ten trong khoang 0 -> 50")
     @Column(name = "ten_combo")
     private String ten;
+    @NotNull
+    @Range(min = 1000, max = 50000, message = "gia range 1000 and 500000 ")
     @Column(name = "gia")
     private double gia;
     @Column(name = "create_at")

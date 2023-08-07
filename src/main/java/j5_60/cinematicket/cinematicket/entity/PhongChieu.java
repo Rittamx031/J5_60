@@ -10,10 +10,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @Entity
 @Table(name = "PhongChieu")
@@ -25,7 +27,9 @@ public class PhongChieu implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private UUID id;
-
+    @NotNull
+    @NotBlank
+    @Size(min = 2, max = 100, message = "ten phong length to 2 -> 100")
     @Column(name = "ten")
     private String ten;
 
@@ -54,4 +58,3 @@ public class PhongChieu implements Serializable {
 
     // Getters and setters, as well as any additional methods
 }
-
