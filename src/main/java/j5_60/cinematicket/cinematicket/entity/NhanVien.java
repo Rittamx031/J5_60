@@ -1,6 +1,8 @@
 package j5_60.cinematicket.cinematicket.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,7 +29,8 @@ public class NhanVien {
 
     @Column(name = "ho_ten")
     private String hoTen;
-
+    @Email
+    @NotNull
     @Column(name = "email")
     private String email;
 

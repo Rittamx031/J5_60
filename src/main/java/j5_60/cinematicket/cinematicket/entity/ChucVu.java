@@ -20,6 +20,7 @@ public class ChucVu {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private UUID id;
+   
 
     @Column(name="ten")
     private String tenCV;

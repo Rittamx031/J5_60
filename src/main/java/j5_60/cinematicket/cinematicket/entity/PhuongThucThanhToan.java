@@ -12,6 +12,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,7 +35,9 @@ public class PhuongThucThanhToan {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(name = "Id", columnDefinition = "uniqueidentifier")
     private UUID id;
-
+    @NotNull
+    @NotBlank
+    @Size(min = 1, max = 150, message = "hinh thuc thanh toan length 1 to 150")
     @Column(name = "hinh_thuc_thanh_toan")
     private String hinhThucThanhToan;
 

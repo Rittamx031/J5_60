@@ -2,6 +2,8 @@ package j5_60.cinematicket.cinematicket.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +23,8 @@ public class Ghe implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", columnDefinition = "uniqueidentifier")
     private UUID id;
-
+    @NotNull
+    @NotBlank
     @Column(name = "ten")
     private String ten;
 

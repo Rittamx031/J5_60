@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +25,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 // @NamedQueries({
-//     @NamedQuery(name="Ve.fillter" ,query="SELECT ve FROM Ve ve WHERE LichChieu:id")
+// @NamedQuery(name="Ve.fillter" ,query="SELECT ve FROM Ve ve WHERE
+// LichChieu:id")
 // })
 public class Ve {
     @EmbeddedId
@@ -33,15 +35,19 @@ public class Ve {
     @MapsId("id_lich_chieu")
     @JoinColumn(name = "id_lich_chieu")
     private LichChieu lichChieu;
-    @ManyToOne  
+    @ManyToOne
     @MapsId("id_ghe")
     @JoinColumn(name = "id_ghe")
     private Ghe ghe;
+    @NotNull
     @Column(name = "gia")
     private double gia;
+
     @Column(name = "trang_thai")
     private int trangThai;
-    @Column(name="ngay_dat_ve")
+
+    @NotNull
+    @Column(name = "ngay_dat_ve")
     private LocalDate ngayDatVe;
     @Column(name = "create_at")
     private LocalDateTime createAt;
@@ -54,7 +60,6 @@ public class Ve {
     @Column(name = "deleted")
     private boolean deleted;
     @ManyToOne
-    @JoinColumn(name="id_hoa_don")
+    @JoinColumn(name = "id_hoa_don")
     private HoaDon hoaDon;
-
 }

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Range;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,6 +16,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,12 +37,13 @@ public class DoAn {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(name = "id", columnDefinition = "uniqueidentifier")
     private UUID id;
-    @NotNull(message = "Ten can not null")
-    @NotBlank
-    @NotEmpty
+    @NotNull(message = "can not null.")
+    @NotBlank(message = "can not blank")
+    @Size(min = 0, max = 100, message = "ten dai tu  0 -> 100")
     @Column(name = "ten")
     private String ten;
     @NotNull(message = "gia can not null")
+    @Range(min = 1000, max = 100000, message = "Gia range 1000-> 10000")
     @Column(name = "gia")
     private double gia;
     @Column(name = "create_at")
