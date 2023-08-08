@@ -1,9 +1,7 @@
 package j5_60.cinematicket.cinematicket.controller;
 
 import j5_60.cinematicket.cinematicket.entity.ThongTinPhim;
-import j5_60.cinematicket.cinematicket.entity.ThongTinPhim;
-import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.repository.ThongTinPhimRepository;
+import j5_60.cinematicket.cinematicket.modelsearch.ThongTinPhimSearch;
 import j5_60.cinematicket.cinematicket.service.ThongTinPhimService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +36,6 @@ public class ThongTinPhimController {
     // @RequestParam(value = "txt", required = true) String txtSearch) {
     // return ResponseEntity.ok().body(service.search(txtSearch));
     // }
-
     @GetMapping("pre")
     public ResponseEntity<List<ThongTinPhim>> getPrevPage(
             @RequestParam(value = "sortby", required = false) String sortby,
@@ -77,6 +74,11 @@ public class ThongTinPhimController {
     public ResponseEntity<ThongTinPhim> createThongTinPhim(@RequestBody ThongTinPhim thongTinPhim) {
         thongTinPhim.setCreateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.service.createThongTinPhim(thongTinPhim));
+    }
+
+    @PostMapping("/fillter")
+    public ResponseEntity<List<ThongTinPhim>> fillter(@RequestBody ThongTinPhimSearch thongTinPhimsSearch) {
+        return ResponseEntity.ok().body(this.service.fillterThongTinPhim(thongTinPhimsSearch));
     }
 
     @PutMapping("{id}")
