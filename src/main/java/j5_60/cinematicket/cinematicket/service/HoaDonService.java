@@ -3,6 +3,7 @@ package j5_60.cinematicket.cinematicket.service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import j5_60.cinematicket.cinematicket.entity.HoaDon;
+import j5_60.cinematicket.cinematicket.entity.HoaDon;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
+import j5_60.cinematicket.cinematicket.modelsearch.HoaDonSearch;
+import j5_60.cinematicket.cinematicket.modelsearch.VeSearch;
 import j5_60.cinematicket.cinematicket.repository.HoaDonRepository;
 import jakarta.transaction.Transactional;
 
@@ -27,6 +31,24 @@ public class HoaDonService {
 
     public HoaDon createHoaDon(HoaDon hoaDon) {
         return repo.save(hoaDon);
+    }
+
+    public List<HoaDon> fillterHoaDon(HoaDonSearch hoaDonSearch) {
+        List<HoaDon> list = repo.findAll();
+        List<HoaDon> result = list.stream()
+                .filter(hoadon -> ((hoadon.getKhachHang().getId().equals(hoaDonSearch.getIdKhachHang())
+                        || (hoaDonSearch.getIdKhachHang() == null))
+                        && ((hoadon.getKhachHang().getId().equals(hoaDonSearch.getIdNhanVien()))
+                                || (hoaDonSearch.getIdKhachHang() == null))
+                        && (hoadon.getPhuongThucThanhToan().getId().equals(hoaDonSearch.getIdPhuongThucThanhToan())
+                                || (hoaDonSearch.getIdPhuongThucThanhToan() == null))
+                        && (hoadon.getThoiGianThanhToan().compareTo(hoaDonSearch.getThoiGianThanhToanMax()) <= 0)
+                        && (hoadon.getThoiGianThanhToan().compareTo(hoaDonSearch.getThoiGianThanhToanMin()) >= 0)
+                        && (hoadon.getTongGia() <= hoaDonSearch.getTongGiaMax())
+                        && (hoadon.getTongGia() >= hoaDonSearch.getTongGiaMin()))
+                        && (hoadon.getTrangThai() == hoaDonSearch.getTrangThai()))
+                .collect(Collectors.toList());
+        return result;
     }
 
     public HoaDon updateHoaDon(HoaDon hoaDon) {

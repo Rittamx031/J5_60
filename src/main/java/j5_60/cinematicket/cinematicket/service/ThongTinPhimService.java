@@ -3,6 +3,7 @@ package j5_60.cinematicket.cinematicket.service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import j5_60.cinematicket.cinematicket.entity.ThongTinPhim;
+import j5_60.cinematicket.cinematicket.entity.ThongTinPhim;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
+import j5_60.cinematicket.cinematicket.modelsearch.ThongTinPhimSearch;
+import j5_60.cinematicket.cinematicket.modelsearch.VeSearch;
 import j5_60.cinematicket.cinematicket.repository.ThongTinPhimRepository;
 
 @Service
@@ -129,4 +133,29 @@ public class ThongTinPhimService {
     int[] array = IntStream.rangeClosed(1, totalPage).toArray();
     return array;
   }
+
+  public List<ThongTinPhim> fillterThongTinPhim(ThongTinPhimSearch thongTinPhimSearch) {
+    List<ThongTinPhim> list = repo.findAll();
+    List<ThongTinPhim> result = list.stream()
+        .filter(thongtinphim -> ((thongtinphim.getNgonNgu().getId().equals(thongTinPhimSearch.getIdNgonNgu())
+            || (thongTinPhimSearch.getIdNgonNgu() == null))
+            &&
+            (thongtinphim.getQuocGia().getId().equals(thongTinPhimSearch.getIdQuocGia())
+                || (thongTinPhimSearch.getIdQuocGia() == null))
+            &&
+            (thongtinphim.getDaoDien().equalsIgnoreCase(thongTinPhimSearch.getDaoDien())
+                || thongTinPhimSearch.getDaoDien() == "" || thongTinPhimSearch.getDaoDien() == null)
+            &&
+            (thongtinphim.getNhaSanXuat().equalsIgnoreCase(thongTinPhimSearch.getNhaSanXuat())
+                || thongTinPhimSearch.getNhaSanXuat() == "" || thongTinPhimSearch.getNhaSanXuat() == null)
+            && (thongtinphim.getThoiLuong() <= thongTinPhimSearch.getThoiLuongMax())
+            && (thongtinphim.getNamPhatHanh() == thongTinPhimSearch.getNamPhatHanh()
+                || thongTinPhimSearch.getNhaSanXuat() == null)
+            && (thongtinphim.getThoiLuong() >= thongTinPhimSearch.getThoiLuongMin())
+            && (thongtinphim.getTuoiGioiHan() <= thongTinPhimSearch.getTuoiGioiHanMax())
+            && (thongtinphim.getTuoiGioiHan() >= thongTinPhimSearch.getTuoiGioiHanMin())))
+        .collect(Collectors.toList());
+    return result;
+  }
+
 }

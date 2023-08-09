@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import j5_60.cinematicket.cinematicket.entity.HoaDon;
+import j5_60.cinematicket.cinematicket.modelsearch.HoaDonSearch;
 import j5_60.cinematicket.cinematicket.service.HoaDonService;
 
 /**
@@ -42,7 +43,8 @@ public class HoaDonController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<HoaDon>> getSearchResult(@RequestParam(value = "txt", required = true) String txtSearch) {
+    public ResponseEntity<List<HoaDon>> getSearchResult(
+            @RequestParam(value = "txt", required = true) String txtSearch) {
         return ResponseEntity.ok().body(service.search(txtSearch));
     }
 
@@ -84,6 +86,11 @@ public class HoaDonController {
     public ResponseEntity<HoaDon> createHoaDon(@RequestBody HoaDon hoaDon) {
         hoaDon.setCreateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.service.createHoaDon(hoaDon));
+    }
+
+    @PostMapping("/fillter")
+    public ResponseEntity<List<HoaDon>> fillter(@RequestBody HoaDonSearch hoaDon) {
+        return ResponseEntity.ok().body(this.service.fillterHoaDon(hoaDon));
     }
 
     @PutMapping("{id}")
