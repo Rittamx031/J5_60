@@ -139,12 +139,18 @@ public class ThongTinPhimService {
     List<ThongTinPhim> result = list.stream()
         .filter(thongtinphim -> ((thongtinphim.getNgonNgu().getId().equals(thongTinPhimSearch.getIdNgonNgu())
             || (thongTinPhimSearch.getIdNgonNgu() == null))
-            && (thongtinphim.getQuocGia().getId().equals(thongTinPhimSearch.getIdQuocGia())
+            &&
+            (thongtinphim.getQuocGia().getId().equals(thongTinPhimSearch.getIdQuocGia())
                 || (thongTinPhimSearch.getIdQuocGia() == null))
-            && (thongtinphim.getDaoDien().equalsIgnoreCase(thongTinPhimSearch.getDaoDien()))
-            && (thongtinphim.getDaoDien().equalsIgnoreCase(thongTinPhimSearch.getDaoDien()))
+            &&
+            (thongtinphim.getDaoDien().equalsIgnoreCase(thongTinPhimSearch.getDaoDien())
+                || thongTinPhimSearch.getDaoDien() == "" || thongTinPhimSearch.getDaoDien() == null)
+            &&
+            (thongtinphim.getNhaSanXuat().equalsIgnoreCase(thongTinPhimSearch.getNhaSanXuat())
+                || thongTinPhimSearch.getNhaSanXuat() == "" || thongTinPhimSearch.getNhaSanXuat() == null)
             && (thongtinphim.getThoiLuong() <= thongTinPhimSearch.getThoiLuongMax())
-            && (thongtinphim.getNamPhatHanh() == thongTinPhimSearch.getNamPhatHanh())
+            && (thongtinphim.getNamPhatHanh() == thongTinPhimSearch.getNamPhatHanh()
+                || thongTinPhimSearch.getNhaSanXuat() == null)
             && (thongtinphim.getThoiLuong() >= thongTinPhimSearch.getThoiLuongMin())
             && (thongtinphim.getTuoiGioiHan() <= thongTinPhimSearch.getTuoiGioiHanMax())
             && (thongtinphim.getTuoiGioiHan() >= thongTinPhimSearch.getTuoiGioiHanMin())))

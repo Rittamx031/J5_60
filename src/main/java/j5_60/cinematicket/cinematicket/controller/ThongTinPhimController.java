@@ -78,6 +78,18 @@ public class ThongTinPhimController {
 
     @PostMapping("/fillter")
     public ResponseEntity<List<ThongTinPhim>> fillter(@RequestBody ThongTinPhimSearch thongTinPhimsSearch) {
+        if (thongTinPhimsSearch.getThoiLuongMin() == 0) {
+            thongTinPhimsSearch.setThoiLuongMin(Integer.MIN_VALUE);
+        }
+        if (thongTinPhimsSearch.getThoiLuongMax() == 0) {
+            thongTinPhimsSearch.setThoiLuongMax(Integer.MAX_VALUE);
+        }
+        if (thongTinPhimsSearch.getTuoiGioiHanMax() == 0) {
+            thongTinPhimsSearch.setTuoiGioiHanMax(Integer.MAX_VALUE);
+        }
+        if (thongTinPhimsSearch.getTuoiGioiHanMin() == 0) {
+            thongTinPhimsSearch.setTuoiGioiHanMin(Integer.MIN_VALUE);
+        }
         return ResponseEntity.ok().body(this.service.fillterThongTinPhim(thongTinPhimsSearch));
     }
 
