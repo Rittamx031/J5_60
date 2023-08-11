@@ -36,7 +36,7 @@ public class KhachHangController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<KhachHang> addKH(@RequestBody KhachHang khachHang) {
+    public ResponseEntity<KhachHang> addKH(@RequestBody  KhachHang khachHang) {
         khachHang.setCreateAt(LocalDateTime.now());
         return new ResponseEntity<>(khService.add(khachHang), HttpStatus.CREATED);
     }

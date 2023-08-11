@@ -36,7 +36,7 @@ public class ChucVuController {
         chucVu.setCreateAt(LocalDateTime.now());
         return new ResponseEntity<>(chucVuService.add(chucVu), HttpStatus.CREATED);
     }
-
+                                                                                  
     @PutMapping("/update/{id}")
     public ResponseEntity<ChucVu> updateChucVu(@PathVariable("id") UUID id, @RequestBody ChucVu chucVu) {
         chucVu.setUpdateAt(LocalDateTime.now());

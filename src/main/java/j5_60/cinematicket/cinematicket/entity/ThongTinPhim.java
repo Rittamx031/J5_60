@@ -5,7 +5,6 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -20,6 +19,16 @@ import org.hibernate.validator.constraints.Range;
 @Getter
 @Setter
 @ToString
+@NamedQueries({
+        @NamedQuery(name = "ThongTinPhim.search", query = "SELECT ttp FROM ThongTinPhim ttp WHERE ten LIKE CONCAT('%',:txtSearch,'%')"
+                + " OR daoDien LIKE CONCAT('%',:txtSearch,'%')"
+                + "OR nhaSanXuat LIKE CONCAT('%',:txtSearch,'%')"
+                + "OR dienVien LIKE CONCAT('%',:txtSearch,'%')"
+                + "OR noiDung LIKE CONCAT('%',:txtSearch,'%')"
+                + "OR quocGia.ten LIKE CONCAT('%',:txtSearch,'%')"
+                + "OR ngonNgu.ten LIKE CONCAT('%',:txtSearch,'%')"
+        )
+})
 public class ThongTinPhim {
 
     @Id

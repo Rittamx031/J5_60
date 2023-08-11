@@ -31,11 +31,12 @@ public class ThongTinPhimController {
         return ResponseEntity.ok().body(service.getThongTinPhimById(id));
     }
 
-    // @GetMapping("/search")
-    // public ResponseEntity<List<ThongTinPhim>> getSearchResult(
-    // @RequestParam(value = "txt", required = true) String txtSearch) {
-    // return ResponseEntity.ok().body(service.search(txtSearch));
-    // }
+    @GetMapping("/search")
+    public ResponseEntity<List<ThongTinPhim>> getSearchResult(
+            @RequestParam(value = "txt", required = true) String txtSearch) {
+        return ResponseEntity.ok().body(service.search(txtSearch));
+    }
+
     @GetMapping("pre")
     public ResponseEntity<List<ThongTinPhim>> getPrevPage(
             @RequestParam(value = "sortby", required = false) String sortby,
