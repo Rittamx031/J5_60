@@ -76,6 +76,8 @@ public class GheController {
         LoaiGhe loaiGhe = loaiGheService.findById(ghe.getLoaiGhe().getId());
         PhongChieu phongChieu = phongChieuService.findById(ghe.getPhongChieu().getId());
         existingGhe.setTen(ghe.getTen());
+        existingGhe.setHang(ghe.getHang());
+        existingGhe.setCot(ghe.getCot());
         existingGhe.setLoaiGhe(loaiGhe);
         existingGhe.setPhongChieu(phongChieu);
         existingGhe.setTrangThai(ghe.getTrangThai());
