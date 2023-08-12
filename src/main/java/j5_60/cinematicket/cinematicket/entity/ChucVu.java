@@ -1,6 +1,8 @@
 package j5_60.cinematicket.cinematicket.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,8 +22,9 @@ public class ChucVu {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private UUID id;
-   
 
+    @NotNull
+    @NotBlank(message="Please enter your chuc vu")
     @Column(name="ten")
     private String tenCV;
 
