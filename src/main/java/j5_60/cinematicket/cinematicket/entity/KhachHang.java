@@ -1,6 +1,7 @@
 package j5_60.cinematicket.cinematicket.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,26 +23,41 @@ public class KhachHang {
     @Column(name = "id")
     private UUID id;
 
-    @Column(name = "ho_ten")
-    private String hoTen;
-
     @Column(name = "ma_khach_hang")
     private String maKhachHang;
 
+    @NotNull
+    @NotBlank(message="Please enter your name")
+    @Column(name = "ho_ten")
+    private String hoTen;
+
+    @Email
+    @NotNull
+    @NotBlank(message="Please enter your email")
     @Column(name = "email")
     private String email;
 
     @Column(name = "mat_khau")
     private String pass;
 
+    @NotNull
     @Column(name = "gioi_tinh")
-    private boolean gioiTinh;
+    private Boolean gioiTinh;
 
+    @NotNull
     @Column(name = "ngay_sinh")
     private Date ngaySinh;
 
+    @NotNull
+    @NotBlank(message="Please enter your phone number")
+    @Pattern(regexp = "(0|\\+84)(3[2-9]|5[2689]|7[06-9]|8[1-689]|9[0-46-9])[-.\\s]?(\\d[-.\\s]?){7}")
     @Column(name = "so_dien_thoai")
     private String sdt;
+
+    @NotNull
+    @NotBlank(message="Please enter your dia chi")
+    @Column(name = "dia_chi")
+    private String diaChi;
 
     @Column(name = "trang_thai")
     private int trangThai;

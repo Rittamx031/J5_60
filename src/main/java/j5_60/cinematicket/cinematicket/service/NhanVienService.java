@@ -1,6 +1,8 @@
 package j5_60.cinematicket.cinematicket.service;
 
+
 import j5_60.cinematicket.cinematicket.entity.NhanVien;
+import j5_60.cinematicket.cinematicket.modelsearch.NhanVienSearch;
 import j5_60.cinematicket.cinematicket.repository.NhanVienRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,6 +27,11 @@ public class NhanVienService {
     public Page<NhanVien> sapXep(Pageable pageable) {
         return nvRepository.findAllByOrderByHoTenDesc(pageable);
     }
+    public Page<NhanVien> findAllNV(Pageable pageable) {
+        return nvRepository.findAllByOrderByCreateAtDesc(pageable);
+    }
+
+
 
     public NhanVien add(NhanVien nv) {
       return nvRepository.save(nv);
@@ -48,5 +55,10 @@ public class NhanVienService {
 
     public NhanVien findById(UUID id) {
         return nvRepository.findById(id).get();
+    }
+
+    public List<NhanVien> fillterNhanVien(NhanVienSearch nhanVienSearch) {
+        List<NhanVien> result = nvRepository.getNhanVienListFilter(nhanVienSearch);
+        return result;
     }
 }

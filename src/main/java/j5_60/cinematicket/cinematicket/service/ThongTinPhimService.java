@@ -65,7 +65,7 @@ public class ThongTinPhimService {
   }
 
   public List<ThongTinPhim> search(String txtSearch) {
-  return repo.search(txtSearch);
+    return repo.search(txtSearch);
   }
 
   public ThongTinPhim getThongTinPhimById(UUID id) {
