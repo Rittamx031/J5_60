@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -29,15 +28,15 @@ public class Ghe implements Serializable {
     @Column(name = "ten")
     private String ten;
 
-    @NotNull(message = "không được để trống")
+    @NotNull(message = "Không được để trống")
     @NotBlank(message = "Không được để trống")
     @Column(name = "hang")
-    private  String hang;
+    private String hang;
 
-    @NotNull(message = "không được để trống")
+    @NotNull(message = "Không được để trống")
     @NotBlank(message = "Không được để trống")
     @Column(name = "cot")
-    private  String cot;
+    private String cot;
 
     @ManyToOne
     @JoinColumn(name = "id_loai_ghe", columnDefinition = "uniqueidentifier")
@@ -62,4 +61,15 @@ public class Ghe implements Serializable {
 
     @Column(name = "deleted", columnDefinition = "bit default 0")
     private boolean deleted;
+
+    @PrePersist
+    public void prePersist() {
+        createAt = LocalDateTime.now();
+        updateAt = createAt;
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        updateAt = LocalDateTime.now();
+    }
 }

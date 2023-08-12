@@ -15,4 +15,5 @@ public interface GheRepository extends JpaRepository<Ghe, UUID> {
     List<Ghe> findAllByOrderByTen();
     List<Ghe> findByTenContainingIgnoreCase(String keyword);
     List<Ghe> findByTenAndHangAndCotAndPhongChieu(String ten, String hang, String cot, PhongChieu phongChieu);
+    List<Ghe> findByHangAndCotAndPhongChieu(String hang, String cot, PhongChieu phongChieu);
 }
