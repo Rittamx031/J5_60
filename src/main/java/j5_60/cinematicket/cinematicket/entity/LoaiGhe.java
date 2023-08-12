@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,11 +27,12 @@ public class LoaiGhe implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private UUID id;
-    @NotBlank(message = "không được để trống")
-    @NotNull(message = "không được để trống")
-    @Column(name = "ten")
+
+    @NotBlank(message = "Tên không được để trống")
+    @Column(name = "ten", nullable = false)
     private String ten;
 
+    @PositiveOrZero(message = "Trạng thái phải là số không âm")
     @Column(name = "trang_thai")
     private int trangThai;
 

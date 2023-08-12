@@ -7,6 +7,7 @@ package j5_60.cinematicket.cinematicket.controller;
 import j5_60.cinematicket.cinematicket.entity.LoaiGhe;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.service.LoaiGheService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,13 +39,13 @@ public class LoaiGheController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<LoaiGhe> addLoaiGhe(@RequestBody LoaiGhe loaiGhe) {
+    public ResponseEntity<LoaiGhe> addLoaiGhe(@RequestBody @Valid LoaiGhe loaiGhe) {
         LoaiGhe savedLoaiGhe = loaiGheService.save(loaiGhe);
         return ResponseEntity.ok().body(savedLoaiGhe);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<LoaiGhe> updateLoaiGhe(@PathVariable("id") UUID id, @RequestBody LoaiGhe loaiGhe) throws ResourceNotFoundException {
+    public ResponseEntity<LoaiGhe> updateLoaiGhe(@PathVariable("id") UUID id, @RequestBody @Valid LoaiGhe loaiGhe) throws ResourceNotFoundException {
         LoaiGhe existingLoaiGhe = loaiGheService.findById(id);
         existingLoaiGhe.setTen(loaiGhe.getTen());
         existingLoaiGhe.setTrangThai(loaiGhe.getTrangThai());
