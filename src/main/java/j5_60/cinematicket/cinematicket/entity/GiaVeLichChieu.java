@@ -2,7 +2,7 @@ package j5_60.cinematicket.cinematicket.entity;
 
 import j5_60.cinematicket.cinematicket.entity.key.GiaVeLichChieuKey;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,8 +10,6 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-
-import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Table(name = "GiaVeLichChieu")
@@ -26,28 +24,41 @@ public class GiaVeLichChieu {
     @ManyToOne
     @MapsId("id_loai_ghe")
     @JoinColumn(name = "id_loai_ghe")
-    LoaiGhe loaiGhe;
+    private LoaiGhe loaiGhe;
 
     @ManyToOne
     @MapsId("id_lich_chieu")
     @JoinColumn(name = "id_lich_chieu")
-    LichChieu lichChieu;
-    @NotNull
-    @Range(min = 1000, max = 1000000, message = "range 1000 - 1000000")
+    private LichChieu lichChieu;
+
+    @NotNull(message = "Giá không được để trống")
+    @DecimalMin(value = "1000", message = "Giá phải lớn hơn hoặc bằng 1000")
+    @DecimalMax(value = "1000000", message = "Giá phải nhỏ hơn hoặc bằng 1000000")
     @Column(name = "gia")
     private double gia;
-    // @Column(name = "so_luong_ghe")
-    // private int slGhe;
+
+    @PositiveOrZero(message = "Trạng thái phải là số không âm")
     @Column(name = "trang_thai")
     private int trangThai;
+
+    @PastOrPresent(message = "Thời gian tạo phải là thời gian trong quá khứ hoặc hiện tại")
     @Column(name = "create_at")
     private LocalDateTime createAt;
+
+    @PastOrPresent(message = "Thời gian cập nhật phải là thời gian trong quá khứ hoặc hiện tại")
     @Column(name = "update_at")
     private LocalDateTime updateAt;
+
     @Column(name = "update_by")
     private UUID updateBy;
+
     @Column(name = "create_by")
     private UUID createBy;
+
     @Column(name = "deleted")
     private boolean deleted;
+
+    // Other attributes and relationships specific to the "GiaVeLichChieu" entity
+
+    // Getters and setters, as well as any additional methods
 }

@@ -20,8 +20,12 @@ import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class GheService {
+    private final GheRepository gheRepository;
+
     @Autowired
-    public GheRepository gheRepository;
+    public GheService(GheRepository gheRepository) {
+        this.gheRepository = gheRepository;
+    }
 
     public Page<Ghe> findAll(Pageable pageable) {
         return gheRepository.findAll(pageable);
@@ -40,6 +44,8 @@ public class GheService {
     }
 
     public Ghe save(Ghe ghe) {
+        validateUniqueTenInHangCotPhongChieu(ghe);
+        validateUniqueHangCotInPhongChieu(ghe);
         ghe.setCreateAt(LocalDateTime.now());
         return gheRepository.save(ghe);
     }
@@ -49,16 +55,20 @@ public class GheService {
         if (optionalGhe.isPresent()) {
             Ghe existingGhe = optionalGhe.get();
             existingGhe.setTen(ghe.getTen());
+            existingGhe.setHang(ghe.getHang());
+            existingGhe.setCot(ghe.getCot());
             existingGhe.setLoaiGhe(ghe.getLoaiGhe());
             existingGhe.setPhongChieu(ghe.getPhongChieu());
             existingGhe.setTrangThai(ghe.getTrangThai());
             existingGhe.setUpdateAt(LocalDateTime.now());
-            // Cập nhật các thuộc tính khác của đối tượng Ghe
+            validateUniqueTenInHangCotPhongChieu(existingGhe);
+            validateUniqueHangCotInPhongChieu(existingGhe);
 
             return gheRepository.save(existingGhe);
         }
         throw new ResourceNotFoundException("Ghe not found with id: " + id);
     }
+
 
     public void deleteById(UUID id) {
         gheRepository.deleteById(id);
@@ -77,5 +87,25 @@ public class GheService {
             return optionalGhe.get();
         }
         throw new ResourceNotFoundException("Ghe not found with id: " + id);
+    }
+
+    // Custom validation logic
+
+    private void validateUniqueTenInHangCotPhongChieu(Ghe ghe) {
+        List<Ghe> ghesWithSameTen = gheRepository.findByTenAndHangAndCotAndPhongChieu(
+                ghe.getTen(), ghe.getHang(), ghe.getCot(), ghe.getPhongChieu());
+
+        if (!ghesWithSameTen.isEmpty()) {
+            throw new IllegalArgumentException("Tên ghế đã tồn tại trong hàng, cột và phòng chiếu.");
+        }
+    }
+
+    private void validateUniqueHangCotInPhongChieu(Ghe ghe) {
+        List<Ghe> ghesWithSameHangCot = gheRepository.findByHangAndCotAndPhongChieu(
+                ghe.getHang(), ghe.getCot(), ghe.getPhongChieu());
+
+        if (!ghesWithSameHangCot.isEmpty()) {
+            throw new IllegalArgumentException("Ghế đã tồn tại cùng hàng và cột trong phòng chiếu.");
+        }
     }
 }

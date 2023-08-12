@@ -7,6 +7,7 @@ import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.service.GheService;
 import j5_60.cinematicket.cinematicket.service.LoaiGheService;
 import j5_60.cinematicket.cinematicket.service.PhongChieuService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,7 +34,7 @@ public class GheController {
 
     @GetMapping("/index")
     public ResponseEntity<Page<Ghe>> getAll(@RequestParam(defaultValue = "1") int page,
-            @RequestParam(defaultValue = "5") int size) {
+                                            @RequestParam(defaultValue = "5") int size) {
         if (page < 1)
             page = 1;
         Pageable pageable = PageRequest.of(page - 1, size);
@@ -60,7 +61,7 @@ public class GheController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Ghe> addGhe(@RequestBody Ghe ghe) throws ResourceNotFoundException {
+    public ResponseEntity<Ghe> addGhe(@Valid @RequestBody Ghe ghe) throws ResourceNotFoundException {
         LoaiGhe loaiGhe = loaiGheService.findById(ghe.getLoaiGhe().getId());
         PhongChieu phongChieu = phongChieuService.findById(ghe.getPhongChieu().getId());
         ghe.setLoaiGhe(loaiGhe);
@@ -70,12 +71,14 @@ public class GheController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Ghe> updateGhe(@PathVariable("id") UUID id, @RequestBody Ghe ghe)
+    public ResponseEntity<Ghe> updateGhe(@PathVariable("id") UUID id, @Valid @RequestBody Ghe ghe)
             throws ResourceNotFoundException {
         Ghe existingGhe = gheService.findById(id);
         LoaiGhe loaiGhe = loaiGheService.findById(ghe.getLoaiGhe().getId());
         PhongChieu phongChieu = phongChieuService.findById(ghe.getPhongChieu().getId());
         existingGhe.setTen(ghe.getTen());
+        existingGhe.setHang(ghe.getHang());
+        existingGhe.setCot(ghe.getCot());
         existingGhe.setLoaiGhe(loaiGhe);
         existingGhe.setPhongChieu(phongChieu);
         existingGhe.setTrangThai(ghe.getTrangThai());
