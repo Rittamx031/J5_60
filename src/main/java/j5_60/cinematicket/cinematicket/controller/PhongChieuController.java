@@ -3,6 +3,7 @@ package j5_60.cinematicket.cinematicket.controller;
 import j5_60.cinematicket.cinematicket.entity.PhongChieu;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.service.PhongChieuService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,13 +38,13 @@ public class PhongChieuController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<PhongChieu> addPhongChieu(@RequestBody PhongChieu phongChieu) {
+    public ResponseEntity<PhongChieu> addPhongChieu(@RequestBody @Valid PhongChieu phongChieu) {
         PhongChieu savedPhongChieu = phongChieuService.save(phongChieu);
         return ResponseEntity.ok().body(savedPhongChieu);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<PhongChieu> updatePhongChieu(@PathVariable("id") UUID id, @RequestBody PhongChieu phongChieu) throws ResourceNotFoundException {
+    public ResponseEntity<PhongChieu> updatePhongChieu(@PathVariable("id") UUID id, @RequestBody @Valid PhongChieu phongChieu) throws ResourceNotFoundException {
         PhongChieu existingPhongChieu = phongChieuService.findById(id);
         existingPhongChieu.setTen(phongChieu.getTen());
         existingPhongChieu.setSoLuongGhe(phongChieu.getSoLuongGhe());

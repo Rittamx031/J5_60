@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,15 +28,18 @@ public class PhongChieu implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private UUID id;
-    @NotNull
-    @NotBlank
-    @Size(min = 2, max = 100, message = "ten phong length to 2 -> 100")
-    @Column(name = "ten")
+
+    @NotNull(message = "Không được để trống")
+    @NotBlank(message = "Không được để trống")
+    @Size(min = 2, max = 100, message = "Tên phòng phải có độ dài từ 2 đến 100 ký tự")
+    @Column(name = "ten", nullable = false)
     private String ten;
 
+    @PositiveOrZero(message = "Số lượng ghế phải là số không âm")
     @Column(name = "so_luong_ghe")
     private int soLuongGhe;
 
+    @PositiveOrZero(message = "Trạng thái phải là số không âm")
     @Column(name = "trang_thai")
     private int trangThai;
 
