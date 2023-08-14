@@ -21,6 +21,7 @@ public class GiaVeLichChieuKey {
 
     @Column(name = "id_loai_ghe")
     UUID id_loai_ghe;
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -33,5 +34,4 @@ public class GiaVeLichChieuKey {
     public int hashCode() {
         return Objects.hash(id_lich_chieu, id_loai_ghe);
     }
-
 }
