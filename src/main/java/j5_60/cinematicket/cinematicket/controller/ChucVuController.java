@@ -16,17 +16,22 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/cimena/chuc-vu")
+@RequestMapping("/cemina/chuc-vu")
 @CrossOrigin
 public class ChucVuController {
 
     @Autowired
     private ChucVuService chucVuService;
 
-    @GetMapping
-    public ResponseEntity<Page<ChucVu>> hienThi(@RequestParam(defaultValue = "1") int page) {
-        if (page < 1)
-            page = 1;
+//    @GetMapping
+//    public ResponseEntity hienThi() {
+//        return new ResponseEntity(chucVuService.getAll1(), HttpStatus.OK);
+//    }
+
+
+    @GetMapping("/hien-thi")
+    public ResponseEntity hienThi( @RequestParam(defaultValue = "1") int page) {
+        if (page < 1) page = 1;
         Pageable pageable = PageRequest.of(page - 1, 5);
         return ResponseEntity.ok().body(chucVuService.findAll(pageable));
     }

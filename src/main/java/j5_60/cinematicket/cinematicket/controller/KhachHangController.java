@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/cimena/khach-hang")
+@RequestMapping("/cemina/khach-hang")
 @CrossOrigin
 public class KhachHangController {
 
@@ -27,11 +27,9 @@ public class KhachHangController {
     private KhachHangService khService;
 
     @GetMapping("/hien-thi")
-    public ResponseEntity<Page<KhachHang>> hienThi(@RequestParam(defaultValue = "1") int page,
-            @RequestParam(required = false) String sapXepTheoName) {
-        if (page < 1)
-            page = 1;
-        Pageable pageable = PageRequest.of(page - 1, 5);
+    public ResponseEntity hienThi(@RequestParam(defaultValue = "1") int page, @RequestParam(required = false) String sapXepTheoName) {
+        if (page < 1) page = 1;
+        Pageable pageable = PageRequest.of(page - 1, 10);
         if (sapXepTheoName != null && sapXepTheoName.equalsIgnoreCase("true")) {
             return ResponseEntity.ok().body(khService.sapXepTheoNgayTao(pageable));
         } else {

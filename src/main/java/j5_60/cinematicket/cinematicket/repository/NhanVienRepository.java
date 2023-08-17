@@ -32,4 +32,6 @@ public interface NhanVienRepository extends JpaRepository<NhanVien, UUID> {
     """, nativeQuery = true)
     List<NhanVien> getNhanVienListFilter(@Param("req") NhanVienSearch req);
 
+    Page<NhanVien> findByNgaySinhContaining(String ngaySinh,Pageable pageable);
+    Page<NhanVien> findByTrangThaiContaining(String trangThai,Pageable pageable);
 }

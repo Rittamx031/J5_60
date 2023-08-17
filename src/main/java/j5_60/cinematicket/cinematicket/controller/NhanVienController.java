@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/cimena/nhan-vien")
+@RequestMapping("/cemina/nhan-vien")
 @CrossOrigin
 public class NhanVienController {
 
