@@ -9,6 +9,9 @@ import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.service.LoaiGheService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,14 +26,14 @@ public class LoaiGheController {
     @Autowired
     private LoaiGheService loaiGheService;
 
-    // @GetMapping("/index")
-    // public ResponseEntity<Page<LoaiGhe>> getAll(@RequestParam(defaultValue = "1") int page,
-    //                                             @RequestParam(defaultValue = "5") int size) {
-    //     if (page < 1) page = 1;
-    //     Pageable pageable = PageRequest.of(page - 1, size);
-    //     Page<LoaiGhe> loaiGhePage = loaiGheService.findAll(pageable);
-    //     return ResponseEntity.ok().body(loaiGhePage);
-    // }
+     @GetMapping("/index")
+     public ResponseEntity<Page<LoaiGhe>> getAll(@RequestParam(defaultValue = "1") int page,
+                                                 @RequestParam(defaultValue = "5") int size) {
+         if (page < 1) page = 1;
+         Pageable pageable = PageRequest.of(page - 1, size);
+         Page<LoaiGhe> loaiGhePage = loaiGheService.findAll(pageable);
+         return ResponseEntity.ok().body(loaiGhePage);
+     }
 
     @GetMapping("/{id}")
     public ResponseEntity<LoaiGhe> getById(@PathVariable("id") UUID id) throws ResourceNotFoundException {

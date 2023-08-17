@@ -21,6 +21,14 @@ public class GiaVeLichChieu {
     @EmbeddedId
     GiaVeLichChieuKey id;
 
+    public GiaVeLichChieuKey getId() {
+        return id;
+    }
+
+    public void setId(GiaVeLichChieuKey id) {
+        this.id = id;
+    }
+
     @ManyToOne
     @MapsId("id_loai_ghe")
     @JoinColumn(name = "id_loai_ghe")

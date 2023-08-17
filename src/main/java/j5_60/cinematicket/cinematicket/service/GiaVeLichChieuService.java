@@ -1,9 +1,13 @@
 package j5_60.cinematicket.cinematicket.service;
 
 import j5_60.cinematicket.cinematicket.entity.GiaVeLichChieu;
+import j5_60.cinematicket.cinematicket.entity.LichChieu;
+import j5_60.cinematicket.cinematicket.entity.LoaiGhe;
 import j5_60.cinematicket.cinematicket.entity.key.GiaVeLichChieuKey;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.repository.GiaVeLichChieuRepository;
+import j5_60.cinematicket.cinematicket.repository.LichChieuRepository;
+import j5_60.cinematicket.cinematicket.repository.LoaiGheRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,10 +26,18 @@ import java.util.stream.IntStream;
 public class GiaVeLichChieuService {
     @Autowired
     private GiaVeLichChieuRepository repo;
+    @Autowired
+    private LichChieuRepository lcrepo;
+    @Autowired
+    private LoaiGheRepository lgrepo;
     private final int ROWCOUNT = 5;
     private int PageNo = -1;
 
     public GiaVeLichChieu createGiaVeLichChieu(GiaVeLichChieu giaVeLichChieuDetail) {
+        Optional<LichChieu> lichChieu = lcrepo.findById(giaVeLichChieuDetail.getId().getId_lich_chieu());
+        Optional<LoaiGhe> loaighe = lgrepo.findById(giaVeLichChieuDetail.getId().getId_loai_ghe());
+        giaVeLichChieuDetail.setLichChieu(lichChieu.get());
+        giaVeLichChieuDetail.setLoaiGhe(loaighe.get());
         return repo.save(giaVeLichChieuDetail);
     }
 
