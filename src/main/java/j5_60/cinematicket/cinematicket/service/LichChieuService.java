@@ -9,8 +9,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -116,6 +119,30 @@ public class LichChieuService {
             return this.getPageNo(0, sortBy, sortBy);
         } else {
             return this.getPageNo(this.PageNo - 1, sortBy, sortBy);
+        }
+    }
+
+    @Service
+    public class LichChieuScheduler {
+
+        @Autowired
+        private LichChieuService lichChieuService;
+
+        // Thực hiện kiểm tra và cập nhật trạng thái trước 3 phút trước thời gian chiếu
+        @Scheduled(fixedDelay = 1000) // Kiểm tra sau mỗi 1 giây (1.000 miliseconds)
+        public void updateLichChieuStatus() {
+            List<LichChieu> ls = lichChieuService.getAllLichChieu();
+            LocalDateTime now = LocalDateTime.now();
+
+            for (LichChieu lichChieu : ls) {
+                LocalDateTime gioChieu = lichChieu.getNgayChieu().atTime(lichChieu.getGioiChieu());
+                Duration timeDifference = Duration.between(now, gioChieu);
+
+                if (timeDifference.toMinutes() <= 3 && lichChieu.getTrangThai() != 2) {
+                    lichChieu.setTrangThai(2); // Chuyển trạng thái thành 2 (hoặc bất kỳ trạng thái bạn định nghĩa)
+                    lichChieuService.updateLichChieu(lichChieu);
+                }
+            }
         }
     }
 }

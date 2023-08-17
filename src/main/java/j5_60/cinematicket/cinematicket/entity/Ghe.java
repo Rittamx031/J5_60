@@ -51,25 +51,19 @@ public class Ghe implements Serializable {
     @Column(name = "trang_thai")
     private Integer trangThai;
 
-    @PastOrPresent(message = "Thời gian cập nhật phải là thời gian trong quá khứ hoặc hiện tại")
+    @Column(name = "create_at")
+    private LocalDateTime createAt;
+
     @Column(name = "update_at")
     private LocalDateTime updateAt;
 
-    @PastOrPresent(message = "Thời gian tạo phải là thời gian trong quá khứ hoặc hiện tại")
-    @Column(name = "create_at")
-    private LocalDateTime  createAt;
+    @Column(name = "update_by")
+    private UUID updateBy;
 
-    @Column(name = "deleted", columnDefinition = "bit default 0")
+    @Column(name = "create_by")
+    private UUID createBy;
+
+    @Column(name = "deleted")
     private boolean deleted;
 
-    @PrePersist
-    public void prePersist() {
-        createAt = LocalDateTime.now();
-        updateAt = createAt;
-    }
-
-    @PreUpdate
-    public void preUpdate() {
-        updateAt = LocalDateTime.now();
-    }
 }
