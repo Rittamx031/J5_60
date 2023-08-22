@@ -30,7 +30,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @CrossOrigin
-@RequestMapping("cimena/ve")
+@RequestMapping("api/cimena/ve")
 public class VeController {
 
     @Autowired

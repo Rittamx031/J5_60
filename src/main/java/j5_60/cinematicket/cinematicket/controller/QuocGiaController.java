@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("cimena/quoc-gia")
+@RequestMapping("api/cimena/quoc-gia")
 @CrossOrigin
 public class QuocGiaController {
 

@@ -26,7 +26,7 @@ import j5_60.cinematicket.cinematicket.service.GiaVeLichChieuService;
  * GiaVeLichChieuController
  */
 @RestController
-@RequestMapping("cimena/gia-ve-lich-chieu")
+@RequestMapping("api/cimena/gia-ve-lich-chieu")
 @CrossOrigin
 public class GiaVeLichChieuController {
 

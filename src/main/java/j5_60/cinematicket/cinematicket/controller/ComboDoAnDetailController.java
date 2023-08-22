@@ -25,7 +25,7 @@ import j5_60.cinematicket.cinematicket.service.ComboDoAnDetailService;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("cimena/com-bo-do-an-detail")
+@RequestMapping("api/cimena/com-bo-do-an-detail")
 public class ComboDoAnDetailController {
     @Autowired
     private ComboDoAnDetailService service;

@@ -4,7 +4,9 @@ import j5_60.cinematicket.cinematicket.entity.ChucVu;
 import j5_60.cinematicket.cinematicket.repository.ChucVuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.UUID;
 
 @Service
 public class ChucVuService {
+    final int ROWCOUNT = 10;
     @Autowired
     private ChucVuRepository repository;
 
@@ -31,7 +34,7 @@ public class ChucVuService {
         ChucVu cv = repository.findById(id).get();
         cv.setTenCV(chucVu.getTenCV());
         cv.setUpdateAt(chucVu.getUpdateAt());
-        return  repository.save(cv);
+        return repository.save(cv);
     }
 
     public void delete(UUID id) {
@@ -45,5 +48,11 @@ public class ChucVuService {
 
     public Page<ChucVu> search(ChucVu serchNhanVien) {
         return null;
+    }
+
+    public List<ChucVu> getPageNo(int pageno) {
+        Sort sort = Sort.by(Sort.Direction.ASC, "createBy");
+        List<ChucVu> listrs = repository.findAll(PageRequest.of(pageno - 1, ROWCOUNT, sort)).getContent();
+        return listrs;
     }
 }

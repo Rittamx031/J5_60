@@ -27,7 +27,7 @@ import jakarta.validation.Valid;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("cimena/do-an")
+@RequestMapping("api/cimena/do-an")
 public class DoAnController {
     @Autowired
     private DoAnService service;

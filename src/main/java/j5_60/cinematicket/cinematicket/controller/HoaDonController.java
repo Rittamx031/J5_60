@@ -27,7 +27,7 @@ import j5_60.cinematicket.cinematicket.service.HoaDonService;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("cimena/hoa-don")
+@RequestMapping("api/cimena/hoa-don")
 public class HoaDonController {
     @Autowired
     private HoaDonService service;
