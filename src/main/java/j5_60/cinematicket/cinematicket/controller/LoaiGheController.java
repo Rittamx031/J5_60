@@ -20,7 +20,7 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin
-@RequestMapping("cimena/loaighe")
+@RequestMapping("api/cimena/loaighe")
 public class LoaiGheController {
 
     @Autowired

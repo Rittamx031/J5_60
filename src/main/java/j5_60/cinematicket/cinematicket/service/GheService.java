@@ -20,12 +20,9 @@ import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class GheService {
-    private final GheRepository gheRepository;
 
     @Autowired
-    public GheService(GheRepository gheRepository) {
-        this.gheRepository = gheRepository;
-    }
+    GheRepository gheRepository;
 
     public Page<Ghe> findAll(Pageable pageable) {
         return gheRepository.findAll(pageable);
@@ -68,7 +65,6 @@ public class GheService {
         }
         throw new ResourceNotFoundException("Ghe not found with id: " + id);
     }
-
 
     public void deleteById(UUID id) {
         gheRepository.deleteById(id);

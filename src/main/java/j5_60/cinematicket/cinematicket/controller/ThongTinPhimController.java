@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/cimena/thong-tin-phim")
+@RequestMapping("api/cimena/thong-tin-phim")
 @CrossOrigin
 public class ThongTinPhimController {
 

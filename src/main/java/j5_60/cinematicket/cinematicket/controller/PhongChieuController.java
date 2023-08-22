@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin
-@RequestMapping("cimena/phongchieu")
+@RequestMapping("api/cimena/phongchieu")
 public class PhongChieuController {
 
     @Autowired

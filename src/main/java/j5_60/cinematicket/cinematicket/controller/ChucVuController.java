@@ -16,12 +16,12 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/cemina/chuc-vu")
+@RequestMapping("api/cimena/chuc-vu")
 @CrossOrigin
 public class ChucVuController {
 
     @Autowired
-    private ChucVuService chucVuService;
+    private ChucVuService service;
 
 //    @GetMapping
 //    public ResponseEntity hienThi() {
@@ -33,34 +33,39 @@ public class ChucVuController {
     public ResponseEntity hienThi( @RequestParam(defaultValue = "1") int page) {
         if (page < 1) page = 1;
         Pageable pageable = PageRequest.of(page - 1, 5);
-        return ResponseEntity.ok().body(chucVuService.findAll(pageable));
+        return ResponseEntity.ok().body(service.findAll(pageable));
     }
 
     @PostMapping("/add")
     public ResponseEntity<ChucVu> addChucVu(@RequestBody ChucVu chucVu) {
         chucVu.setCreateAt(LocalDateTime.now());
-        return new ResponseEntity<>(chucVuService.add(chucVu), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.add(chucVu), HttpStatus.CREATED);
     }
-                                                                                  
+
     @PutMapping("/update/{id}")
     public ResponseEntity<ChucVu> updateChucVu(@PathVariable("id") UUID id, @RequestBody ChucVu chucVu) {
         chucVu.setUpdateAt(LocalDateTime.now());
-        return new ResponseEntity<>(chucVuService.update(id, chucVu), HttpStatus.OK);
+        return new ResponseEntity<>(service.update(id, chucVu), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable("id") UUID id) {
-        chucVuService.delete(id);
+        service.delete(id);
     }
 
     @GetMapping("/detail/{id}")
     public HttpStatus detail(@PathVariable("id") UUID id) {
-        chucVuService.getById(id);
+        service.getById(id);
         return HttpStatus.OK;
     }
 
     @GetMapping("getall")
     public ResponseEntity<List<ChucVu>> getAll() {
-        return ResponseEntity.ok().body(chucVuService.getAll());
+        return ResponseEntity.ok().body(service.getAll());
+    }
+
+    @GetMapping("pageno/{page}")
+    public ResponseEntity<List<ChucVu>> getPageNo(@PathVariable("page") int pageno) {
+        return ResponseEntity.ok().body(service.getPageNo(pageno));
     }
 }

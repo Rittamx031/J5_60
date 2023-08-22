@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/cemina/khach-hang")
+@RequestMapping("api/cimena/khach-hang")
 @CrossOrigin
 public class KhachHangController {
 
