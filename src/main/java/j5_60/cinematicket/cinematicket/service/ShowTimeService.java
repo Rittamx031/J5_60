@@ -21,7 +21,7 @@ import java.util.stream.IntStream;
 
 @Service
 @Transactional
-public class LichChieuService {
+public class ShowTimeService {
     @Autowired
     private LichChieuRepository lichChieuRepository;
     private final int ROWCOUNT = 5;

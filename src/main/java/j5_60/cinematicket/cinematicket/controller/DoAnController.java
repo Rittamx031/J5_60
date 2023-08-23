@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import j5_60.cinematicket.cinematicket.entity.DoAn;
-import j5_60.cinematicket.cinematicket.service.DoAnService;
+import j5_60.cinematicket.cinematicket.service.SnacksService;
 import jakarta.validation.Valid;
 
 /**
@@ -30,7 +30,7 @@ import jakarta.validation.Valid;
 @RequestMapping("api/cimena/do-an")
 public class DoAnController {
     @Autowired
-    private DoAnService service;
+    private SnacksService service;
 
     @GetMapping
     public ResponseEntity<List<DoAn>> getAllDoAn() {

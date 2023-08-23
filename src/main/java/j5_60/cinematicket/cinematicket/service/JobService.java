@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class ChucVuService {
+public class JobService {
     final int ROWCOUNT = 10;
     @Autowired
     private ChucVuRepository repository;

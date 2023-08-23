@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class NhanVienService {
+public class EmployyeService {
     @Autowired
     private NhanVienRepository nvRepository;
 

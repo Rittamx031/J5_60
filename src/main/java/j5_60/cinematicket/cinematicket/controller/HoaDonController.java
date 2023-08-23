@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import j5_60.cinematicket.cinematicket.entity.HoaDon;
 import j5_60.cinematicket.cinematicket.modelsearch.HoaDonSearch;
-import j5_60.cinematicket.cinematicket.service.HoaDonService;
+import j5_60.cinematicket.cinematicket.service.BillService;
 
 /**
  * HoaDonController
@@ -30,7 +30,7 @@ import j5_60.cinematicket.cinematicket.service.HoaDonService;
 @RequestMapping("api/cimena/hoa-don")
 public class HoaDonController {
     @Autowired
-    private HoaDonService service;
+    private BillService service;
 
     @GetMapping
     public ResponseEntity<List<HoaDon>> getAllHoaDon() {

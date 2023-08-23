@@ -1,21 +1,19 @@
 package j5_60.cinematicket.cinematicket.service;
 
-import j5_60.cinematicket.cinematicket.entity.KhachHang;
-import j5_60.cinematicket.cinematicket.entity.ThongTinPhim;
-import j5_60.cinematicket.cinematicket.modelsearch.KhachHangSearch;
-import j5_60.cinematicket.cinematicket.modelsearch.ThongTinPhimSearch;
-import j5_60.cinematicket.cinematicket.repository.KhachHangRepository;
+import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
+import j5_60.cinematicket.cinematicket.entity.KhachHang;
+import j5_60.cinematicket.cinematicket.modelsearch.KhachHangSearch;
+import j5_60.cinematicket.cinematicket.repository.KhachHangRepository;
 
 @Service
-public class KhachHangService {
+public class CustomerService {
     @Autowired
     private KhachHangRepository khRepository;
 

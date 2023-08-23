@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import j5_60.cinematicket.cinematicket.entity.ComboDoAnDetail;
 import j5_60.cinematicket.cinematicket.entity.key.ComBoDoAnDetailKey;
-import j5_60.cinematicket.cinematicket.service.ComboDoAnDetailService;
+import j5_60.cinematicket.cinematicket.service.SnackDetailService;
 
 /**
  * ComboDoAnDetailController
@@ -28,7 +28,7 @@ import j5_60.cinematicket.cinematicket.service.ComboDoAnDetailService;
 @RequestMapping("api/cimena/com-bo-do-an-detail")
 public class ComboDoAnDetailController {
     @Autowired
-    private ComboDoAnDetailService service;
+    private SnackDetailService service;
 
     @PostMapping
     public ResponseEntity<ComboDoAnDetail> createComboDoAnDetail(@RequestBody ComboDoAnDetail comboDoAnDetail) {

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import j5_60.cinematicket.cinematicket.entity.HoaDonDoAn;
 import j5_60.cinematicket.cinematicket.entity.key.HoaDonDoAnKey;
-import j5_60.cinematicket.cinematicket.service.HoaDonDoAnService;
+import j5_60.cinematicket.cinematicket.service.BillSnackService;
 
 /**
  * HoaDonDoAnController
@@ -30,7 +30,7 @@ import j5_60.cinematicket.cinematicket.service.HoaDonDoAnService;
 @CrossOrigin
 public class HoaDonDoAnController {
     @Autowired
-    private HoaDonDoAnService service;
+    private BillSnackService service;
 
     @GetMapping
     public ResponseEntity<List<HoaDonDoAn>> getAll() {

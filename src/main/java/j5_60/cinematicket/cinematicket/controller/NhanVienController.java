@@ -5,8 +5,8 @@ import j5_60.cinematicket.cinematicket.entity.KhachHang;
 import j5_60.cinematicket.cinematicket.entity.NhanVien;
 import j5_60.cinematicket.cinematicket.modelsearch.KhachHangSearch;
 import j5_60.cinematicket.cinematicket.modelsearch.NhanVienSearch;
-import j5_60.cinematicket.cinematicket.service.ChucVuService;
-import j5_60.cinematicket.cinematicket.service.NhanVienService;
+import j5_60.cinematicket.cinematicket.service.JobService;
+import j5_60.cinematicket.cinematicket.service.EmployyeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,10 +27,10 @@ import java.util.UUID;
 public class NhanVienController {
 
     @Autowired
-    private NhanVienService nhanVienService;
+    private EmployyeService nhanVienService;
 
     @Autowired
-    private ChucVuService chucVuService;
+    private JobService chucVuService;
 
     @GetMapping("hien-thi")
     public ResponseEntity<Page<NhanVien>> hienThi(@RequestParam(defaultValue = "1") int page) {

@@ -4,7 +4,7 @@ import j5_60.cinematicket.cinematicket.entity.KhachHang;
 import j5_60.cinematicket.cinematicket.entity.ThongTinPhim;
 import j5_60.cinematicket.cinematicket.modelsearch.KhachHangSearch;
 import j5_60.cinematicket.cinematicket.modelsearch.ThongTinPhimSearch;
-import j5_60.cinematicket.cinematicket.service.KhachHangService;
+import j5_60.cinematicket.cinematicket.service.CustomerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,7 +24,7 @@ import java.util.UUID;
 public class KhachHangController {
 
     @Autowired
-    private KhachHangService khService;
+    private CustomerService khService;
 
     @GetMapping("/hien-thi")
     public ResponseEntity hienThi(@RequestParam(defaultValue = "1") int page, @RequestParam(required = false) String sapXepTheoName) {

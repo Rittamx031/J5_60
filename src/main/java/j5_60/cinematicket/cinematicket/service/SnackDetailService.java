@@ -20,7 +20,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
-public class ComboDoAnDetailService {
+public class SnackDetailService {
     @Autowired
     private ComboDoAnDetailRepository repo;
     private final int ROWCOUNT = 5;

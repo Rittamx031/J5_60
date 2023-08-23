@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.UUID;
 
-public interface PhongChieuService {
+public interface CeminaRoomService {
     List<PhongChieu> getAll();
 
     PhongChieu save(PhongChieu phongChieu);

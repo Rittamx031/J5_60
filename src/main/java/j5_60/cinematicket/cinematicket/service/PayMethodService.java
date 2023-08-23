@@ -19,7 +19,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
-public class PhuongThucThanhToanService {
+public class PayMethodService {
     @Autowired
     private PhuongThucThanhToanRepository repo;
     private final int ROWCOUNT = 5;

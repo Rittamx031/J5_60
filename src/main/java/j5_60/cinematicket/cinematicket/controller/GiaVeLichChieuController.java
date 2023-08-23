@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import j5_60.cinematicket.cinematicket.entity.GiaVeLichChieu;
 import j5_60.cinematicket.cinematicket.entity.key.GiaVeLichChieuKey;
-import j5_60.cinematicket.cinematicket.service.GiaVeLichChieuService;
+import j5_60.cinematicket.cinematicket.service.ShowtimePriceService;
 
 /**
  * GiaVeLichChieuController
@@ -31,7 +31,7 @@ import j5_60.cinematicket.cinematicket.service.GiaVeLichChieuService;
 public class GiaVeLichChieuController {
 
       @Autowired
-    private GiaVeLichChieuService service;
+    private ShowtimePriceService service;
 
     @GetMapping
     public ResponseEntity<List<GiaVeLichChieu>> getAll() {

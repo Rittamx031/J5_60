@@ -19,7 +19,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
-public class ComboService {
+public class ComboSnackService {
       @Autowired
     private ComboRepository repo;
     private final int ROWCOUNT = 5;

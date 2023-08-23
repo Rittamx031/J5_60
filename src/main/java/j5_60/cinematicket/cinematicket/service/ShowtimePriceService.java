@@ -23,7 +23,7 @@ import java.util.stream.IntStream;
 
 @Service
 @Transactional
-public class GiaVeLichChieuService {
+public class ShowtimePriceService {
     @Autowired
     private GiaVeLichChieuRepository repo;
     @Autowired

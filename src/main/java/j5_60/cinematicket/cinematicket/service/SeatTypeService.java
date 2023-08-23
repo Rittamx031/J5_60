@@ -18,7 +18,7 @@ import j5_60.cinematicket.cinematicket.repository.LoaiGheRepository;
 import jakarta.transaction.Transactional;
 @Service
 @Transactional  
-public class LoaiGheService {
+public class SeatTypeService {
     
     @Autowired
     public LoaiGheRepository loaiGheRepository;

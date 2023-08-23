@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import j5_60.cinematicket.cinematicket.entity.TheLoaiPhim;
 import j5_60.cinematicket.cinematicket.entity.key.TheLoaiPhimKey;
-import j5_60.cinematicket.cinematicket.service.TheLoaiPhimService;
+import j5_60.cinematicket.cinematicket.service.MovieGenreService;
 
 /**
  * TheLoaiPhimController
@@ -31,7 +31,7 @@ import j5_60.cinematicket.cinematicket.service.TheLoaiPhimService;
 @CrossOrigin
 public class TheLoaiPhimController {
     @Autowired
-    private TheLoaiPhimService service;
+    private MovieGenreService service;
 
     @GetMapping
     public ResponseEntity<List<TheLoaiPhim>> getAll() {

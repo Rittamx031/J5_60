@@ -22,7 +22,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
-public class VeService {
+public class TicketService {
     @Autowired
     private VeRepository repo;
 

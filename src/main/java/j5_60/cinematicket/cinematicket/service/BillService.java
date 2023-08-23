@@ -23,7 +23,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
-public class HoaDonService {
+public class BillService {
     @Autowired
     private HoaDonRepository repo;
     private final int ROWCOUNT = 5;

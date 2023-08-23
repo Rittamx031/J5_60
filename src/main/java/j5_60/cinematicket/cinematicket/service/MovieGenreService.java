@@ -20,7 +20,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
-public class TheLoaiPhimService {
+public class MovieGenreService {
     @Autowired
     private TheLoaiPhimRepository repo;
     private final int ROWCOUNT = 5;
