@@ -41,9 +41,13 @@ public class EmployyeService {
         NhanVien nv = nvRepository.findById(id).get();
         nv.setHoTen(nhanVien.getHoTen());
         nv.setEmail(nhanVien.getEmail());
+        nv.setGioiTinh(nhanVien.isGioiTinh());
+        nv.setNgaySinh(nhanVien.getNgaySinh());
         nv.setPass(nhanVien.getPass());
         nv.setSdt(nhanVien.getSdt());
         nv.setIdCV(nhanVien.getIdCV());
+        nv.setImagaNV(nhanVien.getImagaNV());
+        nv.setTrangThai(nhanVien.getTrangThai());
         nv.setUpdateAt(nhanVien.getUpdateAt());
         return nvRepository.save(nv);
     }

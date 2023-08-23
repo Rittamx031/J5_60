@@ -23,10 +23,15 @@ public class ChucVuController {
     @Autowired
     private JobService service;
 
-    @GetMapping
-    public ResponseEntity<Page<ChucVu>> hienThi(@RequestParam(defaultValue = "1") int page) {
-        if (page < 1)
-            page = 1;
+//    @GetMapping
+//    public ResponseEntity hienThi() {
+//        return new ResponseEntity(chucVuService.getAll1(), HttpStatus.OK);
+//    }
+
+
+    @GetMapping("/hien-thi")
+    public ResponseEntity hienThi( @RequestParam(defaultValue = "1") int page) {
+        if (page < 1) page = 1;
         Pageable pageable = PageRequest.of(page - 1, 5);
         return ResponseEntity.ok().body(service.findAll(pageable));
     }

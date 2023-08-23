@@ -81,6 +81,18 @@ public class NhanVien {
     @Column(name = "image_nv")
     private String image;
 
+    // @Column(name="gioi_tinh")
+    // private boolean gioiTinh;
+
+    // @Column(name="ngay_sinh")
+    // private Date ngaySinh;
+
+    @Column(name="image_nv")
+    private String imagaNV;
+
+    // @Column(name="trang_thai")
+    // private int trangThai;
+
     @Column(name = "create_at")
     private LocalDateTime createAt;
 

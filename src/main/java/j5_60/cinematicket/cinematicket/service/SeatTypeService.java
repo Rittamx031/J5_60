@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import j5_60.cinematicket.cinematicket.entity.Ghe;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import j5_60.cinematicket.cinematicket.entity.LoaiGhe;
@@ -26,7 +29,9 @@ public class SeatTypeService {
     public List<LoaiGhe> searchLoaiGhe(String keyword) {
         return loaiGheRepository.findByTenContainingIgnoreCase(keyword);
     }
-
+    public Page<LoaiGhe> findAll(Pageable pageable) {
+        return loaiGheRepository.findAll(pageable);
+    }
     
     public List<LoaiGhe> getAll() {
         return loaiGheRepository.findAll();

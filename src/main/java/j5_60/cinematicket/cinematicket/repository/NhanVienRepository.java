@@ -7,13 +7,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Repository
 public interface NhanVienRepository extends JpaRepository<NhanVien, UUID> {
     Page<NhanVien> findAll(Pageable pageable);
 
@@ -34,6 +32,8 @@ public interface NhanVienRepository extends JpaRepository<NhanVien, UUID> {
             """, nativeQuery = true)
     List<NhanVien> getNhanVienListFilter(@Param("req") NhanVienSearch req);
 
+    Page<NhanVien> findByNgaySinhContaining(String ngaySinh,Pageable pageable);
+    Page<NhanVien> findByTrangThaiContaining(String trangThai,Pageable pageable);
     @Query("SELECT kh from NhanVien kh WHERE kh.email = :username")
     Optional<NhanVien> getuser(@Param("username") String username);
 
