@@ -18,14 +18,14 @@ import j5_60.cinematicket.cinematicket.entity.HoaDon;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.modelsearch.HoaDonSearch;
 import j5_60.cinematicket.cinematicket.modelsearch.VeSearch;
-import j5_60.cinematicket.cinematicket.repository.HoaDonRepository;
+import j5_60.cinematicket.cinematicket.repository.BillRepository;
 import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
 public class BillService {
     @Autowired
-    private HoaDonRepository repo;
+    private BillRepository repo;
     private final int ROWCOUNT = 5;
     private int PageNo = -1;
 

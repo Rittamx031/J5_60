@@ -17,14 +17,14 @@ import j5_60.cinematicket.cinematicket.entity.Ve;
 import j5_60.cinematicket.cinematicket.entity.key.VeKey;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.modelsearch.VeSearch;
-import j5_60.cinematicket.cinematicket.repository.VeRepository;
+import j5_60.cinematicket.cinematicket.repository.TicketRepository;
 import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
 public class TicketService {
     @Autowired
-    private VeRepository repo;
+    private TicketRepository repo;
 
     private final int ROWCOUNT = 5;
     private int PageNo = -1;

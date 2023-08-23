@@ -17,11 +17,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import j5_60.cinematicket.cinematicket.repository.KhachHangRepository;
-import j5_60.cinematicket.cinematicket.repository.NhanVienRepository;
+import j5_60.cinematicket.cinematicket.repository.CustomerRepository;
+import j5_60.cinematicket.cinematicket.repository.EmployeeRepository;
 import j5_60.cinematicket.cinematicket.security.jwt.JwtAuthenticationFilter;
-import j5_60.cinematicket.cinematicket.security.services.KhachHangInfoService;
-import j5_60.cinematicket.cinematicket.security.services.NhanVienInfoService;
+import j5_60.cinematicket.cinematicket.security.services.CustomerInfoService;
+import j5_60.cinematicket.cinematicket.security.services.EmployeeInfoService;
 
 @Configuration
 @EnableWebSecurity
@@ -37,10 +37,10 @@ public class SpringSecurityConfig {
     }
 
     @Autowired
-    NhanVienRepository nvifrepository;
+    EmployeeRepository nvifrepository;
 
-    NhanVienInfoService nhanVienServer() {
-        return new NhanVienInfoService(nvifrepository);
+    EmployeeInfoService nhanVienServer() {
+        return new EmployeeInfoService(nvifrepository);
     }
 
     @Bean
@@ -52,10 +52,10 @@ public class SpringSecurityConfig {
     }
 
     @Autowired
-    KhachHangRepository khifrepository;
+    CustomerRepository khifrepository;
 
-    KhachHangInfoService KhachHangServer() {
-        return new KhachHangInfoService(khifrepository);
+    CustomerInfoService KhachHangServer() {
+        return new CustomerInfoService(khifrepository);
     }
 
     @Bean

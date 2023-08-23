@@ -2,7 +2,7 @@ package j5_60.cinematicket.cinematicket.service;
 
 import j5_60.cinematicket.cinematicket.entity.LichChieu;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.repository.LichChieuRepository;
+import j5_60.cinematicket.cinematicket.repository.ShowtimesRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,7 +23,7 @@ import java.util.stream.IntStream;
 @Transactional
 public class ShowTimeService {
     @Autowired
-    private LichChieuRepository lichChieuRepository;
+    private ShowtimesRepository lichChieuRepository;
     private final int ROWCOUNT = 5;
     private int PageNo = -1;
 
@@ -126,7 +126,7 @@ public class ShowTimeService {
     public class LichChieuScheduler {
 
         @Autowired
-        private LichChieuService lichChieuService;
+        private ShowTimeService lichChieuService;
 
         // Thực hiện kiểm tra và cập nhật trạng thái trước 3 phút trước thời gian chiếu
         @Scheduled(fixedDelay = 1000) // Kiểm tra sau mỗi 1 giây (1.000 miliseconds)

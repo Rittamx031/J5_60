@@ -2,7 +2,7 @@ package j5_60.cinematicket.cinematicket.controller;
 
 import j5_60.cinematicket.cinematicket.entity.QuocGia;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.repository.QuocGiaRepository;
+import j5_60.cinematicket.cinematicket.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +16,7 @@ import java.util.UUID;
 public class QuocGiaController {
 
     @Autowired
-    QuocGiaRepository quocGiaRepository;
+    CountryRepository quocGiaRepository;
 
     @GetMapping("/hien-thi")
     public List<QuocGia> get() {

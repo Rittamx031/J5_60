@@ -14,14 +14,14 @@ import org.springframework.stereotype.Service;
 
 import j5_60.cinematicket.cinematicket.entity.PhuongThucThanhToan;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.repository.PhuongThucThanhToanRepository;
+import j5_60.cinematicket.cinematicket.repository.PayMothodRepository;
 import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
 public class PayMethodService {
     @Autowired
-    private PhuongThucThanhToanRepository repo;
+    private PayMothodRepository repo;
     private final int ROWCOUNT = 5;
     private int PageNo = -1;
 

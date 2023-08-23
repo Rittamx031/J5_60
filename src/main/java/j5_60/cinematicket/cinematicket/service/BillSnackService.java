@@ -15,14 +15,14 @@ import org.springframework.stereotype.Service;
 import j5_60.cinematicket.cinematicket.entity.HoaDonDoAn;
 import j5_60.cinematicket.cinematicket.entity.key.HoaDonDoAnKey;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.repository.HoaDonDoAnRepository;
+import j5_60.cinematicket.cinematicket.repository.BillSnacksRepository;
 import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
 public class BillSnackService {
     @Autowired
-    private HoaDonDoAnRepository repo;
+    private BillSnacksRepository repo;
     private final int ROWCOUNT = 5;
     private int PageNo = -1;
 

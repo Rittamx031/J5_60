@@ -16,12 +16,12 @@ import org.springframework.stereotype.Service;
 import j5_60.cinematicket.cinematicket.entity.ThongTinPhim;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.modelsearch.ThongTinPhimSearch;
-import j5_60.cinematicket.cinematicket.repository.ThongTinPhimRepository;
+import j5_60.cinematicket.cinematicket.repository.MovieRepository;
 
 @Service
 public class ThongTinPhimService {
   @Autowired
-  private ThongTinPhimRepository repo;
+  private MovieRepository repo;
   private final int ROWCOUNT = 5;
   private int PageNo = -1;
 

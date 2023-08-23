@@ -10,8 +10,8 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import j5_60.cinematicket.cinematicket.security.services.KhachHangInfoService;
-import j5_60.cinematicket.cinematicket.security.services.NhanVienInfoService;
+import j5_60.cinematicket.cinematicket.security.services.CustomerInfoService;
+import j5_60.cinematicket.cinematicket.security.services.EmployeeInfoService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,9 +23,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
   @Autowired
   private JwtTokenProvider tokenProvider;
   @Autowired
-  private NhanVienInfoService nhanvieninfoService;
+  private EmployeeInfoService nhanvieninfoService;
   @Autowired
-  private KhachHangInfoService khachhanginfoService;
+  private CustomerInfoService khachhanginfoService;
 
   @Override
   protected void doFilterInternal(HttpServletRequest request,

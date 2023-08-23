@@ -1,26 +1,67 @@
 package j5_60.cinematicket.cinematicket.service;
 
-import j5_60.cinematicket.cinematicket.entity.PhongChieu;
-import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
-import java.util.UUID;
+import j5_60.cinematicket.cinematicket.entity.PhongChieu;
+import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
+import j5_60.cinematicket.cinematicket.repository.CenimaRoomRepository;
 
-public interface CeminaRoomService {
-    List<PhongChieu> getAll();
+public class CeminaRoomService {
+    @Autowired
+    private CenimaRoomRepository phongChieuRepository;
 
-    PhongChieu save(PhongChieu phongChieu);
+    public List<PhongChieu> getAll() {
+        return phongChieuRepository.findAll();
+    }
 
-    PhongChieu updatePhongChieu(UUID id, PhongChieu phongChieu) throws ResourceNotFoundException;
+    public Page<PhongChieu> findAll(Pageable pageable) {
+        return phongChieuRepository.findAll(pageable);
+    }
 
-    void deleteById(UUID id);
+    public List<PhongChieu> sapXep() {
+        return phongChieuRepository.findAllByOrderByTen();
+    }
 
-    PhongChieu findById(UUID id) throws ResourceNotFoundException;
+    public List<PhongChieu> searchPhongChieu(String keyword) {
+        return phongChieuRepository.findByTenContainingIgnoreCase(keyword);
+    }
 
-    Page<PhongChieu> findAll(Pageable pageable);
+    public PhongChieu save(PhongChieu phongChieu) {
+        phongChieu.setCreateAt(LocalDateTime.now());
+        return phongChieuRepository.save(phongChieu);
+    }
 
-    List<PhongChieu> sapXep();
-    List<PhongChieu> searchPhongChieu(String keyword);
+    public PhongChieu updatePhongChieu(UUID id, PhongChieu phongChieu) throws ResourceNotFoundException {
+        Optional<PhongChieu> optionalPhongChieu = phongChieuRepository.findById(id);
+        if (optionalPhongChieu.isPresent()) {
+            PhongChieu existingPhongChieu = optionalPhongChieu.get();
+            existingPhongChieu.setTen(phongChieu.getTen());
+            existingPhongChieu.setSoLuongGhe(phongChieu.getSoLuongGhe());
+            existingPhongChieu.setTrangThai(phongChieu.getTrangThai());
+            existingPhongChieu.setUpdateAt(LocalDateTime.now());
+            // Cập nhật các thuộc tính khác của đối tượng PhongChieu
+
+            return phongChieuRepository.save(existingPhongChieu);
+        }
+        throw new ResourceNotFoundException("PhongChieu not found with id: " + id);
+    }
+
+    public void deleteById(UUID id) {
+        phongChieuRepository.deleteById(id);
+    }
+
+    public PhongChieu findById(UUID id) throws ResourceNotFoundException {
+        Optional<PhongChieu> optionalPhongChieu = phongChieuRepository.findById(id);
+        if (optionalPhongChieu.isPresent()) {
+            return optionalPhongChieu.get();
+        }
+        throw new ResourceNotFoundException("PhongChieu not found with id: " + id);
+    }
 }
