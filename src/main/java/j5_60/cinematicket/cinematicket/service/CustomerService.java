@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 
 import j5_60.cinematicket.cinematicket.entity.KhachHang;
 import j5_60.cinematicket.cinematicket.modelsearch.KhachHangSearch;
-import j5_60.cinematicket.cinematicket.repository.KhachHangRepository;
+import j5_60.cinematicket.cinematicket.repository.CustomerRepository;
 
 @Service
 public class CustomerService {
     @Autowired
-    private KhachHangRepository khRepository;
+    private CustomerRepository khRepository;
 
     public List<KhachHang> getAllKH() {
         return khRepository.findAll();

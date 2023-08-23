@@ -1,7 +1,7 @@
 package j5_60.cinematicket.cinematicket.service;
 
 import j5_60.cinematicket.cinematicket.entity.ChucVu;
-import j5_60.cinematicket.cinematicket.repository.ChucVuRepository;
+import j5_60.cinematicket.cinematicket.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,7 +16,7 @@ import java.util.UUID;
 public class JobService {
     final int ROWCOUNT = 10;
     @Autowired
-    private ChucVuRepository repository;
+    private JobRepository repository;
 
     public List<ChucVu> getAll() {
         return repository.findAll();

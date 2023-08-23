@@ -6,7 +6,7 @@ import j5_60.cinematicket.cinematicket.entity.NhanVien;
 import j5_60.cinematicket.cinematicket.modelsearch.KhachHangSearch;
 import j5_60.cinematicket.cinematicket.modelsearch.NhanVienSearch;
 import j5_60.cinematicket.cinematicket.service.JobService;
-import j5_60.cinematicket.cinematicket.service.EmployyeService;
+import j5_60.cinematicket.cinematicket.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,7 +27,7 @@ import java.util.UUID;
 public class NhanVienController {
 
     @Autowired
-    private EmployyeService nhanVienService;
+    private EmployeeService nhanVienService;
 
     @Autowired
     private JobService chucVuService;

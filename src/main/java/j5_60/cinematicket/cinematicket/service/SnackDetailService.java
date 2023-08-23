@@ -15,14 +15,14 @@ import org.springframework.stereotype.Service;
 import j5_60.cinematicket.cinematicket.entity.ComboDoAnDetail;
 import j5_60.cinematicket.cinematicket.entity.key.ComBoDoAnDetailKey;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.repository.ComboDoAnDetailRepository;
+import j5_60.cinematicket.cinematicket.repository.ComboSnacksDetailRepository;
 import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
 public class SnackDetailService {
     @Autowired
-    private ComboDoAnDetailRepository repo;
+    private ComboSnacksDetailRepository repo;
     private final int ROWCOUNT = 5;
     private int PageNo = -1;
 

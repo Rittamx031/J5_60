@@ -15,14 +15,14 @@ import org.springframework.stereotype.Service;
 import j5_60.cinematicket.cinematicket.entity.TheLoaiPhim;
 import j5_60.cinematicket.cinematicket.entity.key.TheLoaiPhimKey;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.repository.TheLoaiPhimRepository;
+import j5_60.cinematicket.cinematicket.repository.MovieGenreRepository;
 import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
 public class MovieGenreService {
     @Autowired
-    private TheLoaiPhimRepository repo;
+    private MovieGenreRepository repo;
     private final int ROWCOUNT = 5;
     private int PageNo = -1;
 

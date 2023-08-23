@@ -5,9 +5,9 @@ import j5_60.cinematicket.cinematicket.entity.LichChieu;
 import j5_60.cinematicket.cinematicket.entity.LoaiGhe;
 import j5_60.cinematicket.cinematicket.entity.key.GiaVeLichChieuKey;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.repository.GiaVeLichChieuRepository;
-import j5_60.cinematicket.cinematicket.repository.LichChieuRepository;
-import j5_60.cinematicket.cinematicket.repository.LoaiGheRepository;
+import j5_60.cinematicket.cinematicket.repository.ShowtimePricesRepository;
+import j5_60.cinematicket.cinematicket.repository.ShowtimesRepository;
+import j5_60.cinematicket.cinematicket.repository.SeatTypeRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,11 +25,11 @@ import java.util.stream.IntStream;
 @Transactional
 public class ShowtimePriceService {
     @Autowired
-    private GiaVeLichChieuRepository repo;
+    private ShowtimePricesRepository repo;
     @Autowired
-    private LichChieuRepository lcrepo;
+    private ShowtimesRepository lcrepo;
     @Autowired
-    private LoaiGheRepository lgrepo;
+    private SeatTypeRepository lgrepo;
     private final int ROWCOUNT = 5;
     private int PageNo = -1;
 

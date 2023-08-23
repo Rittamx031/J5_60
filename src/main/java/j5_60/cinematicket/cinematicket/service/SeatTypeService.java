@@ -14,14 +14,14 @@ import org.springframework.stereotype.Service;
 
 import j5_60.cinematicket.cinematicket.entity.LoaiGhe;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.repository.LoaiGheRepository;
+import j5_60.cinematicket.cinematicket.repository.SeatTypeRepository;
 import jakarta.transaction.Transactional;
 @Service
 @Transactional  
 public class SeatTypeService {
     
     @Autowired
-    public LoaiGheRepository loaiGheRepository;
+    public SeatTypeRepository loaiGheRepository;
 
     public List<LoaiGhe> sapXep() {
         return loaiGheRepository.findAllByOrderByTen();

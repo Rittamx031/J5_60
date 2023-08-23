@@ -14,13 +14,13 @@ import org.springframework.stereotype.Service;
 
 import j5_60.cinematicket.cinematicket.entity.DoAn;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.repository.DoAnRepository;
+import j5_60.cinematicket.cinematicket.repository.SnackRepository;
 
 @Service
 // @Transactional
 public class SnacksService {
     @Autowired
-    private DoAnRepository repo;
+    private SnackRepository repo;
     private final int ROWCOUNT = 5;
     private int PageNo = -1;
 

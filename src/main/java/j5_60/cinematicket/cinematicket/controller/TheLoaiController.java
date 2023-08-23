@@ -2,7 +2,7 @@ package j5_60.cinematicket.cinematicket.controller;
 
 import j5_60.cinematicket.cinematicket.entity.TheLoai;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.repository.TheLoaiRepository;
+import j5_60.cinematicket.cinematicket.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +16,7 @@ import java.util.UUID;
 public class TheLoaiController {
 
     @Autowired
-    TheLoaiRepository theLoaiRepository;
+    GenreRepository theLoaiRepository;
 
     @GetMapping("/hien-thi")
     public List<TheLoai> get() {
