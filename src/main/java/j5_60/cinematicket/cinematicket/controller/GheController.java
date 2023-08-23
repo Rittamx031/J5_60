@@ -4,9 +4,9 @@ import j5_60.cinematicket.cinematicket.entity.Ghe;
 import j5_60.cinematicket.cinematicket.entity.LoaiGhe;
 import j5_60.cinematicket.cinematicket.entity.PhongChieu;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.service.GheService;
-import j5_60.cinematicket.cinematicket.service.LoaiGheService;
-import j5_60.cinematicket.cinematicket.service.PhongChieuService;
+import j5_60.cinematicket.cinematicket.service.SeatService;
+import j5_60.cinematicket.cinematicket.service.SeatTypeService;
+import j5_60.cinematicket.cinematicket.service.CeminaRoomService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,5 +22,16 @@ import java.util.UUID;
 @CrossOrigin
 @RequestMapping("api/cimena/ghe")
 public class GheController {
+  @Autowired
+  SeatService service;
 
+  @GetMapping("phongchieu/{idphongchieu}")
+  public ResponseEntity<List<Ghe>> getGheInPhongChieu(@PathVariable("idphongchieu") UUID idphongchieu) {
+    return ResponseEntity.ok().body(service.getAllgheByPhongChieu(idphongchieu));
+  }
+
+  @GetMapping
+  public ResponseEntity<List<Ghe>> getAllGhe() {
+    return ResponseEntity.ok().body(service.getAll());
+  }
 }
