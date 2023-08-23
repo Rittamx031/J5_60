@@ -1,7 +1,7 @@
 package j5_60.cinematicket.cinematicket.controller;
 
 import j5_60.cinematicket.cinematicket.entity.ChucVu;
-import j5_60.cinematicket.cinematicket.service.ChucVuService;
+import j5_60.cinematicket.cinematicket.service.JobService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,7 +21,7 @@ import java.util.UUID;
 public class ChucVuController {
 
     @Autowired
-    private ChucVuService service;
+    private JobService service;
 
     @GetMapping
     public ResponseEntity<Page<ChucVu>> hienThi(@RequestParam(defaultValue = "1") int page) {

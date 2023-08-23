@@ -2,7 +2,7 @@ package j5_60.cinematicket.cinematicket.controller;
 
 
 import j5_60.cinematicket.cinematicket.entity.LichChieu;
-import j5_60.cinematicket.cinematicket.service.LichChieuService;
+import j5_60.cinematicket.cinematicket.service.ShowTimeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ import java.util.UUID;
 @RequestMapping("api/cimena/lich-chieu")
 public class LichChieuController {
     @Autowired
-    private LichChieuService lcSer;
+    private ShowTimeService lcSer;
 
     @GetMapping
     public ResponseEntity<List<LichChieu>> getAllLichChieu() {

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import j5_60.cinematicket.cinematicket.entity.PhuongThucThanhToan;
-import j5_60.cinematicket.cinematicket.service.PhuongThucThanhToanService;
+import j5_60.cinematicket.cinematicket.service.PayMethodService;
 
 /**
  * PhuongThucThanhToanController
@@ -29,7 +29,7 @@ import j5_60.cinematicket.cinematicket.service.PhuongThucThanhToanService;
 @RequestMapping("api/cimena/phuong-thuc-thanh-toan")
 public class PhuongThucThanhToanController {
     @Autowired
-    private PhuongThucThanhToanService service;
+    private PayMethodService service;
 
     @GetMapping
     public ResponseEntity<List<PhuongThucThanhToan>> getAllPhuongThucThanhToan() {

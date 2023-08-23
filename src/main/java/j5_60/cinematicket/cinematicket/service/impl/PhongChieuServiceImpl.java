@@ -3,7 +3,7 @@ package j5_60.cinematicket.cinematicket.service.impl;
 import j5_60.cinematicket.cinematicket.entity.PhongChieu;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.repository.PhongChieuRepository;
-import j5_60.cinematicket.cinematicket.service.PhongChieuService;
+import j5_60.cinematicket.cinematicket.service.CeminaRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class PhongChieuServiceImpl implements PhongChieuService {
+public class PhongChieuServiceImpl implements CeminaRoomService {
 
     @Autowired
     private PhongChieuRepository phongChieuRepository;

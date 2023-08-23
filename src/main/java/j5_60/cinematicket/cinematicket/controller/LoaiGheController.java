@@ -6,7 +6,7 @@ package j5_60.cinematicket.cinematicket.controller;
 
 import j5_60.cinematicket.cinematicket.entity.LoaiGhe;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.service.LoaiGheService;
+import j5_60.cinematicket.cinematicket.service.SeatTypeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ import java.util.UUID;
 public class LoaiGheController {
 
     @Autowired
-    private LoaiGheService loaiGheService;
+    private SeatTypeService loaiGheService;
 
     // @GetMapping("/index")
     // public ResponseEntity<Page<LoaiGhe>> getAll(@RequestParam(defaultValue = "1") int page,

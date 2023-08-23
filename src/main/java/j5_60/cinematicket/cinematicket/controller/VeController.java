@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import j5_60.cinematicket.cinematicket.entity.Ve;
 import j5_60.cinematicket.cinematicket.modelsearch.VeSearch;
-import j5_60.cinematicket.cinematicket.service.VeService;
+import j5_60.cinematicket.cinematicket.service.TicketService;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
@@ -34,7 +34,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class VeController {
 
     @Autowired
-    public VeService service;
+    public TicketService service;
 
     @GetMapping
     public ResponseEntity<List<Ve>> getAllVe() {

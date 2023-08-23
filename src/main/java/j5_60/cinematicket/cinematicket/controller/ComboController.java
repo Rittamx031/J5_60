@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import j5_60.cinematicket.cinematicket.entity.Combo;
-import j5_60.cinematicket.cinematicket.service.ComboService;
+import j5_60.cinematicket.cinematicket.service.ComboSnackService;
 
 /**
  * ComboController
@@ -29,7 +29,7 @@ import j5_60.cinematicket.cinematicket.service.ComboService;
 @RequestMapping("api/cimena/com-bo")
 public class ComboController {
     @Autowired
-    private ComboService service;
+    private ComboSnackService service;
 
     @GetMapping
     public ResponseEntity<List<Combo>> getAllCombo() {
