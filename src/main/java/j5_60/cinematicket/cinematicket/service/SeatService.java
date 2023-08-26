@@ -11,9 +11,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import j5_60.cinematicket.cinematicket.dto.ghe.RowSeat;
+import j5_60.cinematicket.cinematicket.dto.ghe.Seat;
 import j5_60.cinematicket.cinematicket.entity.Ghe;
+import j5_60.cinematicket.cinematicket.entity.LichChieu;
+import j5_60.cinematicket.cinematicket.entity.LoaiGhe;
+import j5_60.cinematicket.cinematicket.entity.PhongChieu;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
+import j5_60.cinematicket.cinematicket.repository.CenimaRoomRepository;
 import j5_60.cinematicket.cinematicket.repository.GheRepository;
+import j5_60.cinematicket.cinematicket.repository.SeatTypeRepository;
+import j5_60.cinematicket.cinematicket.repository.ShowtimesRepository;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -22,17 +29,36 @@ public class SeatService {
 
     @Autowired
     GheRepository repository;
+    @Autowired
+    SeatTypeRepository lgrepository;
+    @Autowired
+    CenimaRoomRepository pcrepository;
 
     public Page<Ghe> findAll(Pageable pageable) {
         return repository.findAll(pageable);
     }
 
-    public List<Ghe> searchGhe(String keyword) {
-        return repository.findByTenContainingIgnoreCase(keyword);
-    }
-
     public List<Ghe> getAll() {
         return repository.findAll();
+    }
+
+    public Ghe saveGhe(Seat seat) {
+        Ghe ghe = new Ghe();
+        ghe.setCot(seat.getColum());
+        ghe.setHang(seat.getColum());
+        Optional<LoaiGhe> optionalLoaiGhe = lgrepository.findById(seat.getIdLoaiGhe());
+        if (optionalLoaiGhe.isPresent()) {
+            ghe.setLoaiGhe(optionalLoaiGhe.get());
+        } else {
+            throw new ResourceNotFoundException("PhongChieu not found with id: ");
+        }
+        Optional<PhongChieu> optionalPhongChieu = pcrepository.findById(seat.getIdPhongChieu());
+        if (optionalPhongChieu.isPresent()) {
+            ghe.setPhongChieu(optionalPhongChieu.get());
+        } else {
+            throw new ResourceNotFoundException("PhongChieu not found with id: ");
+        }
+        return repository.save(ghe);
     }
 
     public Ghe updateGhe(UUID id, Ghe ghe) throws ResourceNotFoundException {
@@ -57,10 +83,6 @@ public class SeatService {
 
     public List<Ghe> getAllgheByPhongChieu(UUID idPhongChieu) {
         return repository.getGheInPhongChieu(idPhongChieu);
-    }
-
-    public List<Ghe> createRowNew() {
-        return null;
     }
 
     public Ghe findById(UUID id) throws ResourceNotFoundException {

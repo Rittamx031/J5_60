@@ -86,10 +86,6 @@ public class NhanVien {
 
     // @Column(name="ngay_sinh")
     // private Date ngaySinh;
-
-    @Column(name="image_nv")
-    private String imagaNV;
-
     // @Column(name="trang_thai")
     // private int trangThai;
 

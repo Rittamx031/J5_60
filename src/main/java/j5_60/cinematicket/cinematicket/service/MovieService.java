@@ -19,7 +19,7 @@ import j5_60.cinematicket.cinematicket.modelsearch.ThongTinPhimSearch;
 import j5_60.cinematicket.cinematicket.repository.MovieRepository;
 
 @Service
-public class ThongTinPhimService {
+public class MovieService {
   @Autowired
   private MovieRepository repo;
   private final int ROWCOUNT = 5;

@@ -3,12 +3,14 @@ package j5_60.cinematicket.cinematicket.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -16,27 +18,23 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Ghe implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", columnDefinition = "uniqueidentifier")
     private UUID id;
 
-    @NotNull(message = "Không được để trống")
-    @NotBlank(message = "Không được để trống")
-    @Length(min = 1, max = 255, message = "Tên phải có độ dài từ 1 đến 255 ký tự")
     @Column(name = "ten")
     private String ten;
 
     @NotNull(message = "Không được để trống")
-    @NotBlank(message = "Không được để trống")
-    @Column(name = "hang")
-    private String hang;
+    @Column(name = "row")
+    private int hang;
 
     @NotNull(message = "Không được để trống")
-    @NotBlank(message = "Không được để trống")
     @Column(name = "cot")
-    private String cot;
+    private int cot;
 
     @ManyToOne
     @JoinColumn(name = "id_loai_ghe", columnDefinition = "uniqueidentifier")
@@ -66,4 +64,18 @@ public class Ghe implements Serializable {
     @Column(name = "deleted")
     private boolean deleted;
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Ghe))
+            return false;
+        Ghe other = (Ghe) obj;
+        return Objects.equals(id, other.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

@@ -19,14 +19,9 @@ public interface GheRepository extends JpaRepository<Ghe, UUID> {
     @Query(value = "SELECT * FROM Ghe WHERE id_phong_chieu = :idPhongChieu", nativeQuery = true)
     List<Ghe> getGheInPhongChieu(@Param("idPhongChieu") UUID idPhongChieu);
 
-    @Query(value = "SELECT * FROM Ghe WHERE id_phong_chieu = :idPhongChieu AND hang = :row AND deleted = true", nativeQuery = true)
+    @Query(value = "SELECT * FROM Ghe WHERE id_phong_chieu = :idPhongChieu AND row = :row AND deleted = 0 ORDER BY cot", nativeQuery = true)
     List<Ghe> getRowSeatInPhongChieu(@Param("idPhongChieu") UUID idPhongChieu, @Param("row") int row);
 
     List<Ghe> findAllByOrderByTen();
 
-    List<Ghe> findByTenContainingIgnoreCase(String keyword);
-
-    List<Ghe> findByTenAndHangAndCotAndPhongChieu(String ten, String hang, String cot, PhongChieu phongChieu);
-
-    List<Ghe> findByHangAndCotAndPhongChieu(String hang, String cot, PhongChieu phongChieu);
 }
