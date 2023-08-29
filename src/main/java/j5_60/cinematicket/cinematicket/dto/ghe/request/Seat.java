@@ -1,7 +1,8 @@
-package j5_60.cinematicket.cinematicket.dto.ghe;
+package j5_60.cinematicket.cinematicket.dto.ghe.request;
 
 import java.util.UUID;
 
+import j5_60.cinematicket.cinematicket.entity.Ghe;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,6 +24,7 @@ public class Seat {
   String ten;
   UUID idPhongChieu;
   UUID idLoaiGhe;
+  int trangThai;
 
   public static String convertToCellReference(int row, int column) {
     StringBuilder cellReference = new StringBuilder();
@@ -37,4 +39,14 @@ public class Seat {
     return cellReference.toString();
   }
 
+  public Seat(Ghe ghe) {
+    this.id = ghe.getId();
+    this.row = ghe.getHang();
+    this.colum = ghe.getCot();
+    this.ten = ghe.getTen();
+    this.idPhongChieu = ghe.getPhongChieu().getId();
+    this.idLoaiGhe = ghe.getLoaiGhe().getId();
+    this.trangThai = ghe.getTrangThai();
+
+  }
 }

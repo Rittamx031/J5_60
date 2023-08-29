@@ -1,10 +1,6 @@
 package j5_60.cinematicket.cinematicket.repository;
 
 import j5_60.cinematicket.cinematicket.entity.Ghe;
-import j5_60.cinematicket.cinematicket.entity.NhanVien;
-import j5_60.cinematicket.cinematicket.entity.PhongChieu;
-import j5_60.cinematicket.cinematicket.modelsearch.NhanVienSearch;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

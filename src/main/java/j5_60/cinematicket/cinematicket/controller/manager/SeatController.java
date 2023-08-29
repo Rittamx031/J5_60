@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import j5_60.cinematicket.cinematicket.dto.ghe.RowSeat;
-import j5_60.cinematicket.cinematicket.dto.ghe.Seat;
+import j5_60.cinematicket.cinematicket.dto.ghe.request.NewRow;
+import j5_60.cinematicket.cinematicket.dto.ghe.request.Seat;
 import j5_60.cinematicket.cinematicket.service.manager.RowSeatService;
 import jakarta.validation.Valid;
 
@@ -27,6 +28,11 @@ public class SeatController {
   @PostMapping("add-seat-in-row")
   public ResponseEntity<RowSeat> addSeatInRow(@RequestBody @Valid Seat seat) {
     return ResponseEntity.ok().body(service.addSeatInRow(seat));
+  }
+
+  @PostMapping("/add-new-row")
+  public ResponseEntity<RowSeat> addNewRow(@RequestBody @Valid NewRow seat) {
+    return ResponseEntity.ok().body(service.addNewRowSeat(seat));
   }
 
   @GetMapping("get-row-seat/{idphongchieu}/{row}")

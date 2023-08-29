@@ -14,10 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import j5_60.cinematicket.cinematicket.entity.HoaDon;
-import j5_60.cinematicket.cinematicket.entity.HoaDon;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.modelsearch.HoaDonSearch;
-import j5_60.cinematicket.cinematicket.modelsearch.VeSearch;
 import j5_60.cinematicket.cinematicket.repository.BillRepository;
 import jakarta.transaction.Transactional;
 

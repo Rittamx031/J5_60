@@ -1,5 +1,7 @@
 package j5_60.cinematicket.cinematicket.service.manager;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -9,7 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import j5_60.cinematicket.cinematicket.dto.ghe.RowSeat;
-import j5_60.cinematicket.cinematicket.dto.ghe.Seat;
+import j5_60.cinematicket.cinematicket.dto.ghe.request.NewRow;
+import j5_60.cinematicket.cinematicket.dto.ghe.request.Seat;
 import j5_60.cinematicket.cinematicket.entity.Ghe;
 import j5_60.cinematicket.cinematicket.entity.LoaiGhe;
 import j5_60.cinematicket.cinematicket.entity.PhongChieu;
@@ -72,5 +75,39 @@ public class RowSeatService {
     repository.saveAll(rowcount);
     return new RowSeat(seat.getIdPhongChieu(), seat.getRow(),
         repository.getRowSeatInPhongChieu(seat.getIdPhongChieu(), seat.getRow()));
+  }
+
+  public RowSeat addNewRowSeat(NewRow newRow) {
+    Optional<PhongChieu> phongchieu = pcrepository.findById(newRow.getIdPhongChieu());
+    Optional<LoaiGhe> loaiGhe = lgrepository.findById(newRow.getIdLoaiGhe());
+    List<Ghe> listghe = new ArrayList<>();
+    for (int i = 1; i <= newRow.getQuantity(); i++) {
+      Ghe ghe = new Ghe();
+      ghe.setCot(i);
+      ghe.setHang(newRow.getRow());
+      ghe.setPhongChieu(phongchieu.get());
+      ghe.setLoaiGhe(loaiGhe.get());
+      ghe.setTrangThai(1);
+      ghe.setCreateAt(LocalDateTime.now());
+      ghe.setTen(Seat.convertToCellReference(ghe.getHang(), ghe.getCot()));
+      listghe.add(ghe);
+    }
+    List<Ghe> rs = repository.saveAll(listghe);
+    return new RowSeat(newRow.getIdPhongChieu(), newRow.getRow(), rs);
+  }
+
+  public Ghe updateSeat(Seat seat) {
+    Optional<PhongChieu> phongchieu = pcrepository.findById(seat.getIdPhongChieu());
+    Optional<LoaiGhe> loaiGhe = lgrepository.findById(seat.getIdLoaiGhe());
+    Optional<Ghe> ghe = repository.findById(seat.getId());
+    Ghe gheud = ghe.get();
+    gheud.setCot(seat.getColum());
+    gheud.setHang(seat.getRow());
+    gheud.setTrangThai(seat.getTrangThai());
+    gheud.setLoaiGhe(loaiGhe.get());
+    gheud.setTen(Seat.convertToCellReference(seat.getRow(), seat.getColum()));
+    gheud.setPhongChieu(phongchieu.get());
+    gheud.setUpdateAt(LocalDateTime.now());
+    return repository.save(gheud);
   }
 }

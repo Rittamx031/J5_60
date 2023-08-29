@@ -1,9 +1,7 @@
 package j5_60.cinematicket.cinematicket.exception;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
