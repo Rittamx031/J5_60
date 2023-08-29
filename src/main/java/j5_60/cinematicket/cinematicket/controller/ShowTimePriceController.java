@@ -28,7 +28,7 @@ import j5_60.cinematicket.cinematicket.service.ShowtimePriceService;
 @RestController
 @RequestMapping("api/cimena/gia-ve-lich-chieu")
 @CrossOrigin
-public class GiaVeLichChieuController {
+public class ShowTimePriceController {
 
       @Autowired
     private ShowtimePriceService service;

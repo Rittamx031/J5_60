@@ -31,7 +31,7 @@ import jakarta.servlet.http.HttpServletRequest;
 @RestController
 @CrossOrigin
 @RequestMapping("api/cimena/ve")
-public class VeController {
+public class TicketController {
 
     @Autowired
     public TicketService service;

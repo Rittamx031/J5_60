@@ -29,7 +29,7 @@ import j5_60.cinematicket.cinematicket.service.MovieGenreService;
 @RestController
 @RequestMapping("api/cimena/the-loai-phim")
 @CrossOrigin
-public class TheLoaiPhimController {
+public class MovieGenreController {
     @Autowired
     private MovieGenreService service;
 

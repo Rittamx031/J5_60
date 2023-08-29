@@ -13,7 +13,7 @@ import java.util.UUID;
 @RestController
 @CrossOrigin
 @RequestMapping("api/cimena/ngon-ngu")
-public class NgonNguController {
+public class LanguageController {
 
     @Autowired
     LanguageRepository ngonNguRepository;

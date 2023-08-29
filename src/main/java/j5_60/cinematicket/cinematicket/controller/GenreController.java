@@ -13,7 +13,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("api/cimena/the-loai")
 @CrossOrigin
-public class TheLoaiController {
+public class GenreController {
 
     @Autowired
     GenreRepository theLoaiRepository;

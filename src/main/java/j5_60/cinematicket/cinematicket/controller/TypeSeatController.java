@@ -17,7 +17,7 @@ import java.util.UUID;
 @RestController
 @CrossOrigin
 @RequestMapping("api/cimena/loaighe")
-public class LoaiGheController {
+public class TypeSeatController {
 
     @Autowired
     private SeatTypeService loaiGheService;

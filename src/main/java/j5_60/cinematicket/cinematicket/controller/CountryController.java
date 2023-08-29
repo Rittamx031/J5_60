@@ -13,7 +13,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("api/cimena/quoc-gia")
 @CrossOrigin
-public class QuocGiaController {
+public class CountryController {
 
     @Autowired
     CountryRepository quocGiaRepository;

@@ -12,7 +12,7 @@ import java.util.UUID;
 @RestController
 @CrossOrigin
 @RequestMapping("api/cimena/ghe")
-public class GheController {
+public class SeatController {
   @Autowired
   SeatService service;
 

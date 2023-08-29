@@ -21,7 +21,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("api/cemina/nhan-vien")
 @CrossOrigin
-public class NhanVienController {
+public class EmployeeController {
 
     @Autowired
     private EmployeeService nhanVienService;

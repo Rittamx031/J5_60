@@ -28,7 +28,7 @@ import j5_60.cinematicket.cinematicket.service.BillSnackService;
 @RestController
 @RequestMapping("api/cimena/hoa-don-do-an")
 @CrossOrigin
-public class HoaDonDoAnController {
+public class BillSnacksController {
     @Autowired
     private BillSnackService service;
 

@@ -16,7 +16,7 @@ import java.util.UUID;
 @RestController
 @CrossOrigin
 @RequestMapping("api/cimena/lich-chieu")
-public class LichChieuController {
+public class ShowTimeController {
     @Autowired
     private ShowTimeService lcSer;
 

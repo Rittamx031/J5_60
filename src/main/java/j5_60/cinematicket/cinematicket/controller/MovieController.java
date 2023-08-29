@@ -16,7 +16,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("api/cimena/thong-tin-phim")
 @CrossOrigin
-public class ThongTinPhimController {
+public class MovieController {
 
     @Autowired
     private MovieService service;

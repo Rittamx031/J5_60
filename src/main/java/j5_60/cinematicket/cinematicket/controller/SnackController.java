@@ -18,44 +18,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import j5_60.cinematicket.cinematicket.model.entity.PhuongThucThanhToan;
-import j5_60.cinematicket.cinematicket.service.PayMethodService;
+import j5_60.cinematicket.cinematicket.model.entity.DoAn;
+import j5_60.cinematicket.cinematicket.service.SnacksService;
+import jakarta.validation.Valid;
 
 /**
- * PhuongThucThanhToanController
+ * DoAnController
  */
 @RestController
 @CrossOrigin
-@RequestMapping("api/cimena/phuong-thuc-thanh-toan")
-public class PhuongThucThanhToanController {
+@RequestMapping("api/cimena/do-an")
+public class SnackController {
     @Autowired
-    private PayMethodService service;
+    private SnacksService service;
 
     @GetMapping
-    public ResponseEntity<List<PhuongThucThanhToan>> getAllPhuongThucThanhToan() {
-        return ResponseEntity.ok().body(service.getAllPhuongThucThanhToan());
+    public ResponseEntity<List<DoAn>> getAllDoAn() {
+        return ResponseEntity.ok().body(service.getAllDoAn());
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<PhuongThucThanhToan> getPhuongThucThanhToanById(@PathVariable UUID id) {
-        return ResponseEntity.ok().body(service.getPhuongThucThanhToanById(id));
+    public ResponseEntity<DoAn> getDoAnById(@PathVariable UUID id) {
+        return ResponseEntity.ok().body(service.getDoAnById(id));
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<PhuongThucThanhToan>> getDoAnById(
-            @RequestParam(value = "name", required = true) String name) {
-        return ResponseEntity.ok().body(service.searchByName(name));
+    public ResponseEntity<List<DoAn>> getDoAnById(@RequestParam(value = "name", required = true) String name) {
+        return ResponseEntity.ok().body(service.searchDoAn(name));
     }
 
-    @GetMapping("prev-page")
-    public ResponseEntity<List<PhuongThucThanhToan>> getPrevPage(
+    @GetMapping("pre")
+    public ResponseEntity<List<DoAn>> getPrevPage(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir) {
         return ResponseEntity.ok().body(service.getPrevPage(sortby, sortdir));
     }
 
     @GetMapping("page")
-    public ResponseEntity<List<PhuongThucThanhToan>> getPageNo(
+    public ResponseEntity<List<DoAn>> getPageNo(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir,
             @RequestParam(value = "pageno", required = false) int pageNo) {
@@ -63,8 +63,18 @@ public class PhuongThucThanhToanController {
         return ResponseEntity.ok().body(service.getPageNo(pageNo, sortby, sortdir));
     }
 
-    @GetMapping("next-page")
-    public ResponseEntity<List<PhuongThucThanhToan>> getNextPage(
+    @GetMapping("panigation")
+    public ResponseEntity<int[]> getPanigation() {
+        return ResponseEntity.ok().body(service.getPanigation());
+    }
+
+    @GetMapping("currentpage")
+    public int getCrrentPage() {
+        return service.getCrrentPage();
+    }
+
+    @GetMapping("next")
+    public ResponseEntity<List<DoAn>> getNextPage(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir) {
         return ResponseEntity.ok().body(service.getNextPage(sortby, sortdir));
@@ -76,29 +86,23 @@ public class PhuongThucThanhToanController {
         return HttpStatus.OK;
     }
 
-    @GetMapping("panigation")
-    public ResponseEntity<int[]> getPanigation() {
-        return ResponseEntity.ok().body(service.getPanigation());
-    }
-
     @PostMapping
-    public ResponseEntity<PhuongThucThanhToan> createPhuongThucThanhToan(
-            @RequestBody PhuongThucThanhToan phuongThucThanhToan) {
-        phuongThucThanhToan.setCreateAt(LocalDateTime.now());
-        return ResponseEntity.ok().body(this.service.createPhuongThucThanhToan(phuongThucThanhToan));
+    public ResponseEntity<DoAn> createDoAn(@RequestBody @Valid DoAn hoaDon) {
+        hoaDon.setCreateAt(LocalDateTime.now());
+        return ResponseEntity.ok().body(this.service.createDoAn(hoaDon));
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<PhuongThucThanhToan> updatePhuongThucThanhToan(@PathVariable UUID id,
-            @RequestBody PhuongThucThanhToan phuongThucThanhToan) {
-        phuongThucThanhToan.setId(id);
-        phuongThucThanhToan.setUpdateAt(LocalDateTime.now());
-        return ResponseEntity.ok().body(this.service.updatePhuongThucThanhToan(phuongThucThanhToan));
+    public ResponseEntity<DoAn> updateDoAn(@PathVariable UUID id,
+            @RequestBody @Valid DoAn hoaDon) {
+        hoaDon.setId(id);
+        hoaDon.setUpdateAt(LocalDateTime.now());
+        return ResponseEntity.ok().body(this.service.updateDoAn(hoaDon));
     }
 
     @DeleteMapping("{id}")
-    public HttpStatus deletePhuongThucThanhToan(@PathVariable UUID id) {
-        this.service.deletePhuongThucThanhToan(id);
+    public HttpStatus deleteDoAn(@PathVariable UUID id) {
+        this.service.deleteDoAn(id);
         return HttpStatus.OK;
     }
 }

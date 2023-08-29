@@ -18,7 +18,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("api/cimena/khach-hang")
 @CrossOrigin
-public class KhachHangController {
+public class CustomerController {
 
     @Autowired
     private CustomerService khService;

@@ -17,7 +17,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("api/cimena/chuc-vu")
 @CrossOrigin
-public class ChucVuController {
+public class JobController {
 
     @Autowired
     private JobService service;
