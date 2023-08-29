@@ -6,7 +6,7 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 
-import j5_60.cinematicket.cinematicket.entity.HoaDon;
+import j5_60.cinematicket.cinematicket.model.entity.HoaDon;
 
 /**
  * HoaDonRepository

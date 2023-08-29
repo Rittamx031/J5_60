@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import j5_60.cinematicket.cinematicket.entity.KhachHang;
+import j5_60.cinematicket.cinematicket.model.entity.KhachHang;
 import j5_60.cinematicket.cinematicket.repository.CustomerRepository;
 import j5_60.cinematicket.cinematicket.security.config.UserInfoUserDetails;
 import j5_60.cinematicket.cinematicket.security.dto.UserInfo;

@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import j5_60.cinematicket.cinematicket.entity.GiaVeLichChieu;
-import j5_60.cinematicket.cinematicket.entity.key.GiaVeLichChieuKey;
+import j5_60.cinematicket.cinematicket.model.entity.GiaVeLichChieu;
+import j5_60.cinematicket.cinematicket.model.entity.key.GiaVeLichChieuKey;
 import j5_60.cinematicket.cinematicket.service.ShowtimePriceService;
 
 /**

@@ -1,7 +1,7 @@
 package j5_60.cinematicket.cinematicket.service;
 
-import j5_60.cinematicket.cinematicket.entity.NhanVien;
-import j5_60.cinematicket.cinematicket.modelsearch.NhanVienSearch;
+import j5_60.cinematicket.cinematicket.model.entity.NhanVien;
+import j5_60.cinematicket.cinematicket.model.modelsearch.NhanVienSearch;
 import j5_60.cinematicket.cinematicket.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

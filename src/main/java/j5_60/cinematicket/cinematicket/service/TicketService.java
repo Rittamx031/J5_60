@@ -13,10 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import j5_60.cinematicket.cinematicket.entity.Ve;
-import j5_60.cinematicket.cinematicket.entity.key.VeKey;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.modelsearch.VeSearch;
+import j5_60.cinematicket.cinematicket.model.entity.Ve;
+import j5_60.cinematicket.cinematicket.model.entity.key.VeKey;
+import j5_60.cinematicket.cinematicket.model.modelsearch.VeSearch;
 import j5_60.cinematicket.cinematicket.repository.TicketRepository;
 import jakarta.transaction.Transactional;
 

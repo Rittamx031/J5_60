@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import j5_60.cinematicket.cinematicket.entity.Ve;
-import j5_60.cinematicket.cinematicket.modelsearch.VeSearch;
+import j5_60.cinematicket.cinematicket.model.entity.Ve;
+import j5_60.cinematicket.cinematicket.model.modelsearch.VeSearch;
 import j5_60.cinematicket.cinematicket.service.TicketService;
 import jakarta.servlet.http.HttpServletRequest;
 

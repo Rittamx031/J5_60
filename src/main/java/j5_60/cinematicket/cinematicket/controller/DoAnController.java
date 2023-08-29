@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import j5_60.cinematicket.cinematicket.entity.DoAn;
+import j5_60.cinematicket.cinematicket.model.entity.DoAn;
 import j5_60.cinematicket.cinematicket.service.SnacksService;
 import jakarta.validation.Valid;
 

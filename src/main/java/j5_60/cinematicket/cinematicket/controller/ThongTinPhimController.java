@@ -1,7 +1,7 @@
 package j5_60.cinematicket.cinematicket.controller;
 
-import j5_60.cinematicket.cinematicket.entity.ThongTinPhim;
-import j5_60.cinematicket.cinematicket.modelsearch.ThongTinPhimSearch;
+import j5_60.cinematicket.cinematicket.model.entity.ThongTinPhim;
+import j5_60.cinematicket.cinematicket.model.modelsearch.ThongTinPhimSearch;
 import j5_60.cinematicket.cinematicket.service.MovieService;
 
 import org.springframework.beans.factory.annotation.Autowired;

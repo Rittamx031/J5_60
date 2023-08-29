@@ -1,7 +1,7 @@
 package j5_60.cinematicket.cinematicket.controller;
 
-import j5_60.cinematicket.cinematicket.entity.QuocGia;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
+import j5_60.cinematicket.cinematicket.model.entity.QuocGia;
 import j5_60.cinematicket.cinematicket.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

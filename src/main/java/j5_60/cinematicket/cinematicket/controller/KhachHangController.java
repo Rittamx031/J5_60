@@ -1,7 +1,7 @@
 package j5_60.cinematicket.cinematicket.controller;
 
-import j5_60.cinematicket.cinematicket.entity.KhachHang;
-import j5_60.cinematicket.cinematicket.modelsearch.KhachHangSearch;
+import j5_60.cinematicket.cinematicket.model.entity.KhachHang;
+import j5_60.cinematicket.cinematicket.model.modelsearch.KhachHangSearch;
 import j5_60.cinematicket.cinematicket.service.CustomerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

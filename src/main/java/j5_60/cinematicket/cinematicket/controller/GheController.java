@@ -1,6 +1,6 @@
 package j5_60.cinematicket.cinematicket.controller;
 
-import j5_60.cinematicket.cinematicket.entity.Ghe;
+import j5_60.cinematicket.cinematicket.model.entity.Ghe;
 import j5_60.cinematicket.cinematicket.service.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

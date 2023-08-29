@@ -13,9 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import j5_60.cinematicket.cinematicket.entity.ThongTinPhim;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.modelsearch.ThongTinPhimSearch;
+import j5_60.cinematicket.cinematicket.model.entity.ThongTinPhim;
+import j5_60.cinematicket.cinematicket.model.modelsearch.ThongTinPhimSearch;
 import j5_60.cinematicket.cinematicket.repository.MovieRepository;
 
 @Service
