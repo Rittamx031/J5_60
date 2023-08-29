@@ -2,8 +2,8 @@ package j5_60.cinematicket.cinematicket.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import j5_60.cinematicket.cinematicket.entity.TheLoaiPhim;
-import j5_60.cinematicket.cinematicket.entity.key.TheLoaiPhimKey;
+import j5_60.cinematicket.cinematicket.model.entity.TheLoaiPhim;
+import j5_60.cinematicket.cinematicket.model.entity.key.TheLoaiPhimKey;
 
 /**
  * TheLoaiPhimRepository

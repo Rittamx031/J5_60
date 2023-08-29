@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import j5_60.cinematicket.cinematicket.entity.Combo;
+import j5_60.cinematicket.cinematicket.model.entity.Combo;
 import j5_60.cinematicket.cinematicket.service.ComboSnackService;
 
 /**

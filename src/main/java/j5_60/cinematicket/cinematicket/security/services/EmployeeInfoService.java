@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import j5_60.cinematicket.cinematicket.entity.NhanVien;
+import j5_60.cinematicket.cinematicket.model.entity.NhanVien;
 import j5_60.cinematicket.cinematicket.repository.EmployeeRepository;
 import j5_60.cinematicket.cinematicket.security.config.UserInfoUserDetails;
 import j5_60.cinematicket.cinematicket.security.dto.UserInfo;

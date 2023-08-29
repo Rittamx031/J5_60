@@ -1,8 +1,7 @@
 package j5_60.cinematicket.cinematicket.service;
 
-
-import j5_60.cinematicket.cinematicket.entity.NhanVien;
-import j5_60.cinematicket.cinematicket.modelsearch.NhanVienSearch;
+import j5_60.cinematicket.cinematicket.model.entity.NhanVien;
+import j5_60.cinematicket.cinematicket.model.modelsearch.NhanVienSearch;
 import j5_60.cinematicket.cinematicket.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,17 +23,17 @@ public class EmployeeService {
     public Page<NhanVien> findAll(Pageable pageable) {
         return nvRepository.findAll(pageable);
     }
+
     public Page<NhanVien> sapXep(Pageable pageable) {
         return nvRepository.findAllByOrderByHoTenDesc(pageable);
     }
+
     public Page<NhanVien> findAllNV(Pageable pageable) {
         return nvRepository.findAllByOrderByCreateAtDesc(pageable);
     }
 
-
-
     public NhanVien add(NhanVien nv) {
-      return nvRepository.save(nv);
+        return nvRepository.save(nv);
     }
 
     public NhanVien update(UUID id, NhanVien nhanVien) {
@@ -46,7 +45,6 @@ public class EmployeeService {
         nv.setPass(nhanVien.getPass());
         nv.setSdt(nhanVien.getSdt());
         nv.setIdCV(nhanVien.getIdCV());
-        nv.setImagaNV(nhanVien.getImagaNV());
         nv.setTrangThai(nhanVien.getTrangThai());
         nv.setUpdateAt(nhanVien.getUpdateAt());
         return nvRepository.save(nv);

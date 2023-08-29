@@ -6,14 +6,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import j5_60.cinematicket.cinematicket.entity.Ghe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import j5_60.cinematicket.cinematicket.entity.LoaiGhe;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
+import j5_60.cinematicket.cinematicket.model.entity.LoaiGhe;
 import j5_60.cinematicket.cinematicket.repository.SeatTypeRepository;
 import jakarta.transaction.Transactional;
 @Service

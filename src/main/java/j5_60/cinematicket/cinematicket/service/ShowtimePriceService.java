@@ -1,10 +1,10 @@
 package j5_60.cinematicket.cinematicket.service;
 
-import j5_60.cinematicket.cinematicket.entity.GiaVeLichChieu;
-import j5_60.cinematicket.cinematicket.entity.LichChieu;
-import j5_60.cinematicket.cinematicket.entity.LoaiGhe;
-import j5_60.cinematicket.cinematicket.entity.key.GiaVeLichChieuKey;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
+import j5_60.cinematicket.cinematicket.model.entity.GiaVeLichChieu;
+import j5_60.cinematicket.cinematicket.model.entity.LichChieu;
+import j5_60.cinematicket.cinematicket.model.entity.LoaiGhe;
+import j5_60.cinematicket.cinematicket.model.entity.key.GiaVeLichChieuKey;
 import j5_60.cinematicket.cinematicket.repository.ShowtimePricesRepository;
 import j5_60.cinematicket.cinematicket.repository.ShowtimesRepository;
 import j5_60.cinematicket.cinematicket.repository.SeatTypeRepository;

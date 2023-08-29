@@ -12,9 +12,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import j5_60.cinematicket.cinematicket.entity.ComboDoAnDetail;
-import j5_60.cinematicket.cinematicket.entity.key.ComBoDoAnDetailKey;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
+import j5_60.cinematicket.cinematicket.model.entity.ComboDoAnDetail;
+import j5_60.cinematicket.cinematicket.model.entity.key.ComBoDoAnDetailKey;
 import j5_60.cinematicket.cinematicket.repository.ComboSnacksDetailRepository;
 import jakarta.transaction.Transactional;
 

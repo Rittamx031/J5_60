@@ -1,7 +1,8 @@
 package j5_60.cinematicket.cinematicket.repository;
 
-import j5_60.cinematicket.cinematicket.entity.LoaiGhe;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import j5_60.cinematicket.cinematicket.model.entity.LoaiGhe;
 
 import java.util.List;
 import java.util.UUID;

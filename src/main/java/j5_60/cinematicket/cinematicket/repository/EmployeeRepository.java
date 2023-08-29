@@ -1,7 +1,8 @@
 package j5_60.cinematicket.cinematicket.repository;
 
-import j5_60.cinematicket.cinematicket.entity.NhanVien;
-import j5_60.cinematicket.cinematicket.modelsearch.NhanVienSearch;
+import j5_60.cinematicket.cinematicket.model.entity.NhanVien;
+import j5_60.cinematicket.cinematicket.model.modelsearch.NhanVienSearch;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -32,8 +33,10 @@ public interface EmployeeRepository extends JpaRepository<NhanVien, UUID> {
             """, nativeQuery = true)
     List<NhanVien> getNhanVienListFilter(@Param("req") NhanVienSearch req);
 
-    Page<NhanVien> findByNgaySinhContaining(String ngaySinh,Pageable pageable);
-    Page<NhanVien> findByTrangThaiContaining(String trangThai,Pageable pageable);
+    Page<NhanVien> findByNgaySinhContaining(String ngaySinh, Pageable pageable);
+
+    Page<NhanVien> findByTrangThaiContaining(String trangThai, Pageable pageable);
+
     @Query("SELECT kh from NhanVien kh WHERE kh.email = :username")
     Optional<NhanVien> getuser(@Param("username") String username);
 

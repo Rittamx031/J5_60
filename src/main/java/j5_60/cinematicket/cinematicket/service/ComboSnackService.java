@@ -12,8 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import j5_60.cinematicket.cinematicket.entity.Combo;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
+import j5_60.cinematicket.cinematicket.model.entity.Combo;
 import j5_60.cinematicket.cinematicket.repository.ComboRepository;
 import jakarta.transaction.Transactional;
 

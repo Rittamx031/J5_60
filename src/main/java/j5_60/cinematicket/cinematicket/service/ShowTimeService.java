@@ -1,7 +1,8 @@
+
 package j5_60.cinematicket.cinematicket.service;
 
-import j5_60.cinematicket.cinematicket.entity.LichChieu;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
+import j5_60.cinematicket.cinematicket.model.entity.LichChieu;
 import j5_60.cinematicket.cinematicket.repository.ShowtimesRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

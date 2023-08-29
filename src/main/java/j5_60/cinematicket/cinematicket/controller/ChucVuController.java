@@ -1,10 +1,9 @@
 package j5_60.cinematicket.cinematicket.controller;
 
-import j5_60.cinematicket.cinematicket.entity.ChucVu;
+import j5_60.cinematicket.cinematicket.model.entity.ChucVu;
 import j5_60.cinematicket.cinematicket.service.JobService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;

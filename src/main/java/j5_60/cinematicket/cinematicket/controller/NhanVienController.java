@@ -1,10 +1,8 @@
 package j5_60.cinematicket.cinematicket.controller;
 
-import j5_60.cinematicket.cinematicket.entity.ChucVu;
-import j5_60.cinematicket.cinematicket.entity.KhachHang;
-import j5_60.cinematicket.cinematicket.entity.NhanVien;
-import j5_60.cinematicket.cinematicket.modelsearch.KhachHangSearch;
-import j5_60.cinematicket.cinematicket.modelsearch.NhanVienSearch;
+import j5_60.cinematicket.cinematicket.model.entity.ChucVu;
+import j5_60.cinematicket.cinematicket.model.entity.NhanVien;
+import j5_60.cinematicket.cinematicket.model.modelsearch.NhanVienSearch;
 import j5_60.cinematicket.cinematicket.service.JobService;
 import j5_60.cinematicket.cinematicket.service.EmployeeService;
 import jakarta.validation.Valid;
@@ -16,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;

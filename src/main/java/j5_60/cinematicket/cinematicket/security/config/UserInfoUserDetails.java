@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 public class UserInfoUserDetails implements UserDetails {
   private String name;
   private String password;
-  private List<GrantedAuthority> authorities;
+  private List<GrantedAuthority> authorities;// roles 
 
   public UserInfoUserDetails(UserInfo userInfo) {
     name = userInfo.getName();

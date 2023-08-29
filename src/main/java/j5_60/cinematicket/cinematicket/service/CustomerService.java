@@ -1,3 +1,4 @@
+
 package j5_60.cinematicket.cinematicket.service;
 
 import java.util.List;
@@ -8,8 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import j5_60.cinematicket.cinematicket.entity.KhachHang;
-import j5_60.cinematicket.cinematicket.modelsearch.KhachHangSearch;
+import j5_60.cinematicket.cinematicket.model.entity.KhachHang;
+import j5_60.cinematicket.cinematicket.model.modelsearch.KhachHangSearch;
 import j5_60.cinematicket.cinematicket.repository.CustomerRepository;
 
 @Service

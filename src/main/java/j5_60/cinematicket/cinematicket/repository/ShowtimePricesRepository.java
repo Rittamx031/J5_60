@@ -1,8 +1,9 @@
 package j5_60.cinematicket.cinematicket.repository;
 
-import j5_60.cinematicket.cinematicket.entity.GiaVeLichChieu;
-import j5_60.cinematicket.cinematicket.entity.key.GiaVeLichChieuKey;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import j5_60.cinematicket.cinematicket.model.entity.GiaVeLichChieu;
+import j5_60.cinematicket.cinematicket.model.entity.key.GiaVeLichChieuKey;
 
 /**
  * GiaVeLichChieuRepository
