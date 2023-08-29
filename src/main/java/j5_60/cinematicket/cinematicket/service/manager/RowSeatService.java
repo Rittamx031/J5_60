@@ -18,13 +18,13 @@ import j5_60.cinematicket.cinematicket.model.entity.Ghe;
 import j5_60.cinematicket.cinematicket.model.entity.LoaiGhe;
 import j5_60.cinematicket.cinematicket.model.entity.PhongChieu;
 import j5_60.cinematicket.cinematicket.repository.CenimaRoomRepository;
-import j5_60.cinematicket.cinematicket.repository.GheRepository;
+import j5_60.cinematicket.cinematicket.repository.SeatRepository;
 import j5_60.cinematicket.cinematicket.repository.SeatTypeRepository;
 
 @Service
 public class RowSeatService {
   @Autowired
-  GheRepository repository;
+  SeatRepository repository;
   @Autowired
   SeatTypeRepository lgrepository;
   @Autowired
