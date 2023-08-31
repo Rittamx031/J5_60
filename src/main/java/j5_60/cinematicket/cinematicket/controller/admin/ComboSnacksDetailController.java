@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import j5_60.cinematicket.cinematicket.model.entity.ComboDoAnDetail;
+import j5_60.cinematicket.cinematicket.model.entity.ComboSnacksDetail;
 import j5_60.cinematicket.cinematicket.model.entity.key.ComBoDoAnDetailKey;
 import j5_60.cinematicket.cinematicket.service.admin.SnackDetailService;
 
@@ -31,49 +31,49 @@ public class ComboSnacksDetailController {
     private SnackDetailService service;
 
     @PostMapping
-    public ResponseEntity<ComboDoAnDetail> createComboDoAnDetail(@RequestBody ComboDoAnDetail comboDoAnDetail) {
-        ComboDoAnDetail createdComboDoAnDetail = service.createComboDoAnDetail(comboDoAnDetail);
+    public ResponseEntity<ComboSnacksDetail> createComboDoAnDetail(@RequestBody ComboSnacksDetail comboDoAnDetail) {
+        ComboSnacksDetail createdComboDoAnDetail = service.createComboDoAnDetail(comboDoAnDetail);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdComboDoAnDetail);
     }
 
     @PutMapping("/{idcombo}/{iddoan}")
-    public ResponseEntity<ComboDoAnDetail> updateComboDoAnDetail(@PathVariable("idcombo") UUID idcombo,
-            @PathVariable("iddoan") UUID iddoan, @RequestBody ComboDoAnDetail comboDoAnDetail) {
+    public ResponseEntity<ComboSnacksDetail> updateComboDoAnDetail(@PathVariable("idcombo") UUID idcombo,
+            @PathVariable("iddoan") UUID iddoan, @RequestBody ComboSnacksDetail comboDoAnDetail) {
         comboDoAnDetail.setId(new ComBoDoAnDetailKey(idcombo, iddoan));
-        ComboDoAnDetail updatedComboDoAnDetail = service.updateComboDoAnDetail(comboDoAnDetail);
+        ComboSnacksDetail updatedComboDoAnDetail = service.updateComboDoAnDetail(comboDoAnDetail);
         return ResponseEntity.ok(updatedComboDoAnDetail);
     }
 
     @GetMapping
-    public ResponseEntity<List<ComboDoAnDetail>> getAllComboDoAnDetail() {
-        List<ComboDoAnDetail> comboDoAnDetails = service.getAllComboDoAnDetail();
+    public ResponseEntity<List<ComboSnacksDetail>> getAllComboDoAnDetail() {
+        List<ComboSnacksDetail> comboDoAnDetails = service.getAllComboDoAnDetail();
         return ResponseEntity.ok(comboDoAnDetails);
     }
 
     @GetMapping("/{idcombo}/{iddoan}")
-    public ResponseEntity<ComboDoAnDetail> getComboDoAnDetailById(@PathVariable("idcombo") UUID idcombo,
+    public ResponseEntity<ComboSnacksDetail> getComboDoAnDetailById(@PathVariable("idcombo") UUID idcombo,
             @PathVariable("iddoan") UUID iddoan) {
-        ComboDoAnDetail comboDoAnDetail = service.getComboDoAnDetailById(idcombo, iddoan);
+        ComboSnacksDetail comboDoAnDetail = service.getComboDoAnDetailById(idcombo, iddoan);
         return ResponseEntity.ok(comboDoAnDetail);
     }
 
     @GetMapping("/{idcombo}")
-    public ResponseEntity<List<ComboDoAnDetail>> getListDoAnbyCombo(@PathVariable("idcombo") UUID idcombo) {
-        List<ComboDoAnDetail> listdt = service.getComboDoAnDetailByIdComboo(idcombo);
+    public ResponseEntity<List<ComboSnacksDetail>> getListDoAnbyCombo(@PathVariable("idcombo") UUID idcombo) {
+        List<ComboSnacksDetail> listdt = service.getComboDoAnDetailByIdComboo(idcombo);
         return ResponseEntity.ok(listdt);
     }
 
     @DeleteMapping("/{idcombo}/{iddoan}")
-    public ResponseEntity<ComboDoAnDetail> deleteComboDoAnDetail(@PathVariable("idcombo") UUID idcombo,
+    public ResponseEntity<ComboSnacksDetail> deleteComboDoAnDetail(@PathVariable("idcombo") UUID idcombo,
             @PathVariable("iddoan") UUID iddoan) {
-        ComboDoAnDetail deletedComboDoAnDetail = service.deleteComboDoAnDetail(idcombo, iddoan);
+        ComboSnacksDetail deletedComboDoAnDetail = service.deleteComboDoAnDetail(idcombo, iddoan);
         return ResponseEntity.ok(deletedComboDoAnDetail);
     }
 
     @PutMapping("/{idcombo}/{iddoan}/delete")
-    public ResponseEntity<ComboDoAnDetail> setDeleteState(@PathVariable("idcombo") UUID idcombo,
+    public ResponseEntity<ComboSnacksDetail> setDeleteState(@PathVariable("idcombo") UUID idcombo,
             @PathVariable("iddoan") UUID iddoan) {
-        ComboDoAnDetail comboDoAnDetail = service.setDeteleteState(idcombo, iddoan);
+        ComboSnacksDetail comboDoAnDetail = service.setDeteleteState(idcombo, iddoan);
         return ResponseEntity.ok(comboDoAnDetail);
     }
 }

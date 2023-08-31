@@ -28,17 +28,17 @@ import lombok.Setter;
 // @NamedQuery(name="Ve.fillter" ,query="SELECT ve FROM Ve ve WHERE
 // LichChieu:id")
 // })
-public class Ve {
+public class Ticket {
     @EmbeddedId
     private VeKey id;
     @ManyToOne
     @MapsId("id_lich_chieu")
     @JoinColumn(name = "id_lich_chieu")
-    private LichChieu lichChieu;
+    private ShowTimes lichChieu;
     @ManyToOne
     @MapsId("id_ghe")
     @JoinColumn(name = "id_ghe")
-    private Ghe ghe;
+    private Seat ghe;
     @NotNull
     @Column(name = "gia")
     private double gia;
@@ -61,5 +61,5 @@ public class Ve {
     private boolean deleted;
     @ManyToOne
     @JoinColumn(name = "id_hoa_don")
-    private HoaDon hoaDon;
+    private Bill hoaDon;
 }

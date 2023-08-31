@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import j5_60.cinematicket.cinematicket.model.entity.PhuongThucThanhToan;
+import j5_60.cinematicket.cinematicket.model.entity.PayMethod;
 import j5_60.cinematicket.cinematicket.service.admin.PayMethodService;
 
 /**
@@ -32,30 +32,30 @@ public class PayMethodController {
     private PayMethodService service;
 
     @GetMapping
-    public ResponseEntity<List<PhuongThucThanhToan>> getAllPhuongThucThanhToan() {
+    public ResponseEntity<List<PayMethod>> getAllPhuongThucThanhToan() {
         return ResponseEntity.ok().body(service.getAllPhuongThucThanhToan());
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<PhuongThucThanhToan> getPhuongThucThanhToanById(@PathVariable UUID id) {
+    public ResponseEntity<PayMethod> getPhuongThucThanhToanById(@PathVariable UUID id) {
         return ResponseEntity.ok().body(service.getPhuongThucThanhToanById(id));
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<PhuongThucThanhToan>> getDoAnById(
+    public ResponseEntity<List<PayMethod>> getDoAnById(
             @RequestParam(value = "name", required = true) String name) {
         return ResponseEntity.ok().body(service.searchByName(name));
     }
 
     @GetMapping("prev-page")
-    public ResponseEntity<List<PhuongThucThanhToan>> getPrevPage(
+    public ResponseEntity<List<PayMethod>> getPrevPage(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir) {
         return ResponseEntity.ok().body(service.getPrevPage(sortby, sortdir));
     }
 
     @GetMapping("page")
-    public ResponseEntity<List<PhuongThucThanhToan>> getPageNo(
+    public ResponseEntity<List<PayMethod>> getPageNo(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir,
             @RequestParam(value = "pageno", required = false) int pageNo) {
@@ -64,7 +64,7 @@ public class PayMethodController {
     }
 
     @GetMapping("next-page")
-    public ResponseEntity<List<PhuongThucThanhToan>> getNextPage(
+    public ResponseEntity<List<PayMethod>> getNextPage(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir) {
         return ResponseEntity.ok().body(service.getNextPage(sortby, sortdir));
@@ -82,15 +82,15 @@ public class PayMethodController {
     }
 
     @PostMapping
-    public ResponseEntity<PhuongThucThanhToan> createPhuongThucThanhToan(
-            @RequestBody PhuongThucThanhToan phuongThucThanhToan) {
+    public ResponseEntity<PayMethod> createPhuongThucThanhToan(
+            @RequestBody PayMethod phuongThucThanhToan) {
         phuongThucThanhToan.setCreateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.service.createPhuongThucThanhToan(phuongThucThanhToan));
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<PhuongThucThanhToan> updatePhuongThucThanhToan(@PathVariable UUID id,
-            @RequestBody PhuongThucThanhToan phuongThucThanhToan) {
+    public ResponseEntity<PayMethod> updatePhuongThucThanhToan(@PathVariable UUID id,
+            @RequestBody PayMethod phuongThucThanhToan) {
         phuongThucThanhToan.setId(id);
         phuongThucThanhToan.setUpdateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.service.updatePhuongThucThanhToan(phuongThucThanhToan));

@@ -10,38 +10,38 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.model.entity.PhongChieu;
+import j5_60.cinematicket.cinematicket.model.entity.CimenaRoom;
 import j5_60.cinematicket.cinematicket.repository.CenimaRoomRepository;
 
 public class CeminaRoomService {
     @Autowired
     private CenimaRoomRepository phongChieuRepository;
 
-    public List<PhongChieu> getAll() {
+    public List<CimenaRoom> getAll() {
         return phongChieuRepository.findAll();
     }
 
-    public Page<PhongChieu> findAll(Pageable pageable) {
+    public Page<CimenaRoom> findAll(Pageable pageable) {
         return phongChieuRepository.findAll(pageable);
     }
 
-    public List<PhongChieu> sapXep() {
+    public List<CimenaRoom> sapXep() {
         return phongChieuRepository.findAllByOrderByTen();
     }
 
-    public List<PhongChieu> searchPhongChieu(String keyword) {
+    public List<CimenaRoom> searchPhongChieu(String keyword) {
         return phongChieuRepository.findByTenContainingIgnoreCase(keyword);
     }
 
-    public PhongChieu save(PhongChieu phongChieu) {
+    public CimenaRoom save(CimenaRoom phongChieu) {
         phongChieu.setCreateAt(LocalDateTime.now());
         return phongChieuRepository.save(phongChieu);
     }
 
-    public PhongChieu updatePhongChieu(UUID id, PhongChieu phongChieu) throws ResourceNotFoundException {
-        Optional<PhongChieu> optionalPhongChieu = phongChieuRepository.findById(id);
+    public CimenaRoom updatePhongChieu(UUID id, CimenaRoom phongChieu) throws ResourceNotFoundException {
+        Optional<CimenaRoom> optionalPhongChieu = phongChieuRepository.findById(id);
         if (optionalPhongChieu.isPresent()) {
-            PhongChieu existingPhongChieu = optionalPhongChieu.get();
+            CimenaRoom existingPhongChieu = optionalPhongChieu.get();
             existingPhongChieu.setTen(phongChieu.getTen());
             existingPhongChieu.setSoLuongGhe(phongChieu.getSoLuongGhe());
             existingPhongChieu.setTrangThai(phongChieu.getTrangThai());
@@ -57,8 +57,8 @@ public class CeminaRoomService {
         phongChieuRepository.deleteById(id);
     }
 
-    public PhongChieu findById(UUID id) throws ResourceNotFoundException {
-        Optional<PhongChieu> optionalPhongChieu = phongChieuRepository.findById(id);
+    public CimenaRoom findById(UUID id) throws ResourceNotFoundException {
+        Optional<CimenaRoom> optionalPhongChieu = phongChieuRepository.findById(id);
         if (optionalPhongChieu.isPresent()) {
             return optionalPhongChieu.get();
         }

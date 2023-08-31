@@ -1,6 +1,6 @@
 package j5_60.cinematicket.cinematicket.service.admin;
 
-import j5_60.cinematicket.cinematicket.model.entity.ChucVu;
+import j5_60.cinematicket.cinematicket.model.entity.Job;
 import j5_60.cinematicket.cinematicket.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,41 +18,41 @@ public class JobService {
     @Autowired
     private JobRepository repository;
 
-    public List<ChucVu> getAll() {
+    public List<Job> getAll() {
         return repository.findAll();
     }
 
-    public Page<ChucVu> findAll(Pageable pageable) {
+    public Page<Job> findAll(Pageable pageable) {
         return repository.findAll(pageable);
     }
 
-    public ChucVu add(ChucVu cv) {
+    public Job add(Job cv) {
         return repository.save(cv);
     }
 
-    public ChucVu update(UUID id, ChucVu chucVu) {
-        ChucVu cv = repository.findById(id).get();
+    public Job update(UUID id, Job chucVu) {
+        Job cv = repository.findById(id).get();
         cv.setTenCV(chucVu.getTenCV());
         cv.setUpdateAt(chucVu.getUpdateAt());
         return repository.save(cv);
     }
 
     public void delete(UUID id) {
-        ChucVu cv = repository.findById(id).get();
+        Job cv = repository.findById(id).get();
         repository.delete(cv);
     }
 
-    public ChucVu getById(UUID id) {
+    public Job getById(UUID id) {
         return repository.findById(id).get();
     }
 
-    public Page<ChucVu> search(ChucVu serchNhanVien) {
+    public Page<Job> search(Job serchNhanVien) {
         return null;
     }
 
-    public List<ChucVu> getPageNo(int pageno) {
+    public List<Job> getPageNo(int pageno) {
         Sort sort = Sort.by(Sort.Direction.ASC, "createBy");
-        List<ChucVu> listrs = repository.findAll(PageRequest.of(pageno - 1, ROWCOUNT, sort)).getContent();
+        List<Job> listrs = repository.findAll(PageRequest.of(pageno - 1, ROWCOUNT, sort)).getContent();
         return listrs;
     }
 }

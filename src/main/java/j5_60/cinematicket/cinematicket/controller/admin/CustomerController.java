@@ -1,6 +1,6 @@
 package j5_60.cinematicket.cinematicket.controller.admin;
 
-import j5_60.cinematicket.cinematicket.model.entity.KhachHang;
+import j5_60.cinematicket.cinematicket.model.entity.Customer;
 import j5_60.cinematicket.cinematicket.model.modelsearch.KhachHangSearch;
 import j5_60.cinematicket.cinematicket.service.admin.CustomerService;
 import jakarta.validation.Valid;
@@ -35,13 +35,13 @@ public class CustomerController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<KhachHang> addKH(@RequestBody @Valid KhachHang khachHang) {
+    public ResponseEntity<Customer> addKH(@RequestBody @Valid Customer khachHang) {
         khachHang.setCreateAt(LocalDateTime.now());
         return new ResponseEntity<>(khService.add(khachHang), HttpStatus.CREATED);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<KhachHang> updateKH(@PathVariable("id") UUID id, @RequestBody @Valid KhachHang khachHang) {
+    public ResponseEntity<Customer> updateKH(@PathVariable("id") UUID id, @RequestBody @Valid Customer khachHang) {
         khachHang.setUpdateAt(LocalDateTime.now());
         return new ResponseEntity<>(khService.update(id, khachHang), HttpStatus.OK);
     }
@@ -57,12 +57,12 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ResponseEntity<List<KhachHang>> getAll() {
+    public ResponseEntity<List<Customer>> getAll() {
         return ResponseEntity.ok().body(khService.getAllKH());
     }
 
     @PostMapping("/fillter")
-    public ResponseEntity<List<KhachHang>> fillter(@RequestBody KhachHangSearch khachHangSearch) {
+    public ResponseEntity<List<Customer>> fillter(@RequestBody KhachHangSearch khachHangSearch) {
         return ResponseEntity.ok().body(this.khService.fillterKhachHang(khachHangSearch));
     }
 

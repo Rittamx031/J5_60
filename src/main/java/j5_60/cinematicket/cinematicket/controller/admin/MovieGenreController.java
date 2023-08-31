@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import j5_60.cinematicket.cinematicket.model.entity.TheLoaiPhim;
+import j5_60.cinematicket.cinematicket.model.entity.MovieGener;
 import j5_60.cinematicket.cinematicket.model.entity.key.TheLoaiPhimKey;
 import j5_60.cinematicket.cinematicket.service.admin.MovieGenreService;
 
@@ -34,19 +34,19 @@ public class MovieGenreController {
     private MovieGenreService service;
 
     @GetMapping
-    public ResponseEntity<List<TheLoaiPhim>> getAll() {
+    public ResponseEntity<List<MovieGener>> getAll() {
         return ResponseEntity.ok().body(service.getAllTheLoaiPhim());
     }
 
     @GetMapping("{idphim}/{idtheloai}")
-    public ResponseEntity<TheLoaiPhim> getOne(
+    public ResponseEntity<MovieGener> getOne(
             @PathVariable("idtheloai") UUID idtheloai,
             @PathVariable("idphim") UUID idphim) {
         return ResponseEntity.ok().body(service.getTheLoaiPhimById(idphim, idtheloai));
     }
 
     @GetMapping("pageno")
-    public ResponseEntity<List<TheLoaiPhim>> getPageNo(@RequestParam(value = "sortby", required = false) String sortby,
+    public ResponseEntity<List<MovieGener>> getPageNo(@RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir,
             @RequestParam(value = "pageNo", required = false) int pageNo) {
 
@@ -54,14 +54,14 @@ public class MovieGenreController {
     }
 
     @GetMapping("prev-page")
-    public ResponseEntity<List<TheLoaiPhim>> getPrePage(
+    public ResponseEntity<List<MovieGener>> getPrePage(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir) {
         return ResponseEntity.ok().body(service.getPrevPage(sortby, sortdir));
     }
 
     @GetMapping("next-page")
-    public ResponseEntity<List<TheLoaiPhim>> getNextPage(
+    public ResponseEntity<List<MovieGener>> getNextPage(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir) {
         return ResponseEntity.ok().body(service.getNextPage(sortby, sortdir));
@@ -74,15 +74,15 @@ public class MovieGenreController {
     }
 
     @PostMapping
-    public ResponseEntity<TheLoaiPhim> createHoaDon(@RequestBody TheLoaiPhim hoaDonDoAn) {
+    public ResponseEntity<MovieGener> createHoaDon(@RequestBody MovieGener hoaDonDoAn) {
         hoaDonDoAn.setCreateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.service.createTheLoaiPhim(hoaDonDoAn));
     }
 
     @PutMapping("{idphim}/{idtheloai}")
-    public ResponseEntity<TheLoaiPhim> updateHoaDon(@PathVariable("idtheloai") UUID idtheloai,
+    public ResponseEntity<MovieGener> updateHoaDon(@PathVariable("idtheloai") UUID idtheloai,
             @PathVariable("idphim") UUID idphim,
-            @RequestBody TheLoaiPhim hoaDonDoAn) {
+            @RequestBody MovieGener hoaDonDoAn) {
         hoaDonDoAn.setId(new TheLoaiPhimKey(idphim, idtheloai));
         hoaDonDoAn.setUpdateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.service.updateTheLoaiPhim(hoaDonDoAn));

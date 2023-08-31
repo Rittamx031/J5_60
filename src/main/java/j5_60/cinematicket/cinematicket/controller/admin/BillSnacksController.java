@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import j5_60.cinematicket.cinematicket.model.entity.HoaDonDoAn;
+import j5_60.cinematicket.cinematicket.model.entity.BillSnack;
 import j5_60.cinematicket.cinematicket.model.entity.key.HoaDonDoAnKey;
 import j5_60.cinematicket.cinematicket.service.admin.BillSnackService;
 
@@ -33,39 +33,39 @@ public class BillSnacksController {
     private BillSnackService service;
 
     @GetMapping
-    public ResponseEntity<List<HoaDonDoAn>> getAll() {
+    public ResponseEntity<List<BillSnack>> getAll() {
         return ResponseEntity.ok().body(service.getAllHoaDonDoAn());
     }
 
     @GetMapping("{idhoadon}/{idcombo}")
-    public ResponseEntity<HoaDonDoAn> getOne(
+    public ResponseEntity<BillSnack> getOne(
             @PathVariable("idhoadon") UUID idhoadon,
             @PathVariable("idcombo") UUID idcombo) {
         return ResponseEntity.ok().body(service.getHoaDonDoAnById(idcombo, idhoadon));
     }
 
     @GetMapping("/hoadon/{idhoadon}")
-    public ResponseEntity<List<HoaDonDoAn>> getHoaDonDoAnbyHoaDonId(
+    public ResponseEntity<List<BillSnack>> getHoaDonDoAnbyHoaDonId(
             @PathVariable("idhoadon") UUID idhoadon) {
         return ResponseEntity.ok().body(service.getHoaDonDoAnByHoaDonId(idhoadon));
     }
 
     @GetMapping("page")
-    public ResponseEntity<List<HoaDonDoAn>> getPageNo(@RequestParam(value = "sortby", required = false) String sortby,
+    public ResponseEntity<List<BillSnack>> getPageNo(@RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir,
             @RequestParam(value = "pageno", required = false) int pageNo) {
         return ResponseEntity.ok().body(service.getPageNo(pageNo, sortby, sortdir));
     }
 
     @GetMapping("prev")
-    public ResponseEntity<List<HoaDonDoAn>> getPrePage(
+    public ResponseEntity<List<BillSnack>> getPrePage(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir) {
         return ResponseEntity.ok().body(service.getPrevPage(sortby, sortdir));
     }
 
     @GetMapping("next")
-    public ResponseEntity<List<HoaDonDoAn>> getNextPage(
+    public ResponseEntity<List<BillSnack>> getNextPage(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir) {
         return ResponseEntity.ok().body(service.getNextPage(sortby, sortdir));
@@ -78,15 +78,15 @@ public class BillSnacksController {
     }
 
     @PostMapping
-    public ResponseEntity<HoaDonDoAn> createHoaDon(@RequestBody HoaDonDoAn hoaDonDoAn) {
+    public ResponseEntity<BillSnack> createHoaDon(@RequestBody BillSnack hoaDonDoAn) {
         hoaDonDoAn.setCreateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.service.createHoaDonDoAn(hoaDonDoAn));
     }
 
     @PutMapping("{idhoadon}/{idcombo}")
-    public ResponseEntity<HoaDonDoAn> updateHoaDon(@PathVariable("idhoadon") UUID idhoadon,
+    public ResponseEntity<BillSnack> updateHoaDon(@PathVariable("idhoadon") UUID idhoadon,
             @PathVariable("idcombo") UUID idcombo,
-            @RequestBody HoaDonDoAn hoaDonDoAn) {
+            @RequestBody BillSnack hoaDonDoAn) {
         hoaDonDoAn.setId(new HoaDonDoAnKey(idcombo, idhoadon));
         hoaDonDoAn.setUpdateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.service.updateHoaDonDoAn(hoaDonDoAn));

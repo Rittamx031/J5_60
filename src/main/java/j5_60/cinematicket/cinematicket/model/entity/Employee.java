@@ -1,7 +1,10 @@
 package j5_60.cinematicket.cinematicket.model.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,19 +15,25 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "KhachHang")
+@Table(name = "NhanVien")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class KhachHang {
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private UUID id;
 
-    @Column(name = "ma_khach_hang")
-    private String maKhachHang;
+
+    @ManyToOne
+    @JoinColumn(name = "id_chuc_vu", nullable = false)
+    private Job idCV;
+
+
+    @Column(name = "ma_nhan_vien")
+    private String maNhanVien;
 
     @NotNull
     @NotBlank(message="Please enter your name")
@@ -33,7 +42,8 @@ public class KhachHang {
 
     @Email
     @NotNull
-    @NotBlank(message="Please enter your email")
+    @NotBlank(message="Please enter your name")
+
     @Column(name = "email")
     private String email;
 
@@ -41,26 +51,43 @@ public class KhachHang {
     private String pass;
 
     @NotNull
+    @NotBlank(message="Please enter so_dien_thoai")
+    @Pattern(regexp = "(0|\\+84)(3[2-9]|5[2689]|7[06-9]|8[1-689]|9[0-46-9])[-.\\s]?(\\d[-.\\s]?){7}", message = "Sdt khong dung dinh dang")
+    @Column(name = "so_dien_thoai")
+    private String sdt;
+
     @Column(name = "gioi_tinh")
-    private Boolean gioiTinh;
+    private boolean gioiTinh;
+
+    @NotNull
+    @NotBlank(message="Please enter CCCD")
+    @Column(name = "cccd_id")
+    private String cccd_id;
+
+
+    @NotNull
+    @NotBlank(message="Please enter dia chi")
+    @Column(name = "dia_chi")
+    private String diaChi;
 
     @NotNull
     @Column(name = "ngay_sinh")
     private Date ngaySinh;
 
-    @NotNull
-    @NotBlank(message="Please enter your phone number")
-    @Pattern(regexp = "(0|\\+84)(3[2-9]|5[2689]|7[06-9]|8[1-689]|9[0-46-9])[-.\\s]?(\\d[-.\\s]?){7}")
-    @Column(name = "so_dien_thoai")
-    private String sdt;
-
-    @NotNull
-    @NotBlank(message="Please enter your dia chi")
-    @Column(name = "dia_chi")
-    private String diaChi;
-
     @Column(name = "trang_thai")
     private int trangThai;
+
+
+    @Column(name = "image_nv")
+    private String image;
+
+    // @Column(name="gioi_tinh")
+    // private boolean gioiTinh;
+
+    // @Column(name="ngay_sinh")
+    // private Date ngaySinh;
+    // @Column(name="trang_thai")
+    // private int trangThai;
 
     @Column(name = "create_at")
     private LocalDateTime createAt;
@@ -76,4 +103,5 @@ public class KhachHang {
 
     @Column(name = "deleted")
     private boolean deleted;
+
 }

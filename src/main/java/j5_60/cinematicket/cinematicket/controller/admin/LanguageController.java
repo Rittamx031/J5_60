@@ -1,7 +1,7 @@
 package j5_60.cinematicket.cinematicket.controller.admin;
 
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.model.entity.NgonNgu;
+import j5_60.cinematicket.cinematicket.model.entity.Language;
 import j5_60.cinematicket.cinematicket.repository.LanguageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,25 +19,25 @@ public class LanguageController {
     LanguageRepository ngonNguRepository;
 
     @GetMapping
-    public List<NgonNgu> get() {
+    public List<Language> get() {
         return ngonNguRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public NgonNgu getById(@PathVariable("id") UUID id) {
+    public Language getById(@PathVariable("id") UUID id) {
         return ngonNguRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("not find Ngon ngu With id= " + id));
     }
 
     @PostMapping("/add")
-    public NgonNgu add(@RequestBody NgonNgu ngonNgu) {
+    public Language add(@RequestBody Language ngonNgu) {
         LocalDateTime localDateTime = LocalDateTime.now();
         ngonNgu.setCreateAt(localDateTime);
         return ngonNguRepository.save(ngonNgu);
     }
 
     @PutMapping("/update/{id}")
-    public NgonNgu update(@RequestBody NgonNgu ngonNgu,
+    public Language update(@RequestBody Language ngonNgu,
             @PathVariable("id") UUID id) {
         return ngonNguRepository.findById(id)
                 .map(ngonNguMoi -> {

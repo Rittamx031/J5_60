@@ -1,7 +1,7 @@
 package j5_60.cinematicket.cinematicket.controller.admin;
 
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.model.entity.QuocGia;
+import j5_60.cinematicket.cinematicket.model.entity.Coutry;
 import j5_60.cinematicket.cinematicket.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,26 +19,26 @@ public class CountryController {
     CountryRepository quocGiaRepository;
 
     @GetMapping("/hien-thi")
-    public List<QuocGia> get() {
+    public List<Coutry> get() {
         return quocGiaRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public QuocGia getById(@PathVariable("id") UUID id) {
+    public Coutry getById(@PathVariable("id") UUID id) {
         return quocGiaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("not find Quoc Gia With id= " + id));
     }
 
     @PostMapping("/add")
-    public QuocGia add(@RequestBody QuocGia quocGia) {
+    public Coutry add(@RequestBody Coutry quocGia) {
         LocalDateTime localDateTime = LocalDateTime.now();
         quocGia.setCreateAt(localDateTime);
         return quocGiaRepository.save(quocGia);
     }
 
     @PutMapping("/update/{id}")
-    public QuocGia update(@PathVariable("id") UUID id,
-            @RequestBody QuocGia quocGia) {
+    public Coutry update(@PathVariable("id") UUID id,
+            @RequestBody Coutry quocGia) {
         return quocGiaRepository.findById(id)
                 .map(quocGiaMoi -> {
                     quocGiaMoi.setTen(quocGia.getTen());

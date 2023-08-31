@@ -1,7 +1,7 @@
 package j5_60.cinematicket.cinematicket.controller.admin;
 
-import j5_60.cinematicket.cinematicket.model.entity.ChucVu;
-import j5_60.cinematicket.cinematicket.model.entity.NhanVien;
+import j5_60.cinematicket.cinematicket.model.entity.Job;
+import j5_60.cinematicket.cinematicket.model.entity.Employee;
 import j5_60.cinematicket.cinematicket.model.modelsearch.NhanVienSearch;
 import j5_60.cinematicket.cinematicket.service.admin.EmployeeService;
 import j5_60.cinematicket.cinematicket.service.admin.JobService;
@@ -30,7 +30,7 @@ public class EmployeeController {
     private JobService chucVuService;
 
     @GetMapping("hien-thi")
-    public ResponseEntity<Page<NhanVien>> hienThi(@RequestParam(defaultValue = "1") int page) {
+    public ResponseEntity<Page<Employee>> hienThi(@RequestParam(defaultValue = "1") int page) {
         if (page < 1)
             page = 1;
         Pageable pageable = PageRequest.of(page - 1, 5);
@@ -38,23 +38,23 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public ResponseEntity<List<NhanVien>> getAll() {
+    public ResponseEntity<List<Employee>> getAll() {
         return ResponseEntity.ok().body(nhanVienService.getAllNV());
     }
 
     @GetMapping("/chucvus")
-    public ResponseEntity<List<ChucVu>> hienThiCV() {
+    public ResponseEntity<List<Job>> hienThiCV() {
         return ResponseEntity.ok().body(chucVuService.getAll());
     }
 
     @PostMapping("/add")
-    public ResponseEntity<NhanVien> addNV(@RequestBody @Valid NhanVien nhanVien) {
+    public ResponseEntity<Employee> addNV(@RequestBody @Valid Employee nhanVien) {
         nhanVien.setCreateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(nhanVienService.add(nhanVien));
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<NhanVien> updateNV(@PathVariable("id") UUID id, @RequestBody @Valid NhanVien nhanVien) {
+    public ResponseEntity<Employee> updateNV(@PathVariable("id") UUID id, @RequestBody @Valid Employee nhanVien) {
         nhanVien.setUpdateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(nhanVienService.update(id, nhanVien));
     }
@@ -70,7 +70,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/fillter")
-    public ResponseEntity<List<NhanVien>> fillter(@RequestBody NhanVienSearch nhanVienSearch) {
+    public ResponseEntity<List<Employee>> fillter(@RequestBody NhanVienSearch nhanVienSearch) {
         return ResponseEntity.ok().body(this.nhanVienService.fillterNhanVien(nhanVienSearch));
     }
 }

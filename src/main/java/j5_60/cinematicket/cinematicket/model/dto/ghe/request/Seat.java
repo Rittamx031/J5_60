@@ -2,7 +2,7 @@ package j5_60.cinematicket.cinematicket.model.dto.ghe.request;
 
 import java.util.UUID;
 
-import j5_60.cinematicket.cinematicket.model.entity.Ghe;
+import j5_60.cinematicket.cinematicket.model.entity.Seat;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,7 +39,7 @@ public class Seat {
     return cellReference.toString();
   }
 
-  public Seat(Ghe ghe) {
+  public Seat(Seat ghe) {
     this.id = ghe.getId();
     this.row = ghe.getHang();
     this.colum = ghe.getCot();

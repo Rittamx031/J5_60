@@ -14,7 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.model.entity.Ve;
+import j5_60.cinematicket.cinematicket.model.entity.Ticket;
 import j5_60.cinematicket.cinematicket.model.entity.key.VeKey;
 import j5_60.cinematicket.cinematicket.model.modelsearch.VeSearch;
 import j5_60.cinematicket.cinematicket.repository.TicketRepository;
@@ -29,13 +29,13 @@ public class TicketService {
     private final int ROWCOUNT = 5;
     private int PageNo = -1;
 
-    public Ve createVe(Ve ve) {
+    public Ticket createVe(Ticket ve) {
         return repo.save(ve);
     }
 
-    public List<Ve> fillterVe(VeSearch veSearch) {
-        List<Ve> list = repo.findAll();
-        List<Ve> result = list.stream()
+    public List<Ticket> fillterVe(VeSearch veSearch) {
+        List<Ticket> list = repo.findAll();
+        List<Ticket> result = list.stream()
                 .filter(ve -> ((ve.getHoaDon().getId().equals(veSearch.getIdHoaDon())
                         || (veSearch.getIdHoaDon() == null))
                         && (ve.getLichChieu().getId().equals(veSearch.getIdLichChieu())
@@ -51,7 +51,7 @@ public class TicketService {
     }
 
     public List<String> getDistingValueinField(String field) {
-        List<Ve> list = this.repo.findAll();
+        List<Ticket> list = this.repo.findAll();
 
         // Filter and collect distinct values from the specified field
         List<String> result = list.stream()
@@ -62,9 +62,9 @@ public class TicketService {
     }
 
     // Helper method to retrieve the field value as a string using reflection
-    private String getFieldAsString(Ve ve, String field) {
+    private String getFieldAsString(Ticket ve, String field) {
         try {
-            java.lang.reflect.Field declaredField = Ve.class.getDeclaredField(field);
+            java.lang.reflect.Field declaredField = Ticket.class.getDeclaredField(field);
             declaredField.setAccessible(true);
             Object value = declaredField.get(ve);
             return value != null ? value.toString() : null;
@@ -75,10 +75,10 @@ public class TicketService {
         }
     }
 
-    public Ve updateVe(Ve ve) {
-        Optional<Ve> veDb = this.repo.findById(ve.getId());
+    public Ticket updateVe(Ticket ve) {
+        Optional<Ticket> veDb = this.repo.findById(ve.getId());
         if (veDb.isPresent()) {
-            Ve veud = veDb.get();
+            Ticket veud = veDb.get();
             veud.setId(ve.getId());
             veud.setGhe(ve.getGhe());
             veud.setHoaDon(ve.getHoaDon());
@@ -97,20 +97,20 @@ public class TicketService {
         }
     }
 
-    public List<Ve> getAllVe() {
+    public List<Ticket> getAllVe() {
         return repo.findAll();
     }
 
-    public List<Ve> getVeByHoaDonId(UUID hoaDonId) {
-        List<Ve> listhdda = repo.findAll();
-        List<Ve> result = listhdda.stream().filter(hdda -> hdda.getHoaDon() != null)
+    public List<Ticket> getVeByHoaDonId(UUID hoaDonId) {
+        List<Ticket> listhdda = repo.findAll();
+        List<Ticket> result = listhdda.stream().filter(hdda -> hdda.getHoaDon() != null)
                 .toList();
         return result.stream().filter(hdda -> hdda.getHoaDon().getId().equals(hoaDonId))
                 .toList();
     }
 
-    public Ve getVeById(UUID id_lich_chieu, UUID id_ghe) {
-        Optional<Ve> ve = repo.findById(new VeKey(id_lich_chieu, id_ghe));
+    public Ticket getVeById(UUID id_lich_chieu, UUID id_ghe) {
+        Optional<Ticket> ve = repo.findById(new VeKey(id_lich_chieu, id_ghe));
         if (ve.isPresent()) {
             return ve.get();
         } else {
@@ -118,8 +118,8 @@ public class TicketService {
         }
     }
 
-    public Ve deleteVe(UUID id_lich_chieu, UUID id_ghe) {
-        Optional<Ve> ve = repo.findById(new VeKey(id_lich_chieu, id_ghe));
+    public Ticket deleteVe(UUID id_lich_chieu, UUID id_ghe) {
+        Optional<Ticket> ve = repo.findById(new VeKey(id_lich_chieu, id_ghe));
         if (ve.isPresent()) {
             return ve.get();
         } else {
@@ -127,10 +127,10 @@ public class TicketService {
         }
     }
 
-    public Ve setDeteleteState(UUID id_lich_chieu, UUID id_ghe) {
-        Optional<Ve> veDb = this.repo.findById(new VeKey(id_lich_chieu, id_ghe));
+    public Ticket setDeteleteState(UUID id_lich_chieu, UUID id_ghe) {
+        Optional<Ticket> veDb = this.repo.findById(new VeKey(id_lich_chieu, id_ghe));
         if (veDb.isPresent()) {
-            Ve veud = veDb.get();
+            Ticket veud = veDb.get();
             veud.setDeleted(true);
             return veud;
         } else {
@@ -138,20 +138,20 @@ public class TicketService {
         }
     }
 
-    public List<Ve> getPageNo(int pageNo, String sortBy, String sortDir) {
+    public List<Ticket> getPageNo(int pageNo, String sortBy, String sortDir) {
         this.PageNo = pageNo;
-        List<Ve> ves;
+        List<Ticket> ves;
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
         // Pageable object
         Pageable pageable = PageRequest.of(pageNo - 1, ROWCOUNT, sort);
         // findAll method and pass pageable instance
-        Page<Ve> page = repo.findAll(pageable);
+        Page<Ticket> page = repo.findAll(pageable);
         ves = page.getContent();
         return ves;
     }
 
-    public List<Ve> getNextPage(String sortBy, String sortDir) {
+    public List<Ticket> getNextPage(String sortBy, String sortDir) {
         if (this.PageNo >= getPanigation().length - 1) {
             return this.getPageNo(this.getPanigation().length, sortBy, sortBy);
         } else {
@@ -159,7 +159,7 @@ public class TicketService {
         }
     }
 
-    public List<Ve> getPrevPage(String sortBy, String sortDir) {
+    public List<Ticket> getPrevPage(String sortBy, String sortDir) {
         if (this.PageNo <= 0) {
             return this.getPageNo(1, sortBy, sortBy);
         } else {
@@ -169,7 +169,7 @@ public class TicketService {
 
     public int[] getPanigation() {
         Pageable pageable = PageRequest.of(1, ROWCOUNT);
-        Page<Ve> page = repo.findAll(pageable);
+        Page<Ticket> page = repo.findAll(pageable);
         int totalPage = page.getTotalPages();
         int[] array = IntStream.rangeClosed(0, totalPage - 1).toArray();
         return array;

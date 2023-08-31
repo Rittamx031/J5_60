@@ -18,7 +18,7 @@ import j5_60.cinematicket.cinematicket.model.entity.key.GiaVeLichChieuKey;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class GiaVeLichChieu {
+public class ShowTimePrice {
     @EmbeddedId
     GiaVeLichChieuKey id;
 
@@ -33,12 +33,12 @@ public class GiaVeLichChieu {
     @ManyToOne
     @MapsId("id_loai_ghe")
     @JoinColumn(name = "id_loai_ghe")
-    private LoaiGhe loaiGhe;
+    private SeatType loaiGhe;
 
     @ManyToOne
     @MapsId("id_lich_chieu")
     @JoinColumn(name = "id_lich_chieu")
-    private LichChieu lichChieu;
+    private ShowTimes lichChieu;
 
     @NotNull(message = "Giá không được để trống")
     @DecimalMin(value = "1000", message = "Giá phải lớn hơn hoặc bằng 1000")

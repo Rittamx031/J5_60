@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import j5_60.cinematicket.cinematicket.model.entity.KhachHang;
+import j5_60.cinematicket.cinematicket.model.entity.Customer;
 import j5_60.cinematicket.cinematicket.model.modelsearch.KhachHangSearch;
 import j5_60.cinematicket.cinematicket.repository.CustomerRepository;
 
@@ -18,24 +18,24 @@ public class CustomerService {
     @Autowired
     private CustomerRepository khRepository;
 
-    public List<KhachHang> getAllKH() {
+    public List<Customer> getAllKH() {
         return khRepository.findAll();
     }
 
-    public Page<KhachHang> findAllKH(Pageable pageable) {
+    public Page<Customer> findAllKH(Pageable pageable) {
         return khRepository.findAll(pageable);
     }
 
-    public Page<KhachHang> sapXepTheoNgayTao(Pageable pageable) {
+    public Page<Customer> sapXepTheoNgayTao(Pageable pageable) {
         return khRepository.findAllByOrderByCreateAtDesc(pageable);
     }
 
-    public KhachHang add(KhachHang kh) {
+    public Customer add(Customer kh) {
      return khRepository.save(kh);
     }
 
-    public KhachHang update(UUID id, KhachHang khachHang) {
-        KhachHang kh = khRepository.findById(id).get();
+    public Customer update(UUID id, Customer khachHang) {
+        Customer kh = khRepository.findById(id).get();
         kh.setHoTen(khachHang.getHoTen());
         kh.setEmail(khachHang.getEmail());
         kh.setPass(khachHang.getPass());
@@ -48,16 +48,16 @@ public class CustomerService {
     }
 
     public void delete(UUID id) {
-        KhachHang kh = khRepository.findById(id).get();
+        Customer kh = khRepository.findById(id).get();
         khRepository.delete(kh);
     }
 
-    public KhachHang findById(UUID id) {
+    public Customer findById(UUID id) {
         return khRepository.findById(id).get();
     }
 
-    public List<KhachHang> fillterKhachHang(KhachHangSearch khachHangSearch) {
-        List<KhachHang> result = khRepository.getKhachHangListFilter(khachHangSearch);
+    public List<Customer> fillterKhachHang(KhachHangSearch khachHangSearch) {
+        List<Customer> result = khRepository.getKhachHangListFilter(khachHangSearch);
         return result;
     }
 }

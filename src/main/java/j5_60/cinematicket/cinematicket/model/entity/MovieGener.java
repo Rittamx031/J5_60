@@ -3,9 +3,7 @@ package j5_60.cinematicket.cinematicket.model.entity;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import org.hibernate.validator.constraints.Range;
-
-import j5_60.cinematicket.cinematicket.model.entity.key.HoaDonDoAnKey;
+import j5_60.cinematicket.cinematicket.model.entity.key.TheLoaiPhimKey;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -13,38 +11,28 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "HoaDonDoAn")
+@Table(name = "TheLoaiPhim")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class HoaDonDoAn {
+public class MovieGener {
     @EmbeddedId
-    HoaDonDoAnKey id;
+    TheLoaiPhimKey id;
     @ManyToOne
-    @MapsId("id_hoa_don")
-    @JoinColumn(name = "id_hoa_don")
-    HoaDon hoaDon;
+    @MapsId("id_film")
+    @JoinColumn(name = "id_film")
+    Movie thongTinPhim;
     @ManyToOne
-    @MapsId("id_combo")
-    @JoinColumn(name = "id_combo")
-    Combo combo;
-    @NotNull
-    @Positive
-    @Column(name = "gia")
-    private double gia;
-    @NotNull
-    @Range(min = 1, max = 100, message = "range in 1 to 100")
-    @Column(name = "soluong")
-    private int soLuong;
+    @MapsId("id_the_loai")
+    @JoinColumn(name = "id_the_loai")
+    Gener theLoai;
     @Column(name = "create_at")
     private LocalDateTime createAt;
     @Column(name = "update_at")

@@ -36,7 +36,7 @@ import lombok.Setter;
                 "hoaDon.thoiGianThanhToan LIKE CONCAT('%',:txtSearch,'%') OR " +
                 "hoaDon.trangThai LIKE CONCAT('%',:txtSearch,'%') ")
 })
-public class HoaDon {
+public class Bill {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
@@ -72,13 +72,13 @@ public class HoaDon {
     private boolean deleted;
     @ManyToOne
     @JoinColumn(name = "id_nhan_vien")
-    private NhanVien nhanVien;
+    private Employee nhanVien;
 
     @ManyToOne
     @JoinColumn(name = "id_khach_hang")
-    private KhachHang khachHang;
+    private Customer khachHang;
 
     @ManyToOne
     @JoinColumn(name = "id_phuong_thuc_thanh_toan")
-    private PhuongThucThanhToan phuongThucThanhToan;
+    private PayMethod phuongThucThanhToan;
 }

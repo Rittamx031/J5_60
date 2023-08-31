@@ -1,6 +1,6 @@
 package j5_60.cinematicket.cinematicket.repository;
 
-import j5_60.cinematicket.cinematicket.model.entity.KhachHang;
+import j5_60.cinematicket.cinematicket.model.entity.Customer;
 import j5_60.cinematicket.cinematicket.model.modelsearch.KhachHangSearch;
 
 import org.springframework.data.domain.Page;
@@ -15,10 +15,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<KhachHang, UUID> {
-    Page<KhachHang> findAll(Pageable pageable);
+public interface CustomerRepository extends JpaRepository<Customer, UUID> {
+    Page<Customer> findAll(Pageable pageable);
 
-    Page<KhachHang> findAllByOrderByCreateAtDesc(Pageable pageable);
+    Page<Customer> findAllByOrderByCreateAtDesc(Pageable pageable);
 
     @Query(value = """
             select *
@@ -31,8 +31,8 @@ public interface CustomerRepository extends JpaRepository<KhachHang, UUID> {
             and (:#{#req.ngaySinh} is null or e.ngay_sinh = :#{#req.ngaySinh})
             and (:#{#req.diaChi} is null or e.dia_chi like :#{'%'+#req.diaChi+'%'})
             """, nativeQuery = true)
-    List<KhachHang> getKhachHangListFilter(@Param("req") KhachHangSearch req);
+    List<Customer> getKhachHangListFilter(@Param("req") KhachHangSearch req);
 
     @Query("SELECT kh from KhachHang kh WHERE kh.email = :username")
-    Optional<KhachHang> getuser(@Param("username") String username);
+    Optional<Customer> getuser(@Param("username") String username);
 }

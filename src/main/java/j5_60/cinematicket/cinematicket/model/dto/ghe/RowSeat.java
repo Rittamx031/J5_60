@@ -3,7 +3,7 @@ package j5_60.cinematicket.cinematicket.model.dto.ghe;
 import java.util.List;
 import java.util.UUID;
 
-import j5_60.cinematicket.cinematicket.model.entity.Ghe;
+import j5_60.cinematicket.cinematicket.model.entity.Seat;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,5 +21,5 @@ import lombok.experimental.FieldDefaults;
 public class RowSeat {
   UUID idPhongChieu;
   int row;
-  List<Ghe> rowSeat;
+  List<Seat> rowSeat;
 }

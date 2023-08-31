@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import org.hibernate.validator.constraints.Range;
 
-import j5_60.cinematicket.cinematicket.model.entity.key.ComBoDoAnDetailKey;
+import j5_60.cinematicket.cinematicket.model.entity.key.HoaDonDoAnKey;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -14,31 +14,36 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "ComboDoAnDetail")
+@Table(name = "HoaDonDoAn")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ComboDoAnDetail {
+public class BillSnack {
     @EmbeddedId
-    ComBoDoAnDetailKey id;
+    HoaDonDoAnKey id;
     @ManyToOne
-    @MapsId("id_do_an")
-    @JoinColumn(name = "id_do_an")
-    DoAn doAn;
+    @MapsId("id_hoa_don")
+    @JoinColumn(name = "id_hoa_don")
+    Bill hoaDon;
     @ManyToOne
     @MapsId("id_combo")
     @JoinColumn(name = "id_combo")
     Combo combo;
     @NotNull
-    @Range(min = 1, max = 1000, message = "soluong range 1 and 1OOO ")
-    @Column(name = "so_luong")
+    @Positive
+    @Column(name = "gia")
+    private double gia;
+    @NotNull
+    @Range(min = 1, max = 100, message = "range in 1 to 100")
+    @Column(name = "soluong")
     private int soLuong;
     @Column(name = "create_at")
     private LocalDateTime createAt;

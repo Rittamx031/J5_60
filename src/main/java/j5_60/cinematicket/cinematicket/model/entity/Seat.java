@@ -18,7 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Ghe implements Serializable {
+public class Seat implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", columnDefinition = "uniqueidentifier")
@@ -37,11 +37,11 @@ public class Ghe implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "id_loai_ghe", columnDefinition = "uniqueidentifier")
-    private LoaiGhe loaiGhe;
+    private SeatType loaiGhe;
 
     @ManyToOne
     @JoinColumn(name = "id_phong_chieu", columnDefinition = "uniqueidentifier")
-    private PhongChieu phongChieu;
+    private CimenaRoom phongChieu;
 
     @Min(value = 0, message = "Trạng thái phải là số không âm")
     @Max(value = 1, message = "Trạng thái phải là số 0 hoặc 1")
@@ -67,9 +67,9 @@ public class Ghe implements Serializable {
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
-        if (!(obj instanceof Ghe))
+        if (!(obj instanceof Seat))
             return false;
-        Ghe other = (Ghe) obj;
+        Seat other = (Seat) obj;
         return Objects.equals(id, other.id);
     }
 

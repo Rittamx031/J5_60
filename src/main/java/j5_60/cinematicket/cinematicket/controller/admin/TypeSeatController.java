@@ -1,7 +1,7 @@
 package j5_60.cinematicket.cinematicket.controller.admin;
 
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.model.entity.LoaiGhe;
+import j5_60.cinematicket.cinematicket.model.entity.SeatType;
 import j5_60.cinematicket.cinematicket.service.admin.SeatTypeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,35 +23,35 @@ public class TypeSeatController {
     private SeatTypeService loaiGheService;
 
      @GetMapping("/index")
-     public ResponseEntity<Page<LoaiGhe>> getAll(@RequestParam(defaultValue = "1") int page,
+     public ResponseEntity<Page<SeatType>> getAll(@RequestParam(defaultValue = "1") int page,
                                                  @RequestParam(defaultValue = "5") int size) {
          if (page < 1) page = 1;
          Pageable pageable = PageRequest.of(page - 1, size);
-         Page<LoaiGhe> loaiGhePage = loaiGheService.findAll(pageable);
+         Page<SeatType> loaiGhePage = loaiGheService.findAll(pageable);
          return ResponseEntity.ok().body(loaiGhePage);
      }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LoaiGhe> getById(@PathVariable("id") UUID id) throws ResourceNotFoundException {
-        LoaiGhe loaiGhe = loaiGheService.findById(id);
+    public ResponseEntity<SeatType> getById(@PathVariable("id") UUID id) throws ResourceNotFoundException {
+        SeatType loaiGhe = loaiGheService.findById(id);
         return ResponseEntity.ok().body(loaiGhe);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<LoaiGhe> addLoaiGhe(@RequestBody @Valid LoaiGhe loaiGhe) {
-        LoaiGhe savedLoaiGhe = loaiGheService.save(loaiGhe);
+    public ResponseEntity<SeatType> addLoaiGhe(@RequestBody @Valid SeatType loaiGhe) {
+        SeatType savedLoaiGhe = loaiGheService.save(loaiGhe);
         return ResponseEntity.ok().body(savedLoaiGhe);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<LoaiGhe> updateLoaiGhe(@PathVariable("id") UUID id, @RequestBody @Valid LoaiGhe loaiGhe) throws ResourceNotFoundException {
-        LoaiGhe existingLoaiGhe = loaiGheService.findById(id);
+    public ResponseEntity<SeatType> updateLoaiGhe(@PathVariable("id") UUID id, @RequestBody @Valid SeatType loaiGhe) throws ResourceNotFoundException {
+        SeatType existingLoaiGhe = loaiGheService.findById(id);
         existingLoaiGhe.setTen(loaiGhe.getTen());
         existingLoaiGhe.setTrangThai(loaiGhe.getTrangThai());
         existingLoaiGhe.setUpdateAt(loaiGhe.getUpdateAt());
         // Set other properties of LoaiGhe as needed
 
-        LoaiGhe updatedLoaiGhe = loaiGheService.updateLoaiGhe(id, existingLoaiGhe);
+        SeatType updatedLoaiGhe = loaiGheService.updateLoaiGhe(id, existingLoaiGhe);
         return ResponseEntity.ok().body(updatedLoaiGhe);
     }
 
@@ -62,20 +62,20 @@ public class TypeSeatController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<LoaiGhe>> searchLoaiGhe(@RequestParam("keyword") String keyword) {
-        List<LoaiGhe> loaiGheList = loaiGheService.searchLoaiGhe(keyword);
+    public ResponseEntity<List<SeatType>> searchLoaiGhe(@RequestParam("keyword") String keyword) {
+        List<SeatType> loaiGheList = loaiGheService.searchLoaiGhe(keyword);
         return ResponseEntity.ok().body(loaiGheList);
     }
 
     @GetMapping("/sorted")
-    public ResponseEntity<List<LoaiGhe>> getSortedLoaiGheList() {
-        List<LoaiGhe> sortedLoaiGheList = loaiGheService.sapXep();
+    public ResponseEntity<List<SeatType>> getSortedLoaiGheList() {
+        List<SeatType> sortedLoaiGheList = loaiGheService.sapXep();
         return ResponseEntity.ok().body(sortedLoaiGheList);
     }
 
 
       @GetMapping
-    public ResponseEntity<List<LoaiGhe>> getAll() {
+    public ResponseEntity<List<SeatType>> getAll() {
         return ResponseEntity.ok().body(loaiGheService.getAll());
     }
  

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import j5_60.cinematicket.cinematicket.model.entity.DoAn;
+import j5_60.cinematicket.cinematicket.model.entity.Snacks;
 import j5_60.cinematicket.cinematicket.service.admin.SnacksService;
 import jakarta.validation.Valid;
 
@@ -33,29 +33,29 @@ public class SnackController {
     private SnacksService service;
 
     @GetMapping
-    public ResponseEntity<List<DoAn>> getAllDoAn() {
+    public ResponseEntity<List<Snacks>> getAllDoAn() {
         return ResponseEntity.ok().body(service.getAllDoAn());
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<DoAn> getDoAnById(@PathVariable UUID id) {
+    public ResponseEntity<Snacks> getDoAnById(@PathVariable UUID id) {
         return ResponseEntity.ok().body(service.getDoAnById(id));
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<DoAn>> getDoAnById(@RequestParam(value = "name", required = true) String name) {
+    public ResponseEntity<List<Snacks>> getDoAnById(@RequestParam(value = "name", required = true) String name) {
         return ResponseEntity.ok().body(service.searchDoAn(name));
     }
 
     @GetMapping("pre")
-    public ResponseEntity<List<DoAn>> getPrevPage(
+    public ResponseEntity<List<Snacks>> getPrevPage(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir) {
         return ResponseEntity.ok().body(service.getPrevPage(sortby, sortdir));
     }
 
     @GetMapping("page")
-    public ResponseEntity<List<DoAn>> getPageNo(
+    public ResponseEntity<List<Snacks>> getPageNo(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir,
             @RequestParam(value = "pageno", required = false) int pageNo) {
@@ -74,7 +74,7 @@ public class SnackController {
     }
 
     @GetMapping("next")
-    public ResponseEntity<List<DoAn>> getNextPage(
+    public ResponseEntity<List<Snacks>> getNextPage(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir) {
         return ResponseEntity.ok().body(service.getNextPage(sortby, sortdir));
@@ -87,14 +87,14 @@ public class SnackController {
     }
 
     @PostMapping
-    public ResponseEntity<DoAn> createDoAn(@RequestBody @Valid DoAn hoaDon) {
+    public ResponseEntity<Snacks> createDoAn(@RequestBody @Valid Snacks hoaDon) {
         hoaDon.setCreateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.service.createDoAn(hoaDon));
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<DoAn> updateDoAn(@PathVariable UUID id,
-            @RequestBody @Valid DoAn hoaDon) {
+    public ResponseEntity<Snacks> updateDoAn(@PathVariable UUID id,
+            @RequestBody @Valid Snacks hoaDon) {
         hoaDon.setId(id);
         hoaDon.setUpdateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.service.updateDoAn(hoaDon));

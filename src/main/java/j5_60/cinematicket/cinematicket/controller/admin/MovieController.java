@@ -1,6 +1,6 @@
 package j5_60.cinematicket.cinematicket.controller.admin;
 
-import j5_60.cinematicket.cinematicket.model.entity.ThongTinPhim;
+import j5_60.cinematicket.cinematicket.model.entity.Movie;
 import j5_60.cinematicket.cinematicket.model.modelsearch.ThongTinPhimSearch;
 import j5_60.cinematicket.cinematicket.service.admin.MovieService;
 
@@ -22,30 +22,30 @@ public class MovieController {
     private MovieService service;
 
     @GetMapping
-    public ResponseEntity<List<ThongTinPhim>> getAllThongTinPhim() {
+    public ResponseEntity<List<Movie>> getAllThongTinPhim() {
         return ResponseEntity.ok().body(service.getAllThongTinPhim());
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<ThongTinPhim> getThongTinPhimById(@PathVariable UUID id) {
+    public ResponseEntity<Movie> getThongTinPhimById(@PathVariable UUID id) {
         return ResponseEntity.ok().body(service.getThongTinPhimById(id));
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<ThongTinPhim>> getSearchResult(
+    public ResponseEntity<List<Movie>> getSearchResult(
             @RequestParam(value = "txt", required = true) String txtSearch) {
         return ResponseEntity.ok().body(service.search(txtSearch));
     }
 
     @GetMapping("pre")
-    public ResponseEntity<List<ThongTinPhim>> getPrevPage(
+    public ResponseEntity<List<Movie>> getPrevPage(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir) {
         return ResponseEntity.ok().body(service.getPrevPage(sortby, sortdir));
     }
 
     @GetMapping("page")
-    public ResponseEntity<List<ThongTinPhim>> getPageNo(
+    public ResponseEntity<List<Movie>> getPageNo(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir,
             @RequestParam(value = "pageno", required = false) int pageNo) {
@@ -54,7 +54,7 @@ public class MovieController {
     }
 
     @GetMapping("next")
-    public ResponseEntity<List<ThongTinPhim>> getNextPage(
+    public ResponseEntity<List<Movie>> getNextPage(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir) {
         return ResponseEntity.ok().body(service.getNextPage(sortby, sortdir));
@@ -72,13 +72,13 @@ public class MovieController {
     }
 
     @PostMapping
-    public ResponseEntity<ThongTinPhim> createThongTinPhim(@RequestBody ThongTinPhim thongTinPhim) {
+    public ResponseEntity<Movie> createThongTinPhim(@RequestBody Movie thongTinPhim) {
         thongTinPhim.setCreateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.service.createThongTinPhim(thongTinPhim));
     }
 
     @PostMapping("/fillter")
-    public ResponseEntity<List<ThongTinPhim>> fillter(@RequestBody ThongTinPhimSearch thongTinPhimsSearch) {
+    public ResponseEntity<List<Movie>> fillter(@RequestBody ThongTinPhimSearch thongTinPhimsSearch) {
         if (thongTinPhimsSearch.getThoiLuongMin() == 0) {
             thongTinPhimsSearch.setThoiLuongMin(Integer.MIN_VALUE);
         }
@@ -95,8 +95,8 @@ public class MovieController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<ThongTinPhim> updateThongTinPhim(@PathVariable UUID id,
-            @RequestBody ThongTinPhim thongTinPhim) {
+    public ResponseEntity<Movie> updateThongTinPhim(@PathVariable UUID id,
+            @RequestBody Movie thongTinPhim) {
         thongTinPhim.setId(id);
         thongTinPhim.setUpdateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.service.updateThongTinPhim(thongTinPhim));

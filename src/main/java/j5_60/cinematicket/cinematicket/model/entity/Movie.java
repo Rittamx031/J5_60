@@ -29,7 +29,7 @@ import org.hibernate.validator.constraints.Range;
                 + "OR ngonNgu.ten LIKE CONCAT('%',:txtSearch,'%')"
         )
 })
-public class ThongTinPhim {
+public class Movie {
 
     @Id
     @Column(name = "id")
@@ -79,11 +79,11 @@ public class ThongTinPhim {
 
     @ManyToOne
     @JoinColumn(name = "id_quoc_gia", referencedColumnName = "id")
-    private QuocGia quocGia;
+    private Coutry quocGia;
 
     @ManyToOne
     @JoinColumn(name = "id_ngon_ngu", referencedColumnName = "id")
-    private NgonNgu ngonNgu;
+    private Language ngonNgu;
 
     @Column(name = "create_at")
     private LocalDateTime createAt;

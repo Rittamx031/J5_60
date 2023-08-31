@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import j5_60.cinematicket.cinematicket.model.entity.Ve;
+import j5_60.cinematicket.cinematicket.model.entity.Ticket;
 import j5_60.cinematicket.cinematicket.model.modelsearch.VeSearch;
 import j5_60.cinematicket.cinematicket.service.admin.TicketService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,7 +37,7 @@ public class TicketController {
     public TicketService service;
 
     @GetMapping
-    public ResponseEntity<List<Ve>> getAllVe() {
+    public ResponseEntity<List<Ticket>> getAllVe() {
         return ResponseEntity.ok().body(service.getAllVe());
     }
 
@@ -47,7 +47,7 @@ public class TicketController {
     }
 
     @GetMapping("/hoadon/{idhoadon}")
-    public ResponseEntity<List<Ve>> getVebyHoaDonId(
+    public ResponseEntity<List<Ticket>> getVebyHoaDonId(
             @PathVariable("idhoadon") UUID idhoadon) {
         return ResponseEntity.ok().body(service.getVeByHoaDonId(idhoadon));
     }
@@ -63,14 +63,14 @@ public class TicketController {
     }
 
     @GetMapping("{id_ghe}/{id_lich_chieu}")
-    public ResponseEntity<Ve> getOne(
+    public ResponseEntity<Ticket> getOne(
             @PathVariable("id_ghe") UUID id_ghe,
             @PathVariable("id_lich_chieu") UUID id_lich_chieu) {
         return ResponseEntity.ok().body(service.getVeById(id_lich_chieu, id_ghe));
     }
 
     @GetMapping("page")
-    public ResponseEntity<List<Ve>> getPage(
+    public ResponseEntity<List<Ticket>> getPage(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir,
             @RequestParam(value = "pageno", required = false) int pageno) {
@@ -79,14 +79,14 @@ public class TicketController {
     }
 
     @GetMapping("prev-page")
-    public ResponseEntity<List<Ve>> getPrevPage(
+    public ResponseEntity<List<Ticket>> getPrevPage(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir) {
         return ResponseEntity.ok().body(service.getPrevPage(sortby, sortdir));
     }
 
     @GetMapping("next-page")
-    public ResponseEntity<List<Ve>> getNextPage(
+    public ResponseEntity<List<Ticket>> getNextPage(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir) {
         return ResponseEntity.ok().body(service.getNextPage(sortby, sortdir));
@@ -100,22 +100,22 @@ public class TicketController {
     }
 
     @PostMapping
-    public ResponseEntity<Ve> createVe(@RequestBody Ve ve) {
+    public ResponseEntity<Ticket> createVe(@RequestBody Ticket ve) {
         ve.setNgayDatVe(LocalDate.now());
         ve.setCreateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.service.createVe(ve));
     }
 
     @PostMapping("fillter")
-    public ResponseEntity<List<Ve>> fillterVe(@RequestBody VeSearch veSearch) {
+    public ResponseEntity<List<Ticket>> fillterVe(@RequestBody VeSearch veSearch) {
         return ResponseEntity.ok().body(this.service.fillterVe(veSearch));
     }
 
     @PutMapping("{id_ghe}/{id_lich_chieu}")
-    public ResponseEntity<Ve> updateVe(
+    public ResponseEntity<Ticket> updateVe(
             @PathVariable("id_ghe") UUID id_ghe,
             @PathVariable("id_lich_chieu") UUID id_lich_chieu,
-            @RequestBody Ve ve) {
+            @RequestBody Ticket ve) {
         ve.setUpdateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.service.updateVe(ve));
     }

@@ -17,7 +17,7 @@ import org.hibernate.validator.constraints.Range;
 @Getter
 @Setter
 @ToString
-public class TheLoai {
+public class Gener {
 
     @Id
     @Column(name = "id")
@@ -45,5 +45,5 @@ public class TheLoai {
    private UUID updateBy;
 
     @Column(name = "deleted")
-    private Integer deleted;
+    private boolean deleted;
 }

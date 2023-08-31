@@ -1,7 +1,7 @@
 package j5_60.cinematicket.cinematicket.controller.admin;
 
 
-import j5_60.cinematicket.cinematicket.model.entity.LichChieu;
+import j5_60.cinematicket.cinematicket.model.entity.ShowTimes;
 import j5_60.cinematicket.cinematicket.service.admin.ShowTimeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,24 +21,24 @@ public class ShowTimeController {
     private ShowTimeService lcSer;
 
     @GetMapping
-    public ResponseEntity<List<LichChieu>> getAllLichChieu() {
+    public ResponseEntity<List<ShowTimes>> getAllLichChieu() {
         return ResponseEntity.ok().body(lcSer.getAllLichChieu());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LichChieu> getLichChieuById(@PathVariable("id") UUID id) {
+    public ResponseEntity<ShowTimes> getLichChieuById(@PathVariable("id") UUID id) {
         return ResponseEntity.ok().body(lcSer.getLichChieuById(id));
     }
 
     @GetMapping("prev")
-    public ResponseEntity<List<LichChieu>> getPrevPage(
+    public ResponseEntity<List<ShowTimes>> getPrevPage(
             @RequestParam(value = "sortby", required = false) String sortBy,
             @RequestParam(value = "sortdir", required = false) String sortDir) {
         return ResponseEntity.ok().body(lcSer.getPrevPage(sortBy, sortDir));
     }
 
     @GetMapping("pageno")
-    public ResponseEntity<List<LichChieu>> getPageNo(
+    public ResponseEntity<List<ShowTimes>> getPageNo(
             @RequestParam(value = "sortby", required = false) String sortBy,
             @RequestParam(value = "sortdir", required = false) String sortDir,
             @RequestParam(value = "pageNo", required = false) int pageNo) {
@@ -47,7 +47,7 @@ public class ShowTimeController {
     }
 
     @GetMapping("next")
-    public ResponseEntity<List<LichChieu>> getNextPage(
+    public ResponseEntity<List<ShowTimes>> getNextPage(
             @RequestParam(value = "sortby", required = false) String sortBy,
             @RequestParam(value = "sortdir", required = false) String sortDir) {
         return ResponseEntity.ok().body(lcSer.getNextPage(sortBy, sortDir));
@@ -60,14 +60,14 @@ public class ShowTimeController {
     }
 
     @PostMapping
-    public ResponseEntity<LichChieu> createLichChieu(@RequestBody @Valid LichChieu lichChieu) {
+    public ResponseEntity<ShowTimes> createLichChieu(@RequestBody @Valid ShowTimes lichChieu) {
         lichChieu.setCreateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.lcSer.addLichChieu(lichChieu));
     }
 
     @PutMapping("update/{id}")
-    public ResponseEntity<LichChieu> updateLichChieu(@PathVariable UUID id,
-                                                     @RequestBody @Valid LichChieu lichChieu) {
+    public ResponseEntity<ShowTimes> updateLichChieu(@PathVariable UUID id,
+                                                     @RequestBody @Valid ShowTimes lichChieu) {
         lichChieu.setId(id);
         lichChieu.setUpdateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.lcSer.updateLichChieu(lichChieu));

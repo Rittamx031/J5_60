@@ -29,7 +29,7 @@ import lombok.Setter;
 @NamedQueries({
         @NamedQuery(name = "PhuongThucThanhToan.search", query = "SELECT pttt FROM PhuongThucThanhToan pttt WHERE hinhThucThanhToan LIKE CONCAT('%',:txtSearch,'%')")
 })
-public class PhuongThucThanhToan {
+public class PayMethod {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")

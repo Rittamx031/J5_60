@@ -17,7 +17,7 @@ import org.hibernate.validator.constraints.Range;
 @Getter
 @Setter
 @ToString
-public class QuocGia {
+public class Coutry {
 
     @Id
     @Column(name = "id")

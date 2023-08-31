@@ -22,7 +22,7 @@ import java.util.UUID;
 @Setter
 @Getter
 @Component
-public class LichChieu {
+public class ShowTimes {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
@@ -30,11 +30,11 @@ public class LichChieu {
 
     @ManyToOne()
     @JoinColumn(name = "id_phong_chieu", referencedColumnName = "id")
-    private PhongChieu phongChieu;
+    private CimenaRoom phongChieu;
 
     @ManyToOne()
     @JoinColumn(name = "id_phim", referencedColumnName = "id")
-    private ThongTinPhim thongTinPhim;
+    private Movie thongTinPhim;
 
     @NotNull(message = "Giờ chiếu không được để trống")
     @Column(name = "gio_chieu")

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import j5_60.cinematicket.cinematicket.model.entity.GiaVeLichChieu;
+import j5_60.cinematicket.cinematicket.model.entity.ShowTimePrice;
 import j5_60.cinematicket.cinematicket.model.entity.key.GiaVeLichChieuKey;
 import j5_60.cinematicket.cinematicket.service.admin.ShowtimePriceService;
 
@@ -34,19 +34,19 @@ public class ShowTimePriceController {
     private ShowtimePriceService service;
 
     @GetMapping
-    public ResponseEntity<List<GiaVeLichChieu>> getAll() {
+    public ResponseEntity<List<ShowTimePrice>> getAll() {
         return ResponseEntity.ok().body(service.getAllGiaVeLichChieu());
     }
 
     @GetMapping("{idlichchieu}/{idloaighe}")
-    public ResponseEntity<GiaVeLichChieu> getOne(
+    public ResponseEntity<ShowTimePrice> getOne(
             @PathVariable("idloaighe") UUID idloaighe,
             @PathVariable("idlichchieu") UUID idlichchieu) {
         return ResponseEntity.ok().body(service.getGiaVeLichChieuById(idlichchieu, idloaighe));
     }
 
     @GetMapping("pageno")
-    public ResponseEntity<List<GiaVeLichChieu>> getPageNo(@RequestParam(value = "sortby", required = false) String sortby,
+    public ResponseEntity<List<ShowTimePrice>> getPageNo(@RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir,
             @RequestParam(value = "pageNo", required = false) int pageNo) {
 
@@ -54,14 +54,14 @@ public class ShowTimePriceController {
     }
 
     @GetMapping("prev-page")
-    public ResponseEntity<List<GiaVeLichChieu>> getPrePage(
+    public ResponseEntity<List<ShowTimePrice>> getPrePage(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir) {
         return ResponseEntity.ok().body(service.getPrevPage(sortby, sortdir));
     }
 
     @GetMapping("next-page")
-    public ResponseEntity<List<GiaVeLichChieu>> getNextPage(
+    public ResponseEntity<List<ShowTimePrice>> getNextPage(
             @RequestParam(value = "sortby", required = false) String sortby,
             @RequestParam(value = "sortdir", required = false) String sortdir) {
         return ResponseEntity.ok().body(service.getNextPage(sortby, sortdir));
@@ -74,15 +74,15 @@ public class ShowTimePriceController {
     }
 
     @PostMapping
-    public ResponseEntity<GiaVeLichChieu> createHoaDon(@RequestBody GiaVeLichChieu hoaDonDoAn) {
+    public ResponseEntity<ShowTimePrice> createHoaDon(@RequestBody ShowTimePrice hoaDonDoAn) {
         hoaDonDoAn.setCreateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.service.createGiaVeLichChieu(hoaDonDoAn));
     }
 
     @PutMapping("{idlichchieu}/{idloaighe}")
-    public ResponseEntity<GiaVeLichChieu> updateHoaDon(@PathVariable("idloaighe") UUID idloaighe,
+    public ResponseEntity<ShowTimePrice> updateHoaDon(@PathVariable("idloaighe") UUID idloaighe,
             @PathVariable("idlichchieu") UUID idlichchieu,
-            @RequestBody GiaVeLichChieu hoaDonDoAn) {
+            @RequestBody ShowTimePrice hoaDonDoAn) {
         hoaDonDoAn.setId(new GiaVeLichChieuKey(idlichchieu, idloaighe));
         hoaDonDoAn.setUpdateAt(LocalDateTime.now());
         return ResponseEntity.ok().body(this.service.updateGiaVeLichChieu(hoaDonDoAn));

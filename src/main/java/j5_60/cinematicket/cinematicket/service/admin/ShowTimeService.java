@@ -2,7 +2,7 @@
 package j5_60.cinematicket.cinematicket.service.admin;
 
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.model.entity.LichChieu;
+import j5_60.cinematicket.cinematicket.model.entity.ShowTimes;
 import j5_60.cinematicket.cinematicket.repository.ShowtimesRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +28,14 @@ public class ShowTimeService {
     private final int ROWCOUNT = 5;
     private int PageNo = -1;
 
-    public LichChieu addLichChieu(LichChieu lichChieu) {
+    public ShowTimes addLichChieu(ShowTimes lichChieu) {
         return lichChieuRepository.save(lichChieu);
     }
 
-    public LichChieu updateLichChieu(LichChieu lichChieu) {
-        Optional<LichChieu> lichChieuDb = this.lichChieuRepository.findById(lichChieu.getId());
+    public ShowTimes updateLichChieu(ShowTimes lichChieu) {
+        Optional<ShowTimes> lichChieuDb = this.lichChieuRepository.findById(lichChieu.getId());
         if (lichChieuDb.isPresent()) {
-            LichChieu lc = lichChieuDb.get();
+            ShowTimes lc = lichChieuDb.get();
             lc.setId(lichChieu.getId());
             lc.setPhongChieu(lichChieu.getPhongChieu());
             lc.setThongTinPhim(lichChieu.getThongTinPhim());
@@ -54,12 +54,12 @@ public class ShowTimeService {
         }
     }
 
-    public List<LichChieu> getAllLichChieu() {
+    public List<ShowTimes> getAllLichChieu() {
         return lichChieuRepository.findAll();
     }
 
-    public LichChieu getLichChieuById(UUID id) {
-        Optional<LichChieu> lichChieu = lichChieuRepository.findById(id);
+    public ShowTimes getLichChieuById(UUID id) {
+        Optional<ShowTimes> lichChieu = lichChieuRepository.findById(id);
         if (lichChieu.isPresent()) {
             return lichChieu.get();
         } else {
@@ -67,8 +67,8 @@ public class ShowTimeService {
         }
     }
 
-    public LichChieu deleteLichChieu(UUID id) {
-        Optional<LichChieu> lichChieu = lichChieuRepository.findById(id);
+    public ShowTimes deleteLichChieu(UUID id) {
+        Optional<ShowTimes> lichChieu = lichChieuRepository.findById(id);
         if (lichChieu.isPresent()) {
             return lichChieu.get();
         } else {
@@ -76,10 +76,10 @@ public class ShowTimeService {
         }
     }
 
-    public LichChieu setDeleteState(UUID id) {
-        Optional<LichChieu> lichChieuDb = this.lichChieuRepository.findById(id);
+    public ShowTimes setDeleteState(UUID id) {
+        Optional<ShowTimes> lichChieuDb = this.lichChieuRepository.findById(id);
         if (lichChieuDb.isPresent()) {
-            LichChieu lc = lichChieuDb.get();
+            ShowTimes lc = lichChieuDb.get();
             lc.setDeleted(true);
             return lc;
         } else {
@@ -87,27 +87,27 @@ public class ShowTimeService {
         }
     }
 
-    public List<LichChieu> getPageNo(int pageNo, String sortBy, String sortDir) {
+    public List<ShowTimes> getPageNo(int pageNo, String sortBy, String sortDir) {
         this.PageNo = pageNo;
-        List<LichChieu> lichChieus;
+        List<ShowTimes> lichChieus;
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
 
         Pageable pageable = PageRequest.of(pageNo, ROWCOUNT, sort);
-        Page<LichChieu> page = lichChieuRepository.findAll(pageable);
+        Page<ShowTimes> page = lichChieuRepository.findAll(pageable);
         lichChieus = page.getContent();
         return lichChieus;
     }
 
     public int[] getPanigation() {
         Pageable pageable = PageRequest.of(1, ROWCOUNT);
-        Page<LichChieu> page = lichChieuRepository.findAll(pageable);
+        Page<ShowTimes> page = lichChieuRepository.findAll(pageable);
         int totalPage = page.getTotalPages();
         int[] array = IntStream.rangeClosed(0, totalPage).toArray();
         return array;
     }
 
-    public List<LichChieu> getNextPage(String sortBy, String sortDir) {
+    public List<ShowTimes> getNextPage(String sortBy, String sortDir) {
         if (this.PageNo >= getPanigation().length - 1) {
             return this.getPageNo(this.getPanigation().length - 1, sortBy, sortDir);
         } else {
@@ -115,7 +115,7 @@ public class ShowTimeService {
         }
     }
 
-    public List<LichChieu> getPrevPage(String sortBy, String sortDri) {
+    public List<ShowTimes> getPrevPage(String sortBy, String sortDri) {
         if (this.PageNo <= 0) {
             return this.getPageNo(0, sortBy, sortBy);
         } else {
@@ -132,10 +132,10 @@ public class ShowTimeService {
         // Thực hiện kiểm tra và cập nhật trạng thái trước 3 phút trước thời gian chiếu
         @Scheduled(fixedDelay = 1000) // Kiểm tra sau mỗi 1 giây (1.000 miliseconds)
         public void updateLichChieuStatus() {
-            List<LichChieu> ls = lichChieuService.getAllLichChieu();
+            List<ShowTimes> ls = lichChieuService.getAllLichChieu();
             LocalDateTime now = LocalDateTime.now();
 
-            for (LichChieu lichChieu : ls) {
+            for (ShowTimes lichChieu : ls) {
                 LocalDateTime gioChieu = lichChieu.getNgayChieu().atTime(lichChieu.getGioiChieu());
                 Duration timeDifference = Duration.between(now, gioChieu);
 

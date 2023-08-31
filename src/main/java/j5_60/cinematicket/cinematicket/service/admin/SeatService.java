@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.model.dto.ghe.request.Seat;
-import j5_60.cinematicket.cinematicket.model.entity.Ghe;
-import j5_60.cinematicket.cinematicket.model.entity.LoaiGhe;
-import j5_60.cinematicket.cinematicket.model.entity.PhongChieu;
+import j5_60.cinematicket.cinematicket.model.entity.Seat;
+import j5_60.cinematicket.cinematicket.model.entity.SeatType;
+import j5_60.cinematicket.cinematicket.model.entity.CimenaRoom;
 import j5_60.cinematicket.cinematicket.repository.CenimaRoomRepository;
 import j5_60.cinematicket.cinematicket.repository.SeatRepository;
 import j5_60.cinematicket.cinematicket.repository.SeatTypeRepository;
@@ -31,25 +31,25 @@ public class SeatService {
     @Autowired
     CenimaRoomRepository pcrepository;
 
-    public Page<Ghe> findAll(Pageable pageable) {
+    public Page<Seat> findAll(Pageable pageable) {
         return repository.findAll(pageable);
     }
 
-    public List<Ghe> getAll() {
+    public List<Seat> getAll() {
         return repository.findAll();
     }
 
-    public Ghe saveGhe(Seat seat) {
-        Ghe ghe = new Ghe();
+    public Seat saveGhe(Seat seat) {
+        Seat ghe = new Seat();
         ghe.setCot(seat.getColum());
         ghe.setHang(seat.getColum());
-        Optional<LoaiGhe> optionalLoaiGhe = lgrepository.findById(seat.getIdLoaiGhe());
+        Optional<SeatType> optionalLoaiGhe = lgrepository.findById(seat.getIdLoaiGhe());
         if (optionalLoaiGhe.isPresent()) {
             ghe.setLoaiGhe(optionalLoaiGhe.get());
         } else {
             throw new ResourceNotFoundException("PhongChieu not found with id: ");
         }
-        Optional<PhongChieu> optionalPhongChieu = pcrepository.findById(seat.getIdPhongChieu());
+        Optional<CimenaRoom> optionalPhongChieu = pcrepository.findById(seat.getIdPhongChieu());
         if (optionalPhongChieu.isPresent()) {
             ghe.setPhongChieu(optionalPhongChieu.get());
         } else {
@@ -58,10 +58,10 @@ public class SeatService {
         return repository.save(ghe);
     }
 
-    public Ghe updateGhe(UUID id, Ghe ghe) throws ResourceNotFoundException {
-        Optional<Ghe> optionalGhe = repository.findById(id);
+    public Seat updateGhe(UUID id, Seat ghe) throws ResourceNotFoundException {
+        Optional<Seat> optionalGhe = repository.findById(id);
         if (optionalGhe.isPresent()) {
-            Ghe existingGhe = optionalGhe.get();
+            Seat existingGhe = optionalGhe.get();
             existingGhe.setTen(ghe.getTen());
             existingGhe.setHang(ghe.getHang());
             existingGhe.setCot(ghe.getCot());
@@ -78,12 +78,12 @@ public class SeatService {
         repository.deleteById(id);
     }
 
-    public List<Ghe> getAllgheByPhongChieu(UUID idPhongChieu) {
+    public List<Seat> getAllgheByPhongChieu(UUID idPhongChieu) {
         return repository.getGheInPhongChieu(idPhongChieu);
     }
 
-    public Ghe findById(UUID id) throws ResourceNotFoundException {
-        Optional<Ghe> optionalGhe = repository.findById(id);
+    public Seat findById(UUID id) throws ResourceNotFoundException {
+        Optional<Seat> optionalGhe = repository.findById(id);
         if (optionalGhe.isPresent()) {
             return optionalGhe.get();
         }

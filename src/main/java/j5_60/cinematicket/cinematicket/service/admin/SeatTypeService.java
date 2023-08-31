@@ -12,7 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.model.entity.LoaiGhe;
+import j5_60.cinematicket.cinematicket.model.entity.SeatType;
 import j5_60.cinematicket.cinematicket.repository.SeatTypeRepository;
 import jakarta.transaction.Transactional;
 @Service
@@ -22,30 +22,30 @@ public class SeatTypeService {
     @Autowired
     public SeatTypeRepository loaiGheRepository;
 
-    public List<LoaiGhe> sapXep() {
+    public List<SeatType> sapXep() {
         return loaiGheRepository.findAllByOrderByTen();
     }
-    public List<LoaiGhe> searchLoaiGhe(String keyword) {
+    public List<SeatType> searchLoaiGhe(String keyword) {
         return loaiGheRepository.findByTenContainingIgnoreCase(keyword);
     }
-    public Page<LoaiGhe> findAll(Pageable pageable) {
+    public Page<SeatType> findAll(Pageable pageable) {
         return loaiGheRepository.findAll(pageable);
     }
     
-    public List<LoaiGhe> getAll() {
+    public List<SeatType> getAll() {
         return loaiGheRepository.findAll();
     }
 
     
-    public LoaiGhe save(LoaiGhe loaiGhe) {
+    public SeatType save(SeatType loaiGhe) {
         return loaiGheRepository.save(loaiGhe);
     }
 
     
-    public LoaiGhe updateLoaiGhe(UUID id, LoaiGhe loaiGhe) throws ResourceNotFoundException {
-        Optional<LoaiGhe> optionalLoaiGhe = loaiGheRepository.findById(id);
+    public SeatType updateLoaiGhe(UUID id, SeatType loaiGhe) throws ResourceNotFoundException {
+        Optional<SeatType> optionalLoaiGhe = loaiGheRepository.findById(id);
         if (optionalLoaiGhe.isPresent()) {
-            LoaiGhe existingLoaiGhe = optionalLoaiGhe.get();
+            SeatType existingLoaiGhe = optionalLoaiGhe.get();
             existingLoaiGhe.setTen(loaiGhe.getTen());
             existingLoaiGhe.setTrangThai(loaiGhe.getTrangThai());
             existingLoaiGhe.setUpdateAt(LocalDateTime.now());
@@ -62,8 +62,8 @@ public class SeatTypeService {
     }
 
     
-    public LoaiGhe findById(UUID id) throws ResourceNotFoundException {
-        Optional<LoaiGhe> optionalLoaiGhe = loaiGheRepository.findById(id);
+    public SeatType findById(UUID id) throws ResourceNotFoundException {
+        Optional<SeatType> optionalLoaiGhe = loaiGheRepository.findById(id);
         if (optionalLoaiGhe.isPresent()) {
             return optionalLoaiGhe.get();
         }

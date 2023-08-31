@@ -13,7 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.model.entity.DoAn;
+import j5_60.cinematicket.cinematicket.model.entity.Snacks;
 import j5_60.cinematicket.cinematicket.repository.SnackRepository;
 
 @Service
@@ -24,14 +24,14 @@ public class SnacksService {
     private final int ROWCOUNT = 5;
     private int PageNo = -1;
 
-    public DoAn createDoAn(DoAn doAn) {
+    public Snacks createDoAn(Snacks doAn) {
         return repo.save(doAn);
     }
 
-    public DoAn updateDoAn(DoAn doAn) {
-        Optional<DoAn> doAnDb = this.repo.findById(doAn.getId());
+    public Snacks updateDoAn(Snacks doAn) {
+        Optional<Snacks> doAnDb = this.repo.findById(doAn.getId());
         if (doAnDb.isPresent()) {
-            DoAn doAnud = doAnDb.get();
+            Snacks doAnud = doAnDb.get();
             doAnud.setId(doAn.getId());
             doAnud.setGia(doAn.getGia());
             doAnud.setTen(doAn.getTen());
@@ -46,19 +46,19 @@ public class SnacksService {
         }
     }
 
-    public List<DoAn> getAllDoAn() {
+    public List<Snacks> getAllDoAn() {
         return repo.findAll();
     }
 
-    public List<DoAn> searchDoAn(String txt) {
+    public List<Snacks> searchDoAn(String txt) {
         return repo.search(txt);
     }
 
     // public List<DoAn> searchByName(){
     // return repo.findAll();
     // }
-    public DoAn getDoAnById(UUID id) {
-        Optional<DoAn> doAn = repo.findById(id);
+    public Snacks getDoAnById(UUID id) {
+        Optional<Snacks> doAn = repo.findById(id);
         if (doAn.isPresent()) {
             return doAn.get();
         } else {
@@ -66,8 +66,8 @@ public class SnacksService {
         }
     }
 
-    public DoAn deleteDoAn(UUID id) {
-        Optional<DoAn> doAn = repo.findById(id);
+    public Snacks deleteDoAn(UUID id) {
+        Optional<Snacks> doAn = repo.findById(id);
         if (doAn.isPresent()) {
             return doAn.get();
         } else {
@@ -75,10 +75,10 @@ public class SnacksService {
         }
     }
 
-    public DoAn setDeteleteState(UUID id) {
-        Optional<DoAn> doAnDb = this.repo.findById(id);
+    public Snacks setDeteleteState(UUID id) {
+        Optional<Snacks> doAnDb = this.repo.findById(id);
         if (doAnDb.isPresent()) {
-            DoAn doAnud = doAnDb.get();
+            Snacks doAnud = doAnDb.get();
             doAnud.setDeleted(true);
             return doAnud;
         } else {
@@ -86,20 +86,20 @@ public class SnacksService {
         }
     }
 
-    public List<DoAn> getPageNo(int pageNo, String sortBy, String sortDir) {
+    public List<Snacks> getPageNo(int pageNo, String sortBy, String sortDir) {
         this.PageNo = pageNo;
-        List<DoAn> doAns;
+        List<Snacks> doAns;
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
         // Pageable object
         Pageable pageable = PageRequest.of(pageNo - 1, ROWCOUNT, sort);
         // findAll method and pass pageable instance
-        Page<DoAn> page = repo.findAll(pageable);
+        Page<Snacks> page = repo.findAll(pageable);
         doAns = page.getContent();
         return doAns;
     }
 
-    public List<DoAn> getNextPage(String sortBy, String sortDir) {
+    public List<Snacks> getNextPage(String sortBy, String sortDir) {
         if (this.PageNo >= getPanigation().length - 1) {
             return this.getPageNo(this.getPanigation().length, sortBy, sortBy);
         } else {
@@ -107,7 +107,7 @@ public class SnacksService {
         }
     }
 
-    public List<DoAn> getPrevPage(String sortBy, String sortDir) {
+    public List<Snacks> getPrevPage(String sortBy, String sortDir) {
         if (this.PageNo <= 0) {
             return this.getPageNo(1, sortBy, sortBy);
         } else {
@@ -117,7 +117,7 @@ public class SnacksService {
 
     public int[] getPanigation() {
         Pageable pageable = PageRequest.of(0, ROWCOUNT);
-        Page<DoAn> page = repo.findAll(pageable);
+        Page<Snacks> page = repo.findAll(pageable);
         int totalPage = page.getTotalPages();
         int[] array = IntStream.rangeClosed(1, totalPage).toArray();
         return array;

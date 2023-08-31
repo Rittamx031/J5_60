@@ -14,7 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.model.entity.HoaDon;
+import j5_60.cinematicket.cinematicket.model.entity.Bill;
 import j5_60.cinematicket.cinematicket.model.modelsearch.HoaDonSearch;
 import j5_60.cinematicket.cinematicket.repository.BillRepository;
 import jakarta.transaction.Transactional;
@@ -27,13 +27,13 @@ public class BillService {
     private final int ROWCOUNT = 5;
     private int PageNo = -1;
 
-    public HoaDon createHoaDon(HoaDon hoaDon) {
+    public Bill createHoaDon(Bill hoaDon) {
         return repo.save(hoaDon);
     }
 
-    public List<HoaDon> fillterHoaDon(HoaDonSearch hoaDonSearch) {
-        List<HoaDon> list = repo.findAll();
-        List<HoaDon> result = list.stream()
+    public List<Bill> fillterHoaDon(HoaDonSearch hoaDonSearch) {
+        List<Bill> list = repo.findAll();
+        List<Bill> result = list.stream()
                 .filter(hoadon -> ((hoadon.getKhachHang().getId().equals(hoaDonSearch.getIdKhachHang())
                         || (hoaDonSearch.getIdKhachHang() == null))
                         && ((hoadon.getKhachHang().getId().equals(hoaDonSearch.getIdNhanVien()))
@@ -49,10 +49,10 @@ public class BillService {
         return result;
     }
 
-    public HoaDon updateHoaDon(HoaDon hoaDon) {
-        Optional<HoaDon> hoaDonDb = this.repo.findById(hoaDon.getId());
+    public Bill updateHoaDon(Bill hoaDon) {
+        Optional<Bill> hoaDonDb = this.repo.findById(hoaDon.getId());
         if (hoaDonDb.isPresent()) {
-            HoaDon hoaDonud = hoaDonDb.get();
+            Bill hoaDonud = hoaDonDb.get();
             hoaDonud.setId(hoaDon.getId());
             hoaDonud.setThoiGianThanhToan(hoaDon.getThoiGianThanhToan());
             hoaDonud.setTongGia(hoaDon.getTongGia());
@@ -72,16 +72,16 @@ public class BillService {
         }
     }
 
-    public List<HoaDon> getAllHoaDon() {
+    public List<Bill> getAllHoaDon() {
         return repo.findAll();
     }
 
-    public List<HoaDon> search(String txtSearch) {
+    public List<Bill> search(String txtSearch) {
         return repo.search(txtSearch);
     }
 
-    public HoaDon getHoaDonById(UUID id) {
-        Optional<HoaDon> hoaDon = repo.findById(id);
+    public Bill getHoaDonById(UUID id) {
+        Optional<Bill> hoaDon = repo.findById(id);
         if (hoaDon.isPresent()) {
             return hoaDon.get();
         } else {
@@ -89,8 +89,8 @@ public class BillService {
         }
     }
 
-    public HoaDon deleteHoaDon(UUID id) {
-        Optional<HoaDon> hoaDon = repo.findById(id);
+    public Bill deleteHoaDon(UUID id) {
+        Optional<Bill> hoaDon = repo.findById(id);
         if (hoaDon.isPresent()) {
             return hoaDon.get();
         } else {
@@ -98,10 +98,10 @@ public class BillService {
         }
     }
 
-    public HoaDon setDeteleteState(UUID id) {
-        Optional<HoaDon> hoaDonDb = this.repo.findById(id);
+    public Bill setDeteleteState(UUID id) {
+        Optional<Bill> hoaDonDb = this.repo.findById(id);
         if (hoaDonDb.isPresent()) {
-            HoaDon hoaDonud = hoaDonDb.get();
+            Bill hoaDonud = hoaDonDb.get();
             hoaDonud.setDeleted(true);
             return hoaDonud;
         } else {
@@ -109,20 +109,20 @@ public class BillService {
         }
     }
 
-    public List<HoaDon> getPageNo(int pageNo, String sortBy, String sortDir) {
+    public List<Bill> getPageNo(int pageNo, String sortBy, String sortDir) {
         this.PageNo = pageNo;
-        List<HoaDon> hoaDons;
+        List<Bill> hoaDons;
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
         // Pageable object
         Pageable pageable = PageRequest.of(pageNo - 1, ROWCOUNT, sort);
         // findAll method and pass pageable instance
-        Page<HoaDon> page = repo.findAll(pageable);
+        Page<Bill> page = repo.findAll(pageable);
         hoaDons = page.getContent();
         return hoaDons;
     }
 
-    public List<HoaDon> getNextPage(String sortBy, String sortDir) {
+    public List<Bill> getNextPage(String sortBy, String sortDir) {
         if (this.PageNo >= getPanigation().length - 1) {
             return this.getPageNo(this.getPanigation().length - 1, sortBy, sortBy);
         } else {
@@ -130,7 +130,7 @@ public class BillService {
         }
     }
 
-    public List<HoaDon> getPrevPage(String sortBy, String sortDir) {
+    public List<Bill> getPrevPage(String sortBy, String sortDir) {
         if (this.PageNo <= 0) {
             return this.getPageNo(0, sortBy, sortBy);
         } else {
@@ -140,7 +140,7 @@ public class BillService {
 
     public int[] getPanigation() {
         Pageable pageable = PageRequest.of(1, ROWCOUNT);
-        Page<HoaDon> page = repo.findAll(pageable);
+        Page<Bill> page = repo.findAll(pageable);
         int totalPage = page.getTotalPages();
         int[] array = IntStream.rangeClosed(1, totalPage).toArray();
         return array;

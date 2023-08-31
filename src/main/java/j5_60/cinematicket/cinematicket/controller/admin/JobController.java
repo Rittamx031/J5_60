@@ -1,6 +1,6 @@
 package j5_60.cinematicket.cinematicket.controller.admin;
 
-import j5_60.cinematicket.cinematicket.model.entity.ChucVu;
+import j5_60.cinematicket.cinematicket.model.entity.Job;
 import j5_60.cinematicket.cinematicket.service.admin.JobService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +36,13 @@ public class JobController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<ChucVu> addChucVu(@RequestBody ChucVu chucVu) {
+    public ResponseEntity<Job> addChucVu(@RequestBody Job chucVu) {
         chucVu.setCreateAt(LocalDateTime.now());
         return new ResponseEntity<>(service.add(chucVu), HttpStatus.CREATED);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<ChucVu> updateChucVu(@PathVariable("id") UUID id, @RequestBody ChucVu chucVu) {
+    public ResponseEntity<Job> updateChucVu(@PathVariable("id") UUID id, @RequestBody Job chucVu) {
         chucVu.setUpdateAt(LocalDateTime.now());
         return new ResponseEntity<>(service.update(id, chucVu), HttpStatus.OK);
     }
@@ -59,12 +59,12 @@ public class JobController {
     }
 
     @GetMapping("getall")
-    public ResponseEntity<List<ChucVu>> getAll() {
+    public ResponseEntity<List<Job>> getAll() {
         return ResponseEntity.ok().body(service.getAll());
     }
 
     @GetMapping("pageno/{page}")
-    public ResponseEntity<List<ChucVu>> getPageNo(@PathVariable("page") int pageno) {
+    public ResponseEntity<List<Job>> getPageNo(@PathVariable("page") int pageno) {
         return ResponseEntity.ok().body(service.getPageNo(pageno));
     }
 }
