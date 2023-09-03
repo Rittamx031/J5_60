@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.model.dto.ghe.request.Seat;
+import j5_60.cinematicket.cinematicket.model.dto.ghe.request.SeatRequest;
 import j5_60.cinematicket.cinematicket.model.entity.Seat;
 import j5_60.cinematicket.cinematicket.model.entity.SeatType;
 import j5_60.cinematicket.cinematicket.model.entity.CimenaRoom;
@@ -39,7 +39,7 @@ public class SeatService {
         return repository.findAll();
     }
 
-    public Seat saveGhe(Seat seat) {
+    public Seat saveGhe(SeatRequest seat) {
         Seat ghe = new Seat();
         ghe.setCot(seat.getColum());
         ghe.setHang(seat.getColum());

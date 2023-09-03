@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
 import j5_60.cinematicket.cinematicket.model.dto.ghe.RowSeat;
 import j5_60.cinematicket.cinematicket.model.dto.ghe.request.NewRow;
-import j5_60.cinematicket.cinematicket.model.dto.ghe.request.Seat;
+import j5_60.cinematicket.cinematicket.model.dto.ghe.request.SeatRequest;
 import j5_60.cinematicket.cinematicket.model.entity.Seat;
 import j5_60.cinematicket.cinematicket.model.entity.SeatType;
 import j5_60.cinematicket.cinematicket.model.entity.CimenaRoom;
@@ -36,14 +36,14 @@ public class RowSeatService {
     return rowSeat;
   }
 
-  public RowSeat addSeatInRow(Seat seat) {
+  public RowSeat addSeatInRow(SeatRequest seat) {
     List<Seat> rowcount = getRow(seat.getRow(), seat.getIdPhongChieu()).getRowSeat();
     for (Seat gheinrow : rowcount) {
       if (seat.getColum() == gheinrow.getHang()) {
         rowcount.stream().map(ghe -> {
           if (ghe.getCot() >= seat.getRow()) {
             ghe.setCot(ghe.getCot() + 1);
-            ghe.setTen(Seat.convertToCellReference(ghe.getHang(), ghe.getCot()));
+            ghe.setTen(SeatRequest.convertToCellReference(ghe.getHang(), ghe.getCot()));
           }
           return ghe;
         }).collect(Collectors.toList());
@@ -55,7 +55,7 @@ public class RowSeatService {
       Seat ghe = new Seat();
       ghe.setCot(seat.getColum());
       ghe.setHang(seat.getRow());
-      ghe.setTen(Seat.convertToCellReference(seat.getRow(), seat.getColum()));
+      ghe.setTen(SeatRequest.convertToCellReference(seat.getRow(), seat.getColum()));
       ghe.setTrangThai(1);
       ghe.setDeleted(false);
       Optional<SeatType> optionalLoaiGhe = lgrepository.findById(seat.getIdLoaiGhe());
@@ -89,14 +89,14 @@ public class RowSeatService {
       ghe.setLoaiGhe(loaiGhe.get());
       ghe.setTrangThai(1);
       ghe.setCreateAt(LocalDateTime.now());
-      ghe.setTen(Seat.convertToCellReference(ghe.getHang(), ghe.getCot()));
+      ghe.setTen(SeatRequest.convertToCellReference(ghe.getHang(), ghe.getCot()));
       listghe.add(ghe);
     }
     List<Seat> rs = repository.saveAll(listghe);
     return new RowSeat(newRow.getIdPhongChieu(), newRow.getRow(), rs);
   }
 
-  public Seat updateSeat(Seat seat) {
+  public Seat updateSeat(SeatRequest seat) {
     Optional<CimenaRoom> phongchieu = pcrepository.findById(seat.getIdPhongChieu());
     Optional<SeatType> loaiGhe = lgrepository.findById(seat.getIdLoaiGhe());
     Optional<Seat> ghe = repository.findById(seat.getId());
@@ -105,7 +105,7 @@ public class RowSeatService {
     gheud.setHang(seat.getRow());
     gheud.setTrangThai(seat.getTrangThai());
     gheud.setLoaiGhe(loaiGhe.get());
-    gheud.setTen(Seat.convertToCellReference(seat.getRow(), seat.getColum()));
+    gheud.setTen(SeatRequest.convertToCellReference(seat.getRow(), seat.getColum()));
     gheud.setPhongChieu(phongchieu.get());
     gheud.setUpdateAt(LocalDateTime.now());
     return repository.save(gheud);

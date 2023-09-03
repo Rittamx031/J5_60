@@ -17,7 +17,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Seat {
+public class SeatRequest {
   UUID id;
   int row;
   int colum;
@@ -25,7 +25,7 @@ public class Seat {
   UUID idPhongChieu;
   UUID idLoaiGhe;
   int trangThai;
-  
+
   public static String convertToCellReference(int row, int column) {
     StringBuilder cellReference = new StringBuilder();
     // Convert column index to letters (A, B, ..., Z, AA, AB, ...)
@@ -39,7 +39,7 @@ public class Seat {
     return cellReference.toString();
   }
 
-  public Seat(Seat ghe) {
+  public SeatRequest(Seat ghe) {
     this.id = ghe.getId();
     this.row = ghe.getHang();
     this.colum = ghe.getCot();

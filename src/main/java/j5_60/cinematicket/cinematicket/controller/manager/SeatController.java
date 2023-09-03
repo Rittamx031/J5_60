@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import j5_60.cinematicket.cinematicket.model.dto.ghe.RowSeat;
 import j5_60.cinematicket.cinematicket.model.dto.ghe.request.NewRow;
-import j5_60.cinematicket.cinematicket.model.dto.ghe.request.Seat;
+import j5_60.cinematicket.cinematicket.model.dto.ghe.request.SeatRequest;
 import j5_60.cinematicket.cinematicket.model.entity.Seat;
 import j5_60.cinematicket.cinematicket.service.manager.RowSeatService;
 import jakarta.validation.Valid;
@@ -30,7 +30,7 @@ public class SeatController {
   RowSeatService service;
 
   @PostMapping("add-seat-in-row")
-  public ResponseEntity<RowSeat> addSeatInRow(@RequestBody @Valid Seat seat) {
+  public ResponseEntity<RowSeat> addSeatInRow(@RequestBody @Valid SeatRequest seat) {
     return ResponseEntity.ok().body(service.addSeatInRow(seat));
   }
 
@@ -46,7 +46,7 @@ public class SeatController {
   }
 
   @PutMapping("updateghe/{id}")
-  public ResponseEntity<Seat> updateGhe(@PathVariable("id") UUID idGhe, @RequestBody Seat seatud) {
+  public ResponseEntity<Seat> updateGhe(@PathVariable("id") UUID idGhe, @RequestBody SeatRequest seatud) {
     seatud.setId(idGhe);
     return ResponseEntity.ok().body(service.updateSeat(seatud));
   }
