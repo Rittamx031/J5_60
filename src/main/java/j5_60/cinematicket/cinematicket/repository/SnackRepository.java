@@ -6,11 +6,11 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 
-import j5_60.cinematicket.cinematicket.model.entity.DoAn;
+import j5_60.cinematicket.cinematicket.model.entity.Snacks;
 
 /**
  * DoAnRepository
  */
-public interface SnackRepository extends JpaRepository<DoAn,UUID> {
-    public List<DoAn> search(@Param("txtSearch") String txtSearch);
+public interface SnackRepository extends JpaRepository<Snacks,UUID> {
+    public List<Snacks> search(@Param("txtSearch") String txtSearch);
 }

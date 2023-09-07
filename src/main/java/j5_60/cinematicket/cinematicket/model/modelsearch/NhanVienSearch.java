@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import java.sql.Date;
 
-import j5_60.cinematicket.cinematicket.model.entity.ChucVu;
+import j5_60.cinematicket.cinematicket.model.entity.Job;
 
 @Getter
 @Setter
@@ -20,6 +20,6 @@ public class NhanVienSearch {
     Boolean gioiTinh;
     String sdt;
     Date ngaySinh;
-    ChucVu chucVu;
+    Job chucVu;
     int trangThai;
 }

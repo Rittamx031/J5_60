@@ -13,7 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.model.entity.ComboDoAnDetail;
+import j5_60.cinematicket.cinematicket.model.entity.ComboSnacksDetail;
 import j5_60.cinematicket.cinematicket.model.entity.key.ComBoDoAnDetailKey;
 import j5_60.cinematicket.cinematicket.repository.ComboSnacksDetailRepository;
 import jakarta.transaction.Transactional;
@@ -26,14 +26,14 @@ public class SnackDetailService {
     private final int ROWCOUNT = 5;
     private int PageNo = -1;
 
-    public ComboDoAnDetail createComboDoAnDetail(ComboDoAnDetail comboDoAnDetail) {
+    public ComboSnacksDetail createComboDoAnDetail(ComboSnacksDetail comboDoAnDetail) {
         return repo.save(comboDoAnDetail);
     }
 
-    public ComboDoAnDetail updateComboDoAnDetail(ComboDoAnDetail comboDoAnDetail) {
-        Optional<ComboDoAnDetail> comboDoAnDetailDb = this.repo.findById(comboDoAnDetail.getId());
+    public ComboSnacksDetail updateComboDoAnDetail(ComboSnacksDetail comboDoAnDetail) {
+        Optional<ComboSnacksDetail> comboDoAnDetailDb = this.repo.findById(comboDoAnDetail.getId());
         if (comboDoAnDetailDb.isPresent()) {
-            ComboDoAnDetail comboDoAnDetailud = comboDoAnDetailDb.get();
+            ComboSnacksDetail comboDoAnDetailud = comboDoAnDetailDb.get();
             comboDoAnDetailud.setId(comboDoAnDetail.getId());
             comboDoAnDetailud.setSoLuong(comboDoAnDetail.getSoLuong());
             comboDoAnDetailud.setCreateAt(comboDoAnDetail.getCreateAt());
@@ -47,15 +47,15 @@ public class SnackDetailService {
         }
     }
 
-    public List<ComboDoAnDetail> getAllComboDoAnDetail() {
+    public List<ComboSnacksDetail> getAllComboDoAnDetail() {
         return repo.findAll();
     }
 
     // public List<ComboDoAnDetail> searchByName(){
     // return repo.findAll();
     // }
-    public ComboDoAnDetail getComboDoAnDetailById(UUID idcombo, UUID idDoAn) {
-        Optional<ComboDoAnDetail> comboDetail = repo.findById(new ComBoDoAnDetailKey(idcombo, idDoAn));
+    public ComboSnacksDetail getComboDoAnDetailById(UUID idcombo, UUID idDoAn) {
+        Optional<ComboSnacksDetail> comboDetail = repo.findById(new ComBoDoAnDetailKey(idcombo, idDoAn));
         if (comboDetail.isPresent()) {
             return comboDetail.get();
         } else {
@@ -63,15 +63,15 @@ public class SnackDetailService {
         }
     }
 
-    public List<ComboDoAnDetail> getComboDoAnDetailByIdComboo(UUID idcombo) {
-        List<ComboDoAnDetail> comboDetail = repo.findAll();
-        List<ComboDoAnDetail> list = comboDetail.stream().filter(cbdt -> cbdt.getId().getId_combo().equals(idcombo))
+    public List<ComboSnacksDetail> getComboDoAnDetailByIdComboo(UUID idcombo) {
+        List<ComboSnacksDetail> comboDetail = repo.findAll();
+        List<ComboSnacksDetail> list = comboDetail.stream().filter(cbdt -> cbdt.getId().getId_combo().equals(idcombo))
                 .toList();
         return list;
     }
 
-    public ComboDoAnDetail deleteComboDoAnDetail(UUID idcombo, UUID idDoAn) {
-        Optional<ComboDoAnDetail> comboDetail = repo.findById(new ComBoDoAnDetailKey(idcombo, idDoAn));
+    public ComboSnacksDetail deleteComboDoAnDetail(UUID idcombo, UUID idDoAn) {
+        Optional<ComboSnacksDetail> comboDetail = repo.findById(new ComBoDoAnDetailKey(idcombo, idDoAn));
         if (comboDetail.isPresent()) {
             return comboDetail.get();
         } else {
@@ -79,10 +79,10 @@ public class SnackDetailService {
         }
     }
 
-    public ComboDoAnDetail setDeteleteState(UUID idcombo, UUID idDoAn) {
-        Optional<ComboDoAnDetail> comboDoAnDetailDb = this.repo.findById(new ComBoDoAnDetailKey(idcombo, idDoAn));
+    public ComboSnacksDetail setDeteleteState(UUID idcombo, UUID idDoAn) {
+        Optional<ComboSnacksDetail> comboDoAnDetailDb = this.repo.findById(new ComBoDoAnDetailKey(idcombo, idDoAn));
         if (comboDoAnDetailDb.isPresent()) {
-            ComboDoAnDetail comboDoAnDetailud = comboDoAnDetailDb.get();
+            ComboSnacksDetail comboDoAnDetailud = comboDoAnDetailDb.get();
             comboDoAnDetailud.setDeleted(true);
             return comboDoAnDetailud;
         } else {
@@ -91,20 +91,20 @@ public class SnackDetailService {
         }
     }
 
-    public List<ComboDoAnDetail> getPageNo(int pageNo, String sortBy, String sortDir) {
+    public List<ComboSnacksDetail> getPageNo(int pageNo, String sortBy, String sortDir) {
         this.PageNo = pageNo;
-        List<ComboDoAnDetail> comboDoAnDetails;
+        List<ComboSnacksDetail> comboDoAnDetails;
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
         // Pageable object
         Pageable pageable = PageRequest.of(pageNo, ROWCOUNT, sort);
         // findAll method and pass pageable instance
-        Page<ComboDoAnDetail> page = repo.findAll(pageable);
+        Page<ComboSnacksDetail> page = repo.findAll(pageable);
         comboDoAnDetails = page.getContent();
         return comboDoAnDetails;
     }
 
-    public List<ComboDoAnDetail> getNextPage(String sortBy, String sortDir) {
+    public List<ComboSnacksDetail> getNextPage(String sortBy, String sortDir) {
         if (this.PageNo >= getPanigation().length - 1) {
             return this.getPageNo(this.getPanigation().length - 1, sortBy, sortBy);
         } else {
@@ -112,7 +112,7 @@ public class SnackDetailService {
         }
     }
 
-    public List<ComboDoAnDetail> getPrevPage(String sortBy, String sortDir) {
+    public List<ComboSnacksDetail> getPrevPage(String sortBy, String sortDir) {
         if (this.PageNo <= 0) {
             return this.getPageNo(0, sortBy, sortBy);
         } else {
@@ -122,7 +122,7 @@ public class SnackDetailService {
 
     public int[] getPanigation() {
         Pageable pageable = PageRequest.of(1, ROWCOUNT);
-        Page<ComboDoAnDetail> page = repo.findAll(pageable);
+        Page<ComboSnacksDetail> page = repo.findAll(pageable);
         int totalPage = page.getTotalPages();
         int[] array = IntStream.rangeClosed(0, totalPage).toArray();
         return array;

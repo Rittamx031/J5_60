@@ -5,11 +5,11 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 
-import j5_60.cinematicket.cinematicket.model.entity.PhuongThucThanhToan;
+import j5_60.cinematicket.cinematicket.model.entity.PayMethod;
 
 /**
  * PhuongThucThanhToanRepository
  */
-public interface PayMothodRepository extends JpaRepository<PhuongThucThanhToan, UUID> {
-    public List<PhuongThucThanhToan> search(@Param("txtSearch") String txtSearch);
+public interface PayMothodRepository extends JpaRepository<PayMethod, UUID> {
+    public List<PayMethod> search(@Param("txtSearch") String txtSearch);
 }

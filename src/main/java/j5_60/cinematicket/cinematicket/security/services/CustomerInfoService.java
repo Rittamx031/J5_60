@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import j5_60.cinematicket.cinematicket.model.entity.KhachHang;
+import j5_60.cinematicket.cinematicket.model.entity.Customer;
 import j5_60.cinematicket.cinematicket.repository.CustomerRepository;
 import j5_60.cinematicket.cinematicket.security.config.UserInfoUserDetails;
 import j5_60.cinematicket.cinematicket.security.dto.UserInfo;
@@ -24,7 +24,7 @@ public class CustomerInfoService implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String username) {
-    Optional<KhachHang> khachhang = repository.getuser(username);
+    Optional<Customer> khachhang = repository.getuser(username);
     if (!khachhang.isPresent() || khachhang == null) {
       throw new UsernameNotFoundException("can not find nhan vien with username khachhang");
     }

@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import j5_60.cinematicket.cinematicket.model.entity.NhanVien;
+import j5_60.cinematicket.cinematicket.model.entity.Employee;
 import j5_60.cinematicket.cinematicket.repository.EmployeeRepository;
 import j5_60.cinematicket.cinematicket.security.config.UserInfoUserDetails;
 import j5_60.cinematicket.cinematicket.security.dto.UserInfo;
@@ -20,7 +20,7 @@ public class EmployeeInfoService implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    Optional<NhanVien> nhanvien = repository.getuser(username);
+    Optional<Employee> nhanvien = repository.getuser(username);
     if (!nhanvien.isPresent() || nhanvien == null) {
       throw new UsernameNotFoundException("can not find nhan vien with username nhanvien");
     }

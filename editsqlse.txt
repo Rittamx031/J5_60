@@ -1,0 +1,20 @@
+  SELECT ttp.id AS 'Id'
+      ,ttp.ten AS 'Ten'
+      ,ttp.dao_dien AS 'DaoDien'
+      ,ttp.nha_san_xuat AS 'NhaSanXuat'
+      ,ttp.dien_vien AS 'DienVien'
+      ,ttp.nam_phat_hanh AS 'NamPhatHanh'
+      ,ttp.thoi_luong AS 'ThoiLuong'
+      ,ttp.tuoi_gioi_han AS 'TuoiGioiHan'
+      ,qg.ten AS 'QuocGia'
+      ,ng.ten AS 'NgonNgu'
+      ,ttp.noidung AS 'NoiDung'
+      ,ttp.trailer AS 'UrlTrailer'
+      ,ttp.poster AS 'UrlImagePoster'
+      ,STRING_AGG(tl.ten, ', ') WITHIN GROUP (ORDER BY tl.ten) AS 'TheLoai'
+  FROM ThongTinPhim ttp
+  JOIN QuocGia qg ON qg.id = ttp.id_quoc_gia
+  JOIN NgonNgu ng ON ng.id = ttp.id_ngon_ngu
+  LEFT JOIN TheLoaiPhim tlp ON tlp.id_film = ttp.id
+  LEFT JOIN TheLoai tl ON tl.id = tlp.id_the_loai
+  GROUP BY ttp.id, ttp.ten, ttp.dao_dien, ttp.nha_san_xuat, ttp.dien_vien, ttp.nam_phat_hanh, ttp.thoi_luong, ttp.tuoi_gioi_han, qg.ten, ng.ten, ttp.noidung, ttp.trailer, ttp.poster;

@@ -13,7 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.model.entity.PhuongThucThanhToan;
+import j5_60.cinematicket.cinematicket.model.entity.PayMethod;
 import j5_60.cinematicket.cinematicket.repository.PayMothodRepository;
 import jakarta.transaction.Transactional;
 
@@ -25,14 +25,14 @@ public class PayMethodService {
     private final int ROWCOUNT = 5;
     private int PageNo = -1;
 
-    public PhuongThucThanhToan createPhuongThucThanhToan(PhuongThucThanhToan phuongThucThanhToan) {
+    public PayMethod createPhuongThucThanhToan(PayMethod phuongThucThanhToan) {
         return repo.save(phuongThucThanhToan);
     }
 
-    public PhuongThucThanhToan updatePhuongThucThanhToan(PhuongThucThanhToan phuongThucThanhToan) {
-        Optional<PhuongThucThanhToan> phuongThucThanhToanDb = this.repo.findById(phuongThucThanhToan.getId());
+    public PayMethod updatePhuongThucThanhToan(PayMethod phuongThucThanhToan) {
+        Optional<PayMethod> phuongThucThanhToanDb = this.repo.findById(phuongThucThanhToan.getId());
         if (phuongThucThanhToanDb.isPresent()) {
-            PhuongThucThanhToan phuongThucThanhToanud = phuongThucThanhToanDb.get();
+            PayMethod phuongThucThanhToanud = phuongThucThanhToanDb.get();
             phuongThucThanhToanud.setId(phuongThucThanhToan.getId());
             phuongThucThanhToanud.setHinhThucThanhToan(phuongThucThanhToan.getHinhThucThanhToan());
             phuongThucThanhToanud.setTrangThai(phuongThucThanhToan.getTrangThai());
@@ -47,16 +47,16 @@ public class PayMethodService {
         }
     }
 
-    public List<PhuongThucThanhToan> getAllPhuongThucThanhToan() {
+    public List<PayMethod> getAllPhuongThucThanhToan() {
         return repo.findAll();
     }
 
-    public List<PhuongThucThanhToan> searchByName(String txtSearch) {
+    public List<PayMethod> searchByName(String txtSearch) {
         return repo.search(txtSearch);
     }
 
-    public PhuongThucThanhToan getPhuongThucThanhToanById(UUID id) {
-        Optional<PhuongThucThanhToan> phuongthucThanhToan = repo.findById(id);
+    public PayMethod getPhuongThucThanhToanById(UUID id) {
+        Optional<PayMethod> phuongthucThanhToan = repo.findById(id);
         if (phuongthucThanhToan.isPresent()) {
             return phuongthucThanhToan.get();
         } else {
@@ -64,8 +64,8 @@ public class PayMethodService {
         }
     }
 
-    public PhuongThucThanhToan deletePhuongThucThanhToan(UUID id) {
-        Optional<PhuongThucThanhToan> phuongthucThanhToan = repo.findById(id);
+    public PayMethod deletePhuongThucThanhToan(UUID id) {
+        Optional<PayMethod> phuongthucThanhToan = repo.findById(id);
         if (phuongthucThanhToan.isPresent()) {
             return phuongthucThanhToan.get();
         } else {
@@ -73,10 +73,10 @@ public class PayMethodService {
         }
     }
 
-    public PhuongThucThanhToan setDeteleteState(UUID id) {
-        Optional<PhuongThucThanhToan> phuongThucThanhToanDb = this.repo.findById(id);
+    public PayMethod setDeteleteState(UUID id) {
+        Optional<PayMethod> phuongThucThanhToanDb = this.repo.findById(id);
         if (phuongThucThanhToanDb.isPresent()) {
-            PhuongThucThanhToan phuongThucThanhToanud = phuongThucThanhToanDb.get();
+            PayMethod phuongThucThanhToanud = phuongThucThanhToanDb.get();
             phuongThucThanhToanud.setDeleted(true);
             return phuongThucThanhToanud;
         } else {
@@ -84,20 +84,20 @@ public class PayMethodService {
         }
     }
 
-    public List<PhuongThucThanhToan> getPageNo(int pageNo, String sortBy, String sortDir) {
+    public List<PayMethod> getPageNo(int pageNo, String sortBy, String sortDir) {
         this.PageNo = pageNo;
-        List<PhuongThucThanhToan> phuongThucThanhToans;
+        List<PayMethod> phuongThucThanhToans;
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
         // Pageable object
         Pageable pageable = PageRequest.of(pageNo-1, ROWCOUNT, sort);
         // findAll method and pass pageable instance
-        Page<PhuongThucThanhToan> page = repo.findAll(pageable);
+        Page<PayMethod> page = repo.findAll(pageable);
         phuongThucThanhToans = page.getContent();
         return phuongThucThanhToans;
     }
 
-    public List<PhuongThucThanhToan> getNextPage(String sortBy, String sortDir) {
+    public List<PayMethod> getNextPage(String sortBy, String sortDir) {
         if (this.PageNo >= getPanigation().length) {
             return this.getPageNo(this.getPanigation().length, sortBy, sortBy);
         } else {
@@ -105,7 +105,7 @@ public class PayMethodService {
         }
     }
 
-    public List<PhuongThucThanhToan> getPrevPage(String sortBy, String sortDir) {
+    public List<PayMethod> getPrevPage(String sortBy, String sortDir) {
         if (this.PageNo <= 0) {
             return this.getPageNo(1, sortBy, sortBy);
         } else {
@@ -115,7 +115,7 @@ public class PayMethodService {
 
     public int[] getPanigation() {
         Pageable pageable = PageRequest.of(1, ROWCOUNT);
-        Page<PhuongThucThanhToan> page = repo.findAll(pageable);
+        Page<PayMethod> page = repo.findAll(pageable);
         int totalPage = page.getTotalPages();
         int[] array = IntStream.rangeClosed(1, totalPage).toArray();
         return array;

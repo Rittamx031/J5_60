@@ -13,7 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.model.entity.TheLoaiPhim;
+import j5_60.cinematicket.cinematicket.model.entity.MovieGener;
 import j5_60.cinematicket.cinematicket.model.entity.key.TheLoaiPhimKey;
 import j5_60.cinematicket.cinematicket.repository.MovieGenreRepository;
 import jakarta.transaction.Transactional;
@@ -26,14 +26,14 @@ public class MovieGenreService {
     private final int ROWCOUNT = 5;
     private int PageNo = -1;
 
-    public TheLoaiPhim createTheLoaiPhim(TheLoaiPhim theLoaiPhimDetail) {
+    public MovieGener createTheLoaiPhim(MovieGener theLoaiPhimDetail) {
         return repo.save(theLoaiPhimDetail);
     }
 
-    public TheLoaiPhim updateTheLoaiPhim(TheLoaiPhim theLoaiPhimDetail) {
-        Optional<TheLoaiPhim> theLoaiPhimDetailDb = this.repo.findById(theLoaiPhimDetail.getId());
+    public MovieGener updateTheLoaiPhim(MovieGener theLoaiPhimDetail) {
+        Optional<MovieGener> theLoaiPhimDetailDb = this.repo.findById(theLoaiPhimDetail.getId());
         if (theLoaiPhimDetailDb.isPresent()) {
-            TheLoaiPhim theLoaiPhimDetailud = theLoaiPhimDetailDb.get();
+            MovieGener theLoaiPhimDetailud = theLoaiPhimDetailDb.get();
             theLoaiPhimDetailud.setId(theLoaiPhimDetail.getId());
             theLoaiPhimDetailud.setCreateAt(theLoaiPhimDetail.getCreateAt());
             theLoaiPhimDetailud.setCreateBy(theLoaiPhimDetail.getCreateBy());
@@ -46,15 +46,15 @@ public class MovieGenreService {
         }
     }
 
-    public List<TheLoaiPhim> getAllTheLoaiPhim() {
+    public List<MovieGener> getAllTheLoaiPhim() {
         return repo.findAll();
     }
 
     // public List<TheLoaiPhim> searchByName(){
     // return repo.findAll();
     // }
-    public TheLoaiPhim getTheLoaiPhimById(UUID id_phim, UUID id_the_loai) {
-        Optional<TheLoaiPhim> phuongthucThanhToan = repo.findById(new TheLoaiPhimKey(id_phim, id_the_loai));
+    public MovieGener getTheLoaiPhimById(UUID id_phim, UUID id_the_loai) {
+        Optional<MovieGener> phuongthucThanhToan = repo.findById(new TheLoaiPhimKey(id_phim, id_the_loai));
         if (phuongthucThanhToan.isPresent()) {
             return phuongthucThanhToan.get();
         } else {
@@ -62,8 +62,8 @@ public class MovieGenreService {
         }
     }
 
-    public TheLoaiPhim deleteTheLoaiPhim(UUID id_phim, UUID id_the_loai) {
-        Optional<TheLoaiPhim> phuongthucThanhToan = repo.findById(new TheLoaiPhimKey(id_phim, id_the_loai));
+    public MovieGener deleteTheLoaiPhim(UUID id_phim, UUID id_the_loai) {
+        Optional<MovieGener> phuongthucThanhToan = repo.findById(new TheLoaiPhimKey(id_phim, id_the_loai));
         if (phuongthucThanhToan.isPresent()) {
             return phuongthucThanhToan.get();
         } else {
@@ -71,10 +71,10 @@ public class MovieGenreService {
         }
     }
 
-    public TheLoaiPhim setDeteleteState(UUID id_phim, UUID id_the_loai) {
-        Optional<TheLoaiPhim> theLoaiPhimDetailDb = this.repo.findById(new TheLoaiPhimKey(id_phim, id_the_loai));
+    public MovieGener setDeteleteState(UUID id_phim, UUID id_the_loai) {
+        Optional<MovieGener> theLoaiPhimDetailDb = this.repo.findById(new TheLoaiPhimKey(id_phim, id_the_loai));
         if (theLoaiPhimDetailDb.isPresent()) {
-            TheLoaiPhim theLoaiPhimDetailud = theLoaiPhimDetailDb.get();
+            MovieGener theLoaiPhimDetailud = theLoaiPhimDetailDb.get();
             theLoaiPhimDetailud.setDeleted(true);
             return theLoaiPhimDetailud;
         } else {
@@ -83,20 +83,20 @@ public class MovieGenreService {
         }
     }
 
-    public List<TheLoaiPhim> getPageNo(int pageNo, String sortBy, String sortDir) {
+    public List<MovieGener> getPageNo(int pageNo, String sortBy, String sortDir) {
         this.PageNo = pageNo;
-        List<TheLoaiPhim> theLoaiPhimDetails;
+        List<MovieGener> theLoaiPhimDetails;
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
         // Pageable object
         Pageable pageable = PageRequest.of(pageNo - 1, ROWCOUNT, sort);
         // findAll method and pass pageable instance
-        Page<TheLoaiPhim> page = repo.findAll(pageable);
+        Page<MovieGener> page = repo.findAll(pageable);
         theLoaiPhimDetails = page.getContent();
         return theLoaiPhimDetails;
     }
 
-    public List<TheLoaiPhim> getNextPage(String sortBy, String sortDir) {
+    public List<MovieGener> getNextPage(String sortBy, String sortDir) {
         if (this.PageNo >= getPanigation().length - 1) {
             return this.getPageNo(this.getPanigation().length - 1, sortBy, sortBy);
         } else {
@@ -104,7 +104,7 @@ public class MovieGenreService {
         }
     }
 
-    public List<TheLoaiPhim> getPrevPage(String sortBy, String sortDir) {
+    public List<MovieGener> getPrevPage(String sortBy, String sortDir) {
         if (this.PageNo <= 0) {
             return this.getPageNo(0, sortBy, sortBy);
         } else {
@@ -114,7 +114,7 @@ public class MovieGenreService {
 
     public int[] getPanigation() {
         Pageable pageable = PageRequest.of(1, ROWCOUNT);
-        Page<TheLoaiPhim> page = repo.findAll(pageable);
+        Page<MovieGener> page = repo.findAll(pageable);
         int totalPage = page.getTotalPages();
         int[] array = IntStream.rangeClosed(1, totalPage).toArray();
         return array;

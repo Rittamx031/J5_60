@@ -1,6 +1,6 @@
 package j5_60.cinematicket.cinematicket.repository;
 
-import j5_60.cinematicket.cinematicket.model.entity.NhanVien;
+import j5_60.cinematicket.cinematicket.model.entity.Employee;
 import j5_60.cinematicket.cinematicket.model.modelsearch.NhanVienSearch;
 
 import org.springframework.data.domain.Page;
@@ -13,16 +13,16 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface EmployeeRepository extends JpaRepository<NhanVien, UUID> {
-    Page<NhanVien> findAll(Pageable pageable);
+public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
+    Page<Employee> findAll(Pageable pageable);
 
-    Page<NhanVien> findAllByOrderByHoTenDesc(Pageable pageable);
+    Page<Employee> findAllByOrderByHoTenDesc(Pageable pageable);
 
-    Page<NhanVien> findAllByOrderByCreateAtDesc(Pageable pageable);
+    Page<Employee> findAllByOrderByCreateAtDesc(Pageable pageable);
 
     @Query(value = """
             select *
-            from NhanVien e
+            from Employee e
             where (:#{#req.maNV} is null or e.ma_nhan_vien like :#{'%'+#req.maNV+'%'})
             and (:#{#req.hoTen} is null or e.ho_ten like :#{'%'+#req.hoTen+'%'})
             and (:#{#req.email} is null or e.email like :#{'%'+#req.email+'%'})
@@ -31,14 +31,14 @@ public interface EmployeeRepository extends JpaRepository<NhanVien, UUID> {
             and (:#{#req.ngaySinh} is null or e.ngay_sinh = :#{#req.ngaySinh})
             and (:#{#req.chucVu} is null or e.id_chuc_vu like :#{#req.chucVu})
             """, nativeQuery = true)
-    List<NhanVien> getNhanVienListFilter(@Param("req") NhanVienSearch req);
+    List<Employee> getNhanVienListFilter(@Param("req") NhanVienSearch req);
 
-    Page<NhanVien> findByNgaySinhContaining(String ngaySinh, Pageable pageable);
+    Page<Employee> findByNgaySinhContaining(String ngaySinh, Pageable pageable);
 
-    Page<NhanVien> findByTrangThaiContaining(String trangThai, Pageable pageable);
+    Page<Employee> findByTrangThaiContaining(String trangThai, Pageable pageable);
 
     @Query("SELECT kh from NhanVien kh WHERE kh.email = :username")
-    Optional<NhanVien> getuser(@Param("username") String username);
+    Optional<Employee> getuser(@Param("username") String username);
 
-    Optional<NhanVien> findByEmail(String email);
+    Optional<Employee> findByEmail(String email);
 }

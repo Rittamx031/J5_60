@@ -14,7 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import j5_60.cinematicket.cinematicket.exception.ResourceNotFoundException;
-import j5_60.cinematicket.cinematicket.model.entity.ThongTinPhim;
+import j5_60.cinematicket.cinematicket.model.dto.response.MovieUserReponse;
+import j5_60.cinematicket.cinematicket.model.entity.Movie;
 import j5_60.cinematicket.cinematicket.model.modelsearch.ThongTinPhimSearch;
 import j5_60.cinematicket.cinematicket.repository.MovieRepository;
 
@@ -25,14 +26,14 @@ public class MovieService {
   private final int ROWCOUNT = 5;
   private int PageNo = -1;
 
-  public ThongTinPhim createThongTinPhim(ThongTinPhim thongTinPhim) {
+  public Movie createThongTinPhim(Movie thongTinPhim) {
     return repo.save(thongTinPhim);
   }
 
-  public ThongTinPhim updateThongTinPhim(ThongTinPhim thongTinPhim) {
-    Optional<ThongTinPhim> thongTinPhimDb = this.repo.findById(thongTinPhim.getId());
+  public Movie updateThongTinPhim(Movie thongTinPhim) {
+    Optional<Movie> thongTinPhimDb = this.repo.findById(thongTinPhim.getId());
     if (thongTinPhimDb.isPresent()) {
-      ThongTinPhim thongTinPhimud = thongTinPhimDb.get();
+      Movie thongTinPhimud = thongTinPhimDb.get();
       thongTinPhimud.setId(thongTinPhim.getId());
       thongTinPhimud.setTen(thongTinPhim.getTen());
       thongTinPhimud.setDaoDien(thongTinPhim.getDaoDien());
@@ -58,16 +59,16 @@ public class MovieService {
     }
   }
 
-  public List<ThongTinPhim> getAllThongTinPhim() {
+  public List<Movie> getAllThongTinPhim() {
     return repo.findAll();
   }
 
-  public List<ThongTinPhim> search(String txtSearch) {
+  public List<Movie> search(String txtSearch) {
     return repo.search(txtSearch);
   }
 
-  public ThongTinPhim getThongTinPhimById(UUID id) {
-    Optional<ThongTinPhim> thongTinPhim = repo.findById(id);
+  public Movie getThongTinPhimById(UUID id) {
+    Optional<Movie> thongTinPhim = repo.findById(id);
     if (thongTinPhim.isPresent()) {
       return thongTinPhim.get();
     } else {
@@ -75,8 +76,8 @@ public class MovieService {
     }
   }
 
-  public ThongTinPhim deleteThongTinPhim(UUID id) {
-    Optional<ThongTinPhim> thongTinPhim = repo.findById(id);
+  public Movie deleteThongTinPhim(UUID id) {
+    Optional<Movie> thongTinPhim = repo.findById(id);
     if (thongTinPhim.isPresent()) {
       return thongTinPhim.get();
     } else {
@@ -84,10 +85,10 @@ public class MovieService {
     }
   }
 
-  public ThongTinPhim setDeteleteState(UUID id) {
-    Optional<ThongTinPhim> thongTinPhimDb = this.repo.findById(id);
+  public Movie setDeteleteState(UUID id) {
+    Optional<Movie> thongTinPhimDb = this.repo.findById(id);
     if (thongTinPhimDb.isPresent()) {
-      ThongTinPhim thongTinPhimud = thongTinPhimDb.get();
+      Movie thongTinPhimud = thongTinPhimDb.get();
       thongTinPhimud.setDeleted(true);
       return thongTinPhimud;
     } else {
@@ -95,20 +96,20 @@ public class MovieService {
     }
   }
 
-  public List<ThongTinPhim> getPageNo(int pageNo, String sortBy, String sortDir) {
+  public List<Movie> getPageNo(int pageNo, String sortBy, String sortDir) {
     this.PageNo = pageNo;
-    List<ThongTinPhim> thongTinPhims;
+    List<Movie> thongTinPhims;
     Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
         : Sort.by(sortBy).descending();
     // Pageable object
     Pageable pageable = PageRequest.of(pageNo - 1, ROWCOUNT, sort);
     // findAll method and pass pageable instance
-    Page<ThongTinPhim> page = repo.findAll(pageable);
+    Page<Movie> page = repo.findAll(pageable);
     thongTinPhims = page.getContent();
     return thongTinPhims;
   }
 
-  public List<ThongTinPhim> getNextPage(String sortBy, String sortDir) {
+  public List<Movie> getNextPage(String sortBy, String sortDir) {
     if (this.PageNo >= getPanigation().length - 1) {
       return this.getPageNo(this.getPanigation().length - 1, sortBy, sortBy);
     } else {
@@ -116,7 +117,7 @@ public class MovieService {
     }
   }
 
-  public List<ThongTinPhim> getPrevPage(String sortBy, String sortDir) {
+  public List<Movie> getPrevPage(String sortBy, String sortDir) {
     if (this.PageNo <= 0) {
       return this.getPageNo(0, sortBy, sortBy);
     } else {
@@ -126,15 +127,15 @@ public class MovieService {
 
   public int[] getPanigation() {
     Pageable pageable = PageRequest.of(1, ROWCOUNT);
-    Page<ThongTinPhim> page = repo.findAll(pageable);
+    Page<Movie> page = repo.findAll(pageable);
     int totalPage = page.getTotalPages();
     int[] array = IntStream.rangeClosed(1, totalPage).toArray();
     return array;
   }
 
-  public List<ThongTinPhim> fillterThongTinPhim(ThongTinPhimSearch thongTinPhimSearch) {
-    List<ThongTinPhim> list = repo.findAll();
-    List<ThongTinPhim> result = list.stream()
+  public List<Movie> fillterThongTinPhim(ThongTinPhimSearch thongTinPhimSearch) {
+    List<Movie> list = repo.findAll();
+    List<Movie> result = list.stream()
         .filter(thongtinphim -> ((thongtinphim.getNgonNgu().getId().equals(thongTinPhimSearch.getIdNgonNgu())
             || (thongTinPhimSearch.getIdNgonNgu() == null))
             &&
@@ -155,5 +156,30 @@ public class MovieService {
         .collect(Collectors.toList());
     return result;
   }
+  // manager
 
+  public List<MovieUserReponse> getAll() {
+    return null;
+  }
+
+  public MovieUserReponse getMovieRepo(UUID idPhim) {
+    Optional<MovieUserReponse> movieRepose = repo.getMovieResponse(idPhim);
+    if (movieRepose.isPresent()) {
+      return movieRepose.get();
+    } else {
+      throw new ResourceNotFoundException();
+    }
+  }
+
+  public List<MovieUserReponse> getPhimSapChieu() {
+    return null;
+  }
+
+  public List<MovieUserReponse> getPhimDangChieu() {
+    return null;
+  }
+
+  public List<MovieUserReponse> getXuatChieuDacBieu() {
+    return null;
+  }
 }
