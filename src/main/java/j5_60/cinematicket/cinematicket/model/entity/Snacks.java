@@ -14,7 +14,6 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -29,7 +28,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @NamedQueries({
-        @NamedQuery(name = "DoAn.search", query = "SELECT doan FROM DoAn doan WHERE ten LIKE CONCAT('%',:txtSearch,'%')")
+        @NamedQuery(name = "Snacks.search", query = "SELECT doan FROM Snacks doan WHERE ten LIKE CONCAT('%',:txtSearch,'%')")
 })
 public class Snacks {
     @Id

@@ -28,7 +28,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @NamedQueries({
-        @NamedQuery(name = "HoaDon.search", query = "SELECT hoaDon FROM HoaDon hoaDon WHERE" +
+        @NamedQuery(name = "Bill.search", query = "SELECT hoaDon FROM Bill hoaDon WHERE" +
                 " hoaDon.id LIKE CONCAT('%', :txtSearch, '%') OR " +
                 "hoaDon.ghiChu LIKE CONCAT('%', :txtSearch, '%') OR " +
                 "hoaDon.tongGia LIKE CONCAT('%',:txtSearch,'%') OR " +

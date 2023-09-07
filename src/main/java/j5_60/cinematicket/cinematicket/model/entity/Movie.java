@@ -20,7 +20,7 @@ import org.hibernate.validator.constraints.Range;
 @Setter
 @ToString
 @NamedQueries({
-        @NamedQuery(name = "ThongTinPhim.search", query = "SELECT ttp FROM ThongTinPhim ttp WHERE ten LIKE CONCAT('%',:txtSearch,'%')"
+        @NamedQuery(name = "Movie.search", query = "SELECT ttp FROM Movie ttp WHERE ten LIKE CONCAT('%',:txtSearch,'%')"
                 + " OR daoDien LIKE CONCAT('%',:txtSearch,'%')"
                 + "OR nhaSanXuat LIKE CONCAT('%',:txtSearch,'%')"
                 + "OR dienVien LIKE CONCAT('%',:txtSearch,'%')"

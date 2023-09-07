@@ -22,7 +22,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
 
     @Query(value = """
             select *
-            from NhanVien e
+            from Employee e
             where (:#{#req.maNV} is null or e.ma_nhan_vien like :#{'%'+#req.maNV+'%'})
             and (:#{#req.hoTen} is null or e.ho_ten like :#{'%'+#req.hoTen+'%'})
             and (:#{#req.email} is null or e.email like :#{'%'+#req.email+'%'})
