@@ -1,5 +1,6 @@
 package j5_60.cinematicket.cinematicket.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -172,11 +173,11 @@ public class MovieService {
   }
 
   public List<MovieUserReponse> getPhimSapChieu() {
-    return null;
+    return repo.getAllMovieSapChieu();
   }
 
-  public List<MovieUserReponse> getPhimDangChieu() {
-    return null;
+  public List<MovieUserReponse> getPhimDangChieu(LocalDate date) {
+    return repo.getAllMovieDangChieu(date);
   }
 
   public List<MovieUserReponse> getXuatChieuDacBieu() {

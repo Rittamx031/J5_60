@@ -27,7 +27,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @NamedQueries({
-        @NamedQuery(name = "PhuongThucThanhToan.search", query = "SELECT pttt FROM PhuongThucThanhToan pttt WHERE hinhThucThanhToan LIKE CONCAT('%',:txtSearch,'%')")
+        @NamedQuery(name = "PayMethod.search", query = "SELECT pttt FROM PayMethod pttt WHERE hinhThucThanhToan LIKE CONCAT('%',:txtSearch,'%')")
 })
 public class PayMethod {
     @Id

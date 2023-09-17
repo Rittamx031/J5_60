@@ -37,7 +37,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
 
     Page<Employee> findByTrangThaiContaining(String trangThai, Pageable pageable);
 
-    @Query("SELECT kh from NhanVien kh WHERE kh.email = :username")
+    @Query("SELECT kh from Employee kh WHERE kh.email = :username")
     Optional<Employee> getuser(@Param("username") String username);
 
     Optional<Employee> findByEmail(String email);

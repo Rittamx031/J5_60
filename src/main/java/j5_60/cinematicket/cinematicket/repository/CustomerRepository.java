@@ -31,6 +31,6 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
             """, nativeQuery = true)
     List<Customer> getKhachHangListFilter(@Param("req") KhachHangSearch req);
 
-    @Query("SELECT kh from KhachHang kh WHERE kh.email = :username")
+    @Query("SELECT kh from Customer kh WHERE kh.email = :username")
     Optional<Customer> getuser(@Param("username") String username);
 }

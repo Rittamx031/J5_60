@@ -37,10 +37,10 @@ public class SpringSecurityConfig {
     }
 
     @Autowired
-    EmployeeRepository nvifrepository;
+    EmployeeRepository employeeRepository;
 
     EmployeeInfoService nhanVienServer() {
-        return new EmployeeInfoService(nvifrepository);
+        return new EmployeeInfoService(employeeRepository);
     }
 
     @Bean
@@ -52,10 +52,10 @@ public class SpringSecurityConfig {
     }
 
     @Autowired
-    CustomerRepository khifrepository;
+    CustomerRepository customerRepository;
 
     CustomerInfoService KhachHangServer() {
-        return new CustomerInfoService(khifrepository);
+        return new CustomerInfoService(customerRepository);
     }
 
     @Bean

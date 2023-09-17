@@ -2,6 +2,8 @@ package j5_60.cinematicket.cinematicket.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -97,8 +99,22 @@ public class SeatService {
 
     public RowSeat getRow(int row, UUID idPhongChieu) {
         List<Seat> list = repository.getRowSeatInPhongChieu(idPhongChieu, row);
+        Collections.sort(list, Comparator.comparing(Seat::getCot));
         RowSeat rowSeat = new RowSeat(idPhongChieu, row, list);
         return rowSeat;
+    }
+
+    public List<RowSeat> getAllRow(UUID idPhongChieu) {
+        System.out.println(idPhongChieu);
+        Optional<Integer> max = repository.getMaxRow(idPhongChieu);
+        List<RowSeat> listrs = new ArrayList<>();
+        System.out.println(max);
+        if (max.isPresent()) {
+            for (int i = 1; i <= max.get(); i++) {
+                listrs.add(getRow(i, idPhongChieu));
+            }
+        }
+        return listrs;
     }
 
     public RowSeat addSeatInRow(SeatRequest seat) {

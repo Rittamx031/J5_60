@@ -10,12 +10,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("api/cimena/thong-tin-phim")
+@RequestMapping("api/movie")
 @CrossOrigin
 public class MovieController {
 
@@ -113,5 +114,15 @@ public class MovieController {
     @GetMapping("/user/{idphim}")
     public ResponseEntity<MovieUserReponse> getOne(@PathVariable("idphim") UUID idPhim) {
         return ResponseEntity.ok().body(service.getMovieRepo(idPhim));
+    }
+
+    @GetMapping("/user/moviepublish")
+    public ResponseEntity<List<MovieUserReponse>> getMoviePublish(@RequestParam("date") LocalDate date) {
+        return ResponseEntity.ok().body(service.getPhimDangChieu(date));
+    }
+
+    @GetMapping("/user/comingsoon")
+    public ResponseEntity<List<MovieUserReponse>> getMovieComingSoon() {
+        return ResponseEntity.ok().body(service.getPhimSapChieu());
     }
 }

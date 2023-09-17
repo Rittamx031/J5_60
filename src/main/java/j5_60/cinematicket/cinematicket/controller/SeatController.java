@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+
 @RestController
 @CrossOrigin
 @RequestMapping("api/cimena/ghe")
@@ -31,7 +32,8 @@ public class SeatController {
   public ResponseEntity<List<Seat>> getAllGhe() {
     return ResponseEntity.ok().body(service.getAll());
   }
-// manager
+
+  // manager
   @PostMapping("/manager/add-seat-in-row")
   public ResponseEntity<RowSeat> addSeatInRow(@RequestBody @Valid SeatRequest seat) {
     return ResponseEntity.ok().body(service.addSeatInRow(seat));
@@ -58,4 +60,12 @@ public class SeatController {
   public HttpStatusCode deleteGhe(@PathVariable("id") UUID idGhe) {
     return null;
   }
+
+  // user
+
+  @GetMapping("user/{idphongchieu}")
+  public ResponseEntity<List<RowSeat>> getAllSeatInCimenaRoom(@PathVariable("idphongchieu") UUID idPhongChieu) {
+    return ResponseEntity.ok().body(service.getAllRow(idPhongChieu));
+  }
+
 }
